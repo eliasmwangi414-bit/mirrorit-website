@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | MIRROR-IT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Inter:wght@400;500&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #e0e0e0; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed; top: 0; left: 0; width: 240px; height: 100vh;
+      background: #111; border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; padding: 28px 0; z-index: 100;
+    }
+    .sidebar-logo { padding: 0 24px 28px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .sidebar-logo span { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 2px; color: #fff; }
+    .sidebar-logo small { display: block; font-size: 10px; color: #555; letter-spacing: 1px; margin-top: 3px; }
+    .sidebar-nav { flex: 1; padding: 20px 0; overflow-y: auto; }
+    .nav-section-label { padding: 14px 24px 6px; font-size: 10px; color: #444; text-transform: uppercase; letter-spacing: 1.5px; }
+    .sidebar-nav a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 24px; color: #888; font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s; cursor: pointer;
+    }
+    .sidebar-nav a:hover, .sidebar-nav a.active { color: #fff; background: rgba(255,255,255,0.05); }
+    .sidebar-nav a .icon { font-size: 16px; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .logout-btn {
+      display: block; width: 100%; padding: 10px; text-align: center;
+      background: rgba(255,80,80,0.1); color: #ff6060; border: 1px solid rgba(255,80,80,0.2);
+      border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.2s;
+    }
+    .logout-btn:hover { background: rgba(255,80,80,0.2); }
+
+    /* MAIN CONTENT */
+    .main { margin-left: 240px; padding: 40px; min-height: 100vh; }
+    .page-header { margin-bottom: 32px; }
+    .page-header h1 { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: #fff; }
+    .page-header p { color: #666; font-size: 14px; margin-top: 6px; }
+
+    /* PANELS */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* CARDS */
+    .section-card {
+      background: #161616; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; padding: 28px; margin-bottom: 24px;
+    }
+    .section-card h3 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .section-card p { font-size: 13px; color: #666; margin-bottom: 20px; }
+
+    /* IMAGE SLOT */
+    .image-slot {
+      display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: start;
+    }
+    .image-preview {
+      width: 200px; height: 140px; background: #0f0f0f; border: 2px dashed rgba(255,255,255,0.1);
+      border-radius: 8px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; position: relative;
+    }
+    .image-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .image-preview .no-image { color: #333; font-size: 12px; text-align: center; }
+    .image-preview .no-image span { font-size: 28px; display: block; margin-bottom: 6px; }
+    .image-actions { display: flex; flex-direction: column; gap: 10px; }
+    .image-actions label {
+      display: inline-block; padding: 9px 18px; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
+      cursor: pointer; font-size: 13px; font-weight: 500; transition: all 0.2s; text-align: center;
+    }
+    .image-actions label:hover { background: rgba(255,255,255,0.15); }
+    .image-actions input[type="file"] { display: none; }
+    .remove-btn {
+      padding: 9px 18px; background: rgba(255,60,60,0.08); border: 1px solid rgba(255,60,60,0.2);
+      border-radius: 6px; color: #ff6060; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; text-align: center;
+    }
+    .remove-btn:hover { background: rgba(255,60,60,0.15); }
+    .upload-status { font-size: 12px; margin-top: 4px; }
+    .upload-status.ok { color: #2ed573; }
+    .upload-status.err { color: #ff5555; }
+    .live-badge {
+      display: inline-block; font-size: 10px; padding: 2px 8px;
+      background: rgba(46,213,115,0.15); color: #2ed573; border-radius: 20px;
+      border: 1px solid rgba(46,213,115,0.2); margin-left: 10px; vertical-align: middle;
+    }
+    .empty-badge {
+      display: inline-block; font-size: 10px; padding: 2px 8px;
+      background: rgba(255,180,0,0.1); color: #ffa500; border-radius: 20px;
+      border: 1px solid rgba(255,180,0,0.2); margin-left: 10px; vertical-align: middle;
+    }
+
+    /* GRID LAYOUTS */
+    .products-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .mini-card { background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 20px; }
+    .mini-card h4 { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px; }
+    .mini-image-preview {
+      width: 100%; aspect-ratio: 4/3; background: #0f0f0f; border: 2px dashed rgba(255,255,255,0.08);
+      border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      overflow: hidden; margin-bottom: 12px;
+    }
+    .mini-image-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .mini-image-preview .no-img { color: #333; font-size: 11px; text-align: center; }
+    .mini-image-preview .no-img span { font-size: 22px; display: block; margin-bottom: 4px; }
+    .mini-actions { display: flex; gap: 8px; }
+    .mini-actions label, .mini-actions .mini-remove {
+      flex: 1; padding: 7px 10px; text-align: center; border-radius: 5px; font-size: 12px;
+      font-weight: 500; cursor: pointer; transition: all 0.2s;
+    }
+    .mini-actions label { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: #ccc; }
+    .mini-actions label:hover { background: rgba(255,255,255,0.14); }
+    .mini-actions .mini-remove { background: rgba(255,60,60,0.08); border: 1px solid rgba(255,60,60,0.2); color: #ff6060; }
+    .mini-actions .mini-remove:hover { background: rgba(255,60,60,0.15); }
+    .mini-actions input[type="file"] { display: none; }
+
+    /* GALLERY SECTION */
+    .gallery-upload-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 12px; color: #888; font-weight: 500; }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 10px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px; color: #e0e0e0; font-size: 13px; font-family: 'Inter', sans-serif;
+    }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+    .full-width { grid-column: 1 / -1; }
+    .upload-gallery-btn {
+      grid-column: 1 / -1; padding: 12px; background: #fff; color: #000;
+      border: none; border-radius: 6px; font-weight: 600; font-size: 14px;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .upload-gallery-btn:hover { opacity: 0.88; }
+    .gallery-grid-admin { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .gallery-admin-item {
+      background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; overflow: hidden;
+    }
+    .gallery-admin-item img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .gallery-admin-info { padding: 10px 12px; }
+    .gallery-admin-info strong { font-size: 12px; color: #ccc; display: block; }
+    .gallery-admin-info span { font-size: 11px; color: #555; }
+    .gallery-admin-item button {
+      width: 100%; padding: 8px; background: rgba(255,60,60,0.08); color: #ff6060;
+      border: none; border-top: 1px solid rgba(255,60,60,0.15); cursor: pointer; font-size: 12px;
+      transition: background 0.2s;
+    }
+    .gallery-admin-item button:hover { background: rgba(255,60,60,0.18); }
+    .empty-gallery { color: #444; text-align: center; padding: 40px; font-size: 14px; }
+
+    /* TOAST */
+    .toast {
+      position: fixed; bottom: 30px; right: 30px; padding: 14px 22px;
+      background: #1e1e1e; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; font-size: 14px; color: #fff;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.5); z-index: 9999;
+      transform: translateY(20px); opacity: 0; transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast.ok { border-color: rgba(46,213,115,0.4); color: #2ed573; }
+    .toast.err { border-color: rgba(255,80,80,0.4); color: #ff6060; }
+
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-grid-admin { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; }
+      .main { margin-left: 200px; padding: 24px; }
+      .products-grid, .services-grid { grid-template-columns: 1fr; }
+      .gallery-upload-form { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <span style="font-family:'Cinzel', serif; font-weight:700; letter-spacing:1.5px; font-size:18px;">MIRROR-IT</span>
+    <small>ADMIN PORTAL</small>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Sections</div>
+    <a class="active" onclick="showPanel('hero')" data-panel="hero"><span class="icon">🖼</span> Hero Banner</a>
+    <a onclick="showPanel('logo')" data-panel="logo"><span class="icon">🏷️</span> Logo</a>
+    <a onclick="showPanel('products')" data-panel="products"><span class="icon">🪞</span> Products</a>
+    <a onclick="showPanel('services')" data-panel="services"><span class="icon">🔧</span> Services</a>
+    <a onclick="showPanel('gallery')" data-panel="gallery"><span class="icon">📸</span> Gallery</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="/admin-logout" class="logout-btn">Log Out</a>
+  </div>
+</div>
+
+<div class="main">
+  <!-- HERO PANEL -->
+  <div class="panel active" id="panel-hero">
+    <div class="page-header">
+      <h1>Hero Banner</h1>
+      <p>This is the large background image on the homepage. Keep it high resolution and portrait or landscape.</p>
+    </div>
+    <div class="section-card">
+      <h3>Background Image <span id="hero-badge"></span></h3>
+      <p>Recommended: 1920×1080px minimum. Will be overlaid with text.</p>
+      <div class="image-slot">
+        <div class="image-preview" id="hero-preview">
+          <div class="no-image"><span>🖼</span>No image yet</div>
+        </div>
+        <div class="image-actions">
+          <label for="hero-file">📤 Upload New Image</label>
+          <input type="file" id="hero-file" accept="image/*" onchange="uploadSection(this,'hero')">
+          <div class="remove-btn" onclick="removeSection('hero')">🗑 Remove Image</div>
+          <div class="upload-status" id="hero-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGO PANEL -->
+  <div class="panel" id="panel-logo">
+    <div class="page-header">
+      <h1>Logo <span id="logo-badge"></span></h1>
+      <p>Upload a PNG or SVG with a transparent background for the site logo.</p>
+    </div>
+    <div class="section-card">
+      <h3>Brand Logo <span id="logo-badge"></span></h3>
+      <p>Recommended: PNG with transparent background, at least 400px wide. Will be displayed at a small size in the navbar.</p>
+      <div class="image-slot">
+        <div class="image-preview" id="logo-preview" style="background:#1a1a1a;">
+          <div class="no-image"><span>🏷️</span>No logo yet</div>
+        </div>
+        <div class="image-actions">
+          <label for="logo-file">📤 Upload Logo</label>
+          <input type="file" id="logo-file" accept="image/*" onchange="uploadSection(this,'logo')">
+          <div class="remove-btn" onclick="removeSection('logo')">🗑 Remove Logo</div>
+          <div class="upload-status" id="logo-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCTS PANEL -->
+  <div class="panel" id="panel-products">
+    <div class="page-header">
+      <h1>Products</h1>
+      <p>Upload one image per mirror category. These appear on the homepage product cards.</p>
+    </div>
+    <div class="products-grid" id="products-grid"></div>
+  </div>
+
+  <!-- SERVICES PANEL -->
+  <div class="panel" id="panel-services">
+    <div class="page-header">
+      <h1>Services</h1>
+      <p>Upload images for the four service areas shown in the services section.</p>
+    </div>
+    <div class="services-grid" id="services-grid"></div>
+  </div>
+
+  <!-- GALLERY PANEL -->
+  <div class="panel" id="panel-gallery">
+    <div class="page-header">
+      <h1>Gallery</h1>
+      <p>Upload photos of completed projects. These appear live in the "Latest Work" section on the homepage.</p>
+    </div>
+    <div class="section-card">
+      <h3>Add New Project Photo</h3>
+      <form class="gallery-upload-form" id="gallery-form" onsubmit="uploadGallery(event)">
+        <div class="form-group">
+          <label>Mirror Type</label>
+          <select name="mirrorType" required>
+            <option value="">Select mirror type...</option>
+            <option>Wooden Framed Mirror</option>
+            <option>Thin Framed Mirror</option>
+            <option>Frameless Mirror</option>
+            <option>Wall Mirror</option>
+            <option>Aluminium Framed Mirror</option>
+            <option>Smart Mirror</option>
+            <option>Vanity Mirror</option>
+            <option>Accent Mirror</option>
+            <option>Custom Mirror</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Select Image</label>
+          <input type="file" name="image" accept="image/*" required>
+        </div>
+        <div class="form-group full-width">
+          <label>Description</label>
+          <textarea name="description" placeholder="Describe this project briefly..." required></textarea>
+        </div>
+        <button type="submit" class="upload-gallery-btn">📤 Upload to Gallery</button>
+      </form>
+    </div>
+    <div class="section-card">
+      <h3>Current Gallery</h3>
+      <div class="gallery-grid-admin" id="gallery-grid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const PRODUCTS = {
+    'wooden-framed': 'Wooden Framed Mirrors',
+    'thin-framed': 'Thin Framed Mirrors',
+    'frameless': 'Frameless Mirrors',
+    'wall-mirrors': 'Wall Mirrors',
+    'aluminium-framed': 'Aluminium Framed Mirrors',
+    'smart-mirrors': 'Smart Mirrors',
+    'vanity': 'Vanity Mirrors',
+    'accent': 'Accent Mirrors',
+    'custom': 'Custom Mirrors'
+  };
+  const SERVICES = {
+    'custom-fabrication': 'Custom Mirror Fabrication',
+    'professional-installation': 'Professional Installation',
+    'design-consultation': 'Design Consultation',
+    'delivery-logistics': 'Delivery & Logistics'
+  };
+
+  let siteContent = {};
+
+  // ---- Navigation ----
+  function showPanel(name) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    document.querySelector(`[data-panel="${name}"]`).classList.add('active');
+  }
+
+  // ---- Toast ----
+  function toast(msg, type = 'ok') {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.className = `toast show ${type}`;
+    setTimeout(() => el.className = 'toast', 3000);
+  }
+
+  // ---- Load everything ----
+  async function loadContent() {
+    try {
+      const res = await fetch('/api/site-content?t=' + Date.now());
+      siteContent = await res.json();
+      renderHero();
+      renderLogo();
+      renderProducts();
+      renderServices();
+      renderGallery();
+    } catch(e) {
+      console.error(e);
+      toast('Failed to load content', 'err');
+    }
+  }
+
+  function renderHero() {
+    const preview = document.getElementById('hero-preview');
+    const badge = document.getElementById('hero-badge');
+    if (siteContent.hero) {
+      preview.innerHTML = `<img src="/${siteContent.hero.path}?t=${Date.now()}" alt="Hero">`;
+      badge.innerHTML = '<span class="live-badge">✓ Live</span>';
+    } else {
+      preview.innerHTML = '<div class="no-image"><span>🖼</span>No image yet</div>';
+      badge.innerHTML = '<span class="empty-badge">Empty</span>';
+    }
+  }
+
+  function renderLogo() {
+    const preview = document.getElementById('logo-preview');
+    const badge = document.getElementById('logo-badge');
+    if (siteContent.logo) {
+      preview.innerHTML = `<img src="/${siteContent.logo.path}?t=${Date.now()}" alt="Logo" style="object-fit: contain; max-height: 100%; max-width: 100%;">`;
+      badge.innerHTML = '<span class="live-badge">✓ Live</span>';
+    } else {
+      preview.innerHTML = '<div class="no-image"><span>🏷️</span>No logo yet</div>';
+      badge.innerHTML = '<span class="empty-badge">Empty</span>';
+    }
+  }
+
+  function renderProducts() {
+    const grid = document.getElementById('products-grid');
+    grid.innerHTML = Object.entries(PRODUCTS).map(([key, label]) => {
+      const img = siteContent.products?.[key];
+      return `
+        <div class="mini-card">
+          <h4>${label} ${img ? '<span class="live-badge">✓ Live</span>' : '<span class="empty-badge">Empty</span>'}</h4>
+          <div class="mini-image-preview">
+            ${img ? `<img src="/${img.path}?t=${Date.now()}" alt="${label}">` : '<div class="no-img"><span>🪞</span>No image</div>'}
+          </div>
+          <div class="mini-actions">
+            <label for="prod-${key}">Upload</label>
+            <input type="file" id="prod-${key}" accept="image/*" onchange="uploadSection(this,'product','${key}')">
+            ${img ? `<div class="mini-remove" onclick="removeSection('product','${key}')">Remove</div>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderServices() {
+    const grid = document.getElementById('services-grid');
+    grid.innerHTML = Object.entries(SERVICES).map(([key, label]) => {
+      const img = siteContent.services?.[key];
+      return `
+        <div class="mini-card">
+          <h4>${label} ${img ? '<span class="live-badge">✓ Live</span>' : '<span class="empty-badge">Empty</span>'}</h4>
+          <div class="mini-image-preview">
+            ${img ? `<img src="/${img.path}?t=${Date.now()}" alt="${label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
+          </div>
+          <div class="mini-actions">
+            <label for="srv-${key}">Upload</label>
+            <input type="file" id="srv-${key}" accept="image/*" onchange="uploadSection(this,'service','${key}')">
+            ${img ? `<div class="mini-remove" onclick="removeSection('service','${key}')">Remove</div>` : ''}
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderGallery() {
+    const grid = document.getElementById('gallery-grid');
+    const gallery = siteContent.gallery || [];
+    if (!gallery.length) {
+      grid.innerHTML = '<div class="empty-gallery">No photos uploaded yet.</div>';
+      return;
+    }
+    grid.innerHTML = gallery.map(img => `
+      <div class="gallery-admin-item">
+        <img src="/${img.path}?t=${Date.now()}" alt="${img.mirrorType}">
+        <div class="gallery-admin-info">
+          <strong>${img.mirrorType}</strong>
+          <span>${(img.description || '').replace(/\r\n|\r|\n/g, '<br>')}</span>
+        </div>
+        <button onclick="deleteGallery('${img.id}')">🗑 Delete</button>
+      </div>`).join('');
+  }
+
+  // ---- Upload hero / logo / product / service ----
+  async function uploadSection(input, section, key) {
+    if (!input.files[0]) return;
+    const fd = new FormData();
+    fd.append('image', input.files[0]);
+    const url = section === 'hero' ? '/api/upload/hero'
+              : section === 'logo' ? '/api/upload/logo'
+              : section === 'product' ? `/api/upload/product/${key}`
+              : `/api/upload/service/${key}`;
+    try {
+      const res = await fetch(url, { method: 'POST', body: fd });
+      const json = await res.json();
+      if (json.success) {
+        toast('Image uploaded and live!');
+        await loadContent();
+      } else {
+        toast('Upload failed', 'err');
+      }
+    } catch {
+      toast('Upload failed', 'err');
+    }
+    input.value = '';
+  }
+
+  // ---- Remove hero / logo / product / service ----
+  async function removeSection(section, key) {
+    const url = (section === 'hero' || section === 'logo') ? `/api/remove/${section}` : `/api/remove/${section}/${key}`;
+    try {
+      const res = await fetch(url, { method: 'POST' });
+      const json = await res.json();
+      if (json.success) {
+        toast('Image removed.');
+        await loadContent();
+      }
+    } catch {
+      toast('Remove failed', 'err');
+    }
+  }
+
+  // ---- Upload gallery ----
+  async function uploadGallery(e) {
+    e.preventDefault();
+    const form = document.getElementById('gallery-form');
+    const fd = new FormData(form);
+    try {
+      const res = await fetch('/api/upload/gallery', { method: 'POST', body: fd });
+      const json = await res.json();
+      if (json.success) {
+        toast('Photo added to gallery!');
+        form.reset();
+        await loadContent();
+      } else {
+        toast('Upload failed', 'err');
+      }
+    } catch {
+      toast('Upload failed', 'err');
+    }
+  }
+
+  // ---- Delete gallery item ----
+  async function deleteGallery(id) {
+    if (!confirm('Delete this photo from the gallery?')) return;
+    try {
+      const res = await fetch(`/api/delete/gallery/${id}`, { method: 'POST' });
+      const json = await res.json();
+      if (json.success) {
+        toast('Photo deleted.');
+        await loadContent();
+      }
+    } catch {
+      toast('Delete failed', 'err');
+    }
+  }
+
+  // Initial load
+  loadContent();
+</script>
+</body>
+</html>

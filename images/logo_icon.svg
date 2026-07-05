@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- TOP-LEFT QUADRANT — bright/white face (light source from left) -->
+  <!-- Outer triangle (largest, brightest) -->
+  <polygon points="50,8 8,50 32,50" fill="#efefef"/>
+  <!-- Inner triangle (slightly dimmer) -->
+  <polygon points="50,8 32,50 50,32" fill="#b0b0b0"/>
+
+  <!-- TOP-RIGHT QUADRANT — dark face (shadow) -->
+  <!-- Outer triangle (darkest) -->
+  <polygon points="50,8 92,50 68,50" fill="#303030"/>
+  <!-- Inner triangle (slightly lighter dark) -->
+  <polygon points="50,8 68,50 50,32" fill="#525252"/>
+
+  <!-- BOTTOM-LEFT QUADRANT — medium grey face -->
+  <!-- Outer triangle -->
+  <polygon points="8,50 50,92 50,68" fill="#848484"/>
+  <!-- Inner triangle -->
+  <polygon points="8,50 50,68 32,50" fill="#a6a6a6"/>
+
+  <!-- BOTTOM-RIGHT QUADRANT — medium-dark face -->
+  <!-- Outer triangle -->
+  <polygon points="92,50 50,92 50,68" fill="#484848"/>
+  <!-- Inner triangle -->
+  <polygon points="92,50 50,68 68,50" fill="#646464"/>
+
+  <!-- CENTER CUT — inner diamond hole (black) -->
+  <polygon points="50,32 68,50 50,68 32,50" fill="#0a0a0a"/>
+</svg>

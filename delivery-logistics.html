@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery & Logistics | MIRROR-IT Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Cinzel:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    /* Basic resets & variables */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0c0c0c;
+      color: #e8e8e8;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    :root {
+      --bg-primary:   #0c0c0c;
+      --border:       rgba(255,255,255,0.08);
+      --glass-bg:     rgba(255,255,255,0.04);
+      --glass-border: rgba(255,255,255,0.1);
+      --text-primary: #f0f0f0;
+      --text-secondary:#a0a0a0;
+      --text-muted:   #606060;
+      --accent-bright:#ffffff;
+      --divider:      rgba(255,255,255,0.06);
+      --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    a { text-decoration: none; }
+    
+    /* Navbar styles */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 0 5%;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(12,12,12,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { height: 40px; width: auto; max-width: 150px; object-fit: contain; flex-shrink: 0; display: block; }
+    .logo-text-wrap { display: flex; flex-direction: column; gap: 0px; }
+    .logo-text { font-family: 'Cinzel', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1; }
+    .logo-tagline { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { color: var(--text-secondary); font-size: 14px; font-weight: 500; position: relative; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .dropdown { position: relative; }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #1a1a1a;
+      min-width: 220px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 8px 0;
+      z-index: 2000;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+    }
+    .dropdown:hover .dropdown-content { display: block; }
+    .dropdown-content a {
+      display: block;
+      padding: 10px 20px;
+      color: #c0c0c0 !important;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .dropdown-content a::after { display: none !important; }
+    .dropdown-content a:hover {
+      background: rgba(255,255,255,0.07);
+      color: #ffffff !important;
+    }
+    .nav-cta { padding: 9px 22px; background: var(--accent-bright); color: #0c0c0c !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }
+
+    /* ===== MOBILE NAV ===== */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--text-primary);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 72px; left: 0; right: 0;
+        background: rgba(12,12,12,0.98);
+        backdrop-filter: blur(20px);
+        padding: 24px;
+        border-bottom: 1px solid var(--border);
+        gap: 20px;
+        z-index: 999;
+        max-height: calc(100vh - 72px);
+        overflow-y: auto;
+      }
+      .dropdown-content {
+        position: static;
+        display: none;
+        background: rgba(255,255,255,0.03);
+        border: none;
+        box-shadow: none;
+        padding: 4px 0 4px 15px;
+        margin-top: 5px;
+        min-width: unset;
+      }
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+    }
+
+    /* WhatsApp Float */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+    .whatsapp-float svg {
+      width: 56px;
+      height: 56px;
+      fill: #ffffff;
+      filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
+    }
+
+    /* Service Hero */
+    .service-hero {
+      padding: 160px 5% 80px;
+      text-align: center;
+      background: radial-gradient(circle at top center, rgba(255,255,255,0.05) 0%, transparent 60%);
+      border-bottom: 1px solid var(--border);
+    }
+    .service-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--text-primary);
+    }
+    .service-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .service-hero-img {
+      width: 100%;
+      max-width: 1000px;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 0 auto;
+      display: block;
+      filter: brightness(0.8);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* Service Details Sections */
+    .service-details {
+      padding: 100px 5%;
+    }
+    .detail-row {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      margin-bottom: 100px;
+    }
+    .detail-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .detail-img-wrapper {
+      flex: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      position: relative;
+    }
+    .detail-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .detail-img-wrapper:hover .detail-img {
+      transform: scale(1.05);
+    }
+    .detail-content {
+      flex: 1;
+    }
+    .detail-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-primary);
+    }
+    .detail-desc {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    .inquire-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 28px;
+      background: var(--text-primary);
+      color: #000;
+      font-weight: 600;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    .inquire-btn:hover {
+      background: #ccc;
+      transform: translateY(-2px);
+    }
+
+    /* Footer styles */
+    footer { padding: 80px 5% 32px; background: #080808; border-top: 1px solid var(--border); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-brand p { color: var(--text-secondary); font-size: 14px; margin: 20px 0; max-width: 320px; }
+    .footer-socials { display: flex; gap: 12px; }
+    .social-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--text-primary); transition: var(--transition); }
+    .social-btn:hover { background: var(--accent-bright); color: var(--bg-primary); transform: translateY(-3px); }
+    .footer-col-title { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 12px; }
+    .footer-links a { color: var(--text-secondary); font-size: 14px; transition: var(--transition); }
+    .footer-links a:hover { color: var(--accent-bright); padding-left: 4px; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--divider); }
+    .footer-copy { color: var(--text-muted); font-size: 13px; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { color: var(--text-muted); font-size: 13px; text-decoration: none; transition: var(--transition); }
+    .footer-bottom-links a:hover { color: var(--accent-bright); }
+    @media (max-width: 900px) { 
+      .footer-grid { grid-template-columns: 1fr 1fr; } 
+      .detail-row, .detail-row:nth-child(even) { flex-direction: column; gap: 40px; margin-bottom: 60px; }
+      .detail-img { height: 300px; }
+    }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo.png" class="logo-icon" alt="MIRROR-IT logo" />
+      <div class="logo-text-wrap">
+        <div class="logo-text">MIRROR-IT</div>
+        <div class="logo-tagline">You Are Enough!</div>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#hero">Home</a></li>
+      <li class="dropdown">
+        <a href="index.html#products">Products</a>
+        <div class="dropdown-content">
+          <a href="wooden-framed.html">Wooden Framed Mirrors</a>
+          <a href="thin-framed.html">Thin Framed Mirrors</a>
+          <a href="frameless.html">Frameless Mirrors</a>
+          <a href="wall-mirrors.html">Wall Mirrors</a>
+          <a href="aluminium-framed.html">Aluminium Framed Mirrors</a>
+          <a href="smart-mirrors.html">Smart Mirrors</a>
+          <a href="vanity.html">Vanity Mirrors</a>
+          <a href="accent.html">Accent Mirrors</a>
+          <a href="custom.html">Custom Mirrors</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <a href="index.html#services">Services</a>
+        <div class="dropdown-content">
+          <a href="custom-fabrication.html">Custom Mirror Fabrication</a>
+          <a href="professional-installation.html">Professional Installation</a>
+          <a href="design-consultation.html">Design Consultation</a>
+          <a href="delivery-logistics.html">Delivery & Logistics</a>
+        </div>
+      </li>
+      <li><a href="index.html#why-us">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="tel:+254794439669" class="nav-cta">Call Us</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section class="service-hero">
+    <h1 class="service-title">Delivery & Logistics</h1>
+    <p class="service-subtitle">Safe, insured transport of fragile glass products directly to your doorstep or project site.</p>
+    <img src="https://placehold.co/1200x600?text=Delivery%20%26%20Logistics" alt="Delivery & Logistics" class="service-hero-img" />
+  </section>
+
+  <section class="service-details">
+    
+    <div class="detail-row">
+      <div class="detail-img-wrapper">
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ASpecialized%20Packaging" alt="Specialized Packaging" class="detail-img" />
+      </div>
+      <div class="detail-content">
+        <h2 class="detail-title">Specialized Packaging</h2>
+        <p class="detail-desc">Every mirror is meticulously wrapped in protective foam, edge guards, and custom wooden crating to prevent any damage during transit.</p>
+        <a href="https://wa.me/254794439669?text=Hello%20MIRROIT%21%20I%20am%20inquiring%20about%20Delivery%20%26%20Logistics%20-%20Specialized%20Packaging." class="inquire-btn" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512" style="fill:currentColor;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          Inquire about this
+        </a>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-img-wrapper">
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ADedicated%20Fleet" alt="Dedicated Fleet" class="detail-img" />
+      </div>
+      <div class="detail-content">
+        <h2 class="detail-title">Dedicated Fleet</h2>
+        <p class="detail-desc">We use our own specialized glass-transport vehicles equipped with secure A-frames to ensure a smooth journey to your location.</p>
+        <a href="https://wa.me/254794439669?text=Hello%20MIRROIT%21%20I%20am%20inquiring%20about%20Delivery%20%26%20Logistics%20-%20Dedicated%20Fleet." class="inquire-btn" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512" style="fill:currentColor;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          Inquire about this
+        </a>
+      </div>
+    </div>
+
+    <div class="detail-row">
+      <div class="detail-img-wrapper">
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ANationwide%20Shipping" alt="Nationwide Shipping" class="detail-img" />
+      </div>
+      <div class="detail-content">
+        <h2 class="detail-title">Nationwide Shipping</h2>
+        <p class="detail-desc">While based in Nairobi, we coordinate safe logistics and delivery for large custom orders across all 47 counties in Kenya.</p>
+        <a href="https://wa.me/254794439669?text=Hello%20MIRROIT%21%20I%20am%20inquiring%20about%20Delivery%20%26%20Logistics%20-%20Nationwide%20Shipping." class="inquire-btn" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512" style="fill:currentColor;"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+          Inquire about this
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="display:inline-flex;">
+          <img src="images/logo.png" class="logo-icon" alt="MIRROR-IT diamond logo" />
+          <div class="logo-text-wrap">
+            <div class="logo-text">MIRROR-IT</div>
+            <div class="logo-tagline">You Are Enough!</div>
+          </div>
+        </a>
+        <p>Quality mirrors for homes & businesses. Handmade locally in Nairobi, Kenya — mirrors, furniture mirrors, and custom projects across all 47 counties.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" id="facebook-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" id="instagram-btn" title="Instagram">in</a>
+          <a href="#" class="social-btn" id="twitter-btn" title="Twitter / X">ð•</a>
+          <a href="#" class="social-btn" id="whatsapp-btn" title="WhatsApp">W</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Our Mirrors</div>
+        <ul class="footer-links">
+          <li><a href="led-backlit.html">LED Backlit Mirrors</a></li>
+          <li><a href="front-lit.html">Front-Lit Mirrors</a></li>
+          <li><a href="hollywood-vanity.html">Hollywood Vanity Mirrors</a></li>
+          <li><a href="oval-led.html">Oval LED Mirrors</a></li>
+          <li><a href="round-led.html">Round LED Mirrors</a></li>
+          <li><a href="leather-strap.html">Leather-Strap Mirrors</a></li>
+          <li><a href="custom-size.html">Custom-Size Mirrors</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="custom-fabrication.html">Custom Mirror Fabrication</a></li>
+          <li><a href="professional-installation.html">Professional Installation</a></li>
+          <li><a href="design-consultation.html">Design Consultation</a></li>
+          <li><a href="delivery-logistics.html">Delivery & Logistics</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="tel:+254794439669">+254 718 850 862</a></li>
+          <li><a href="mailto:sales@abritglass.co.ke">sales@abritglass.co.ke</a></li>
+          <li><a href="#">Manyanja Rd, Nairobi</a></li>
+          <li><a href="#">Opp. Gertrude's Children Hospital</a></li>
+          <li><a href="#">Mon to Sat: 8am to 6pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2025 MIRROR-IT. All rights reserved. &nbsp;&middot;&nbsp; <em>You Are Enough!</em></p>
+      <div class="footer-bottom-links">
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/254794439669" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  </a>
+
+  <script>
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+    document.querySelectorAll('.dropdown > a').forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const parent = this.parentElement;
+          parent.classList.toggle('active');
+          document.querySelectorAll('.dropdown').forEach(d => {
+            if (d !== parent) d.classList.remove('active');
+          });
+        }
+      });
+    });
+
+    async function loadDynamicLogo() {
+      try {
+        const res = await fetch('/api/site-content');
+        const data = await res.json();
+        if (data.logo) {
+          document.querySelectorAll('.logo-icon').forEach(img => {
+            img.src = '/' + data.logo.path;
+          });
+        }
+      } catch(e) {}
+    }
+    document.addEventListener("DOMContentLoaded", loadDynamicLogo);
+  </script>
+</body>
+</html>

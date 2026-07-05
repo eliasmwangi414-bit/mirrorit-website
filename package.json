@@ -1,0 +1,40 @@
+{
+    "name": "abrit-glass-replica",
+    "version": "1.0.0",
+    "main": "main.js",
+    "scripts": {
+        "start": "node server.js",
+        "start:app": "electron .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "build": {
+        "appId": "com.mirrorit.admin",
+        "productName": "MirrorIt Admin",
+        "directories": {
+            "output": "dist"
+        },
+        "win": {
+            "target": "nsis"
+        },
+        "files": [
+            "**/*",
+            "!node_modules/electron",
+            "!node_modules/electron-builder"
+        ]
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "express": "^5.2.1",
+        "express-session": "^1.19.0",
+        "multer": "^2.2.0"
+    },
+    "devDependencies": {
+        "electron": "^41.7.1",
+        "electron-builder": "^26.15.3"
+    }
+}
