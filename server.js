@@ -60,14 +60,25 @@ function writeDB(data) {
 // ========== GITHUB AUTO-SYNC ==========
 function syncToGitHub() {
     const cwd = __dirname;
-    const cmd = 'git add -A && git commit -m "Auto-update from Admin Panel" && git push origin main';
-    exec(cmd, { cwd }, (err, stdout, stderr) => {
-        if (err) {
-            console.error('[GIT SYNC] Error:', err.message);
-        } else {
-            console.log('[GIT SYNC] Pushed to GitHub:', stdout.trim() || 'No changes');
+    const { execSync } = require('child_process');
+    setTimeout(() => {
+        try {
+            execSync('git add -A', { cwd, stdio: 'pipe' });
+            try {
+                execSync('git commit -m "Auto-update from Admin Panel"', { cwd, stdio: 'pipe' });
+            } catch(e) {
+                // Nothing to commit — that's fine
+                if (!e.stdout || !e.stdout.toString().includes('nothing to commit')) {
+                    console.error('[GIT SYNC] Commit error:', e.message);
+                    return;
+                }
+            }
+            execSync('git push origin main', { cwd, stdio: 'pipe' });
+            console.log('[GIT SYNC] ✅ Pushed to GitHub successfully');
+        } catch(e) {
+            console.error('[GIT SYNC] ❌ Error:', e.message);
         }
-    });
+    }, 500); // small delay so the file write completes first
 }
 
 // ========== MULTER SETUP ==========

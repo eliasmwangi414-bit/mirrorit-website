@@ -1785,13 +1785,16 @@
     async function loadSiteContent() {
       try {
         const t = Date.now(); // cache-bust
-        const res = await fetch('/api/site-content?t=' + t);
+        // Try local API first (admin/dev mode), fall back to static JSON (GitHub Pages)
+        let res;
+        try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
+        catch { res = await fetch('site-content.json?t=' + t); }
         const data = await res.json();
 
         // Hero
         const heroBg = document.querySelector('.hero-bg');
         if (data.hero) {
-          heroBg.style.backgroundImage = `url('/${data.hero.path}?t=${t}')`;
+          heroBg.style.backgroundImage = `url('${data.hero.path}?t=${t}')`;
         }
 
         // Products
@@ -1799,7 +1802,7 @@
           const el = document.getElementById('prod-img-' + key);
           if (!el) return;
           if (data.products && data.products[key]) {
-            el.src = `/${data.products[key].path}?t=${t}`;
+            el.src = `${data.products[key].path}?t=${t}`;
           }
         });
 
@@ -1809,14 +1812,14 @@
           const imgEl = document.getElementById('svc-img-' + index);
           if (!imgEl) return;
           if (data.services && data.services[key]) {
-            imgEl.src = `/${data.services[key].path}?t=${t}`;
+            imgEl.src = `${data.services[key].path}?t=${t}`;
           }
         });
 
         // Logo
         if (data.logo) {
           document.querySelectorAll('.logo-icon').forEach(img => {
-            img.src = `/${data.logo.path}?t=${t}`;
+            img.src = `${data.logo.path}?t=${t}`;
           });
         }
 
@@ -1847,7 +1850,7 @@
 
       galleryContainer.innerHTML = renderData.map(img => `
         <div class="gallery-item">
-          <img src="${img.path.startsWith('http') ? img.path : '/' + img.path}" alt="${img.mirrorType}">
+          <img src="${img.path.startsWith('http') ? img.path : img.path}" alt="${img.mirrorType}">
           <div class="gallery-overlay">
             <h4>${img.mirrorType}</h4>
             <p>${(img.description || '').replace(/\\r\\n|\\r|\\n/g, '<br>')}</p>
