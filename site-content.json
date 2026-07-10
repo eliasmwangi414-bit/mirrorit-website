@@ -5,14 +5,8 @@
     "uploadedAt": "2026-06-27T10:03:30.810Z"
   },
   "products": {
-    "wooden-framed": {
-      "path": "images/uploads/1782552187866-899213595.JPG",
-      "uploadedAt": "2026-06-27T09:23:07.878Z"
-    },
-    "thin-framed": {
-      "path": "images/uploads/1782552306194-44239037.JPG",
-      "uploadedAt": "2026-06-27T09:25:06.196Z"
-    },
+    "wooden-framed": null,
+    "thin-framed": null,
     "frameless": null,
     "wall-mirrors": null,
     "aluminium-framed": null,
@@ -23,20 +17,9 @@
   },
   "services": {
     "custom-fabrication": null,
-    "professional-installation": {
-      "path": "images/uploads/1782539195861-579051572.JPG",
-      "uploadedAt": "2026-06-27T05:46:35.865Z"
-    },
+    "professional-installation": null,
     "design-consultation": null,
     "delivery-logistics": null
   },
-  "gallery": [
-    {
-      "id": "1782555402045",
-      "path": "images/uploads/1782555402042-45683322.webp",
-      "description": "Premium smart mirrors custom fabricated to your exact specifications. Contact us to order.\r\n\r\nInquire on WhatsApp",
-      "mirrorType": "Smart Mirror",
-      "uploadedAt": "2026-06-27T10:16:42.045Z"
-    }
-  ]
+  "gallery": []
 }
