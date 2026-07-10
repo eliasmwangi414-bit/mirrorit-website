@@ -5,7 +5,10 @@
     "uploadedAt": "2026-06-27T10:03:30.810Z"
   },
   "products": {
-    "wooden-framed": null,
+    "wooden-framed": {
+      "path": "images/uploads/1783669970875-673134679.JPG",
+      "uploadedAt": "2026-07-10T07:52:50.886Z"
+    },
     "thin-framed": null,
     "frameless": null,
     "wall-mirrors": null,
