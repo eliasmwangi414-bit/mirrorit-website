@@ -181,12 +181,14 @@ app.post('/api/remove/hero', requireAuth, (req, res) => {
     const db = readDB();
     db.hero = null;
     writeDB(db);
+    syncToGitHub();
     res.json({ success: true });
 });
 app.post('/api/remove/logo', requireAuth, (req, res) => {
     const db = readDB();
     db.logo = null;
     writeDB(db);
+    syncToGitHub();
     res.json({ success: true });
 });
 app.post('/api/remove/:section/:key', requireAuth, (req, res) => {
@@ -196,6 +198,7 @@ app.post('/api/remove/:section/:key', requireAuth, (req, res) => {
     else if (section === 'service' && db.services.hasOwnProperty(key)) db.services[key] = null;
     else return res.status(400).json({ error: 'Invalid section/key' });
     writeDB(db);
+    syncToGitHub();
     res.json({ success: true });
 });
 
