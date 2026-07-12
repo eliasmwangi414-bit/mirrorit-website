@@ -263,40 +263,28 @@
   <div class="panel" id="panel-gallery">
     <div class="page-header">
       <h1>Gallery</h1>
-      <p>Upload photos of completed projects. These appear live in the "Latest Work" section on the homepage.</p>
+      <p>Select a mirror type, then upload images directly to each slot. They appear live on that product page.</p>
     </div>
-    <div class="section-card">
-      <h3>Add New Project Photo</h3>
-      <form class="gallery-upload-form" id="gallery-form" onsubmit="uploadGallery(event)">
-        <div class="form-group">
-          <label>Mirror Type</label>
-          <select name="mirrorType" required>
-            <option value="">Select mirror type...</option>
-            <option>Wooden Framed Mirror</option>
-            <option>Thin Framed Mirror</option>
-            <option>Frameless Mirror</option>
-            <option>Wall Mirror</option>
-            <option>Aluminium Framed Mirror</option>
-            <option>Smart Mirror</option>
-            <option>Vanity Mirror</option>
-            <option>Accent Mirror</option>
-            <option>Custom Mirror</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Select Image</label>
-          <input type="file" name="image" accept="image/*" required>
-        </div>
-        <div class="form-group full-width">
-          <label>Description</label>
-          <textarea name="description" placeholder="Describe this project briefly..." required></textarea>
-        </div>
-        <button type="submit" class="upload-gallery-btn">📤 Upload to Gallery</button>
-      </form>
+
+    <!-- Mirror type tabs -->
+    <div class="gallery-tabs" id="gallery-tabs">
+      <button class="gtab active" onclick="switchGalleryTab('Wooden Framed Mirror', this)">Wooden Framed</button>
+      <button class="gtab" onclick="switchGalleryTab('Thin Framed Mirror', this)">Thin Framed</button>
+      <button class="gtab" onclick="switchGalleryTab('Frameless Mirror', this)">Frameless</button>
+      <button class="gtab" onclick="switchGalleryTab('Wall Mirror', this)">Wall</button>
+      <button class="gtab" onclick="switchGalleryTab('Aluminium Framed Mirror', this)">Aluminium</button>
+      <button class="gtab" onclick="switchGalleryTab('Smart Mirror', this)">Smart</button>
+      <button class="gtab" onclick="switchGalleryTab('Vanity Mirror', this)">Vanity</button>
+      <button class="gtab" onclick="switchGalleryTab('Accent Mirror', this)">Accent</button>
+      <button class="gtab" onclick="switchGalleryTab('Custom Mirror', this)">Custom</button>
     </div>
-    <div class="section-card">
-      <h3>Current Gallery</h3>
-      <div class="gallery-grid-admin" id="gallery-grid"></div>
+
+    <div class="section-card" style="margin-top:16px;">
+      <h3 id="gallery-tab-title">Wooden Framed Mirror — Slots</h3>
+      <p style="margin-bottom:20px; color:#555; font-size:13px;">Click a slot to upload an image. Images fill the product page in order.</p>
+      <div class="gallery-slot-grid" id="gallery-slot-grid">
+        <!-- rendered by JS -->
+      </div>
     </div>
   </div>
 </div>

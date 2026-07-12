@@ -10,7 +10,10 @@
       "uploadedAt": "2026-07-12T09:51:53.253Z"
     },
     "thin-framed": null,
-    "frameless": null,
+    "frameless": {
+      "path": "images/uploads/1783863546337-234533998.JPG",
+      "uploadedAt": "2026-07-12T13:39:06.343Z"
+    },
     "wall-mirrors": null,
     "aluminium-framed": null,
     "smart-mirrors": null,
