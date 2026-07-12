@@ -24,5 +24,13 @@
     "design-consultation": null,
     "delivery-logistics": null
   },
-  "gallery": []
+  "gallery": [
+    {
+      "id": "1783849978529",
+      "path": "images/uploads/1783849978521-625125853.jpeg",
+      "description": "SunBurst Mirror",
+      "mirrorType": "Wooden Framed Mirror",
+      "uploadedAt": "2026-07-12T09:52:58.529Z"
+    }
+  ]
 }
