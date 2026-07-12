@@ -40,6 +40,20 @@ const defaultContent = {
         "design-consultation": null,
         "delivery-logistics": null
     },
+    serviceDetails: {
+        "custom-fabrication-0": null,
+        "custom-fabrication-1": null,
+        "custom-fabrication-2": null,
+        "professional-installation-0": null,
+        "professional-installation-1": null,
+        "professional-installation-2": null,
+        "design-consultation-0": null,
+        "design-consultation-1": null,
+        "design-consultation-2": null,
+        "delivery-logistics-0": null,
+        "delivery-logistics-1": null,
+        "delivery-logistics-2": null
+    },
     gallery: []
 };
 
@@ -150,6 +164,18 @@ app.post('/api/upload/service/:key', requireAuth, upload.single('image'), (req, 
     res.json({ success: true, path: db.services[req.params.key].path });
 });
 
+// Upload service detail image
+app.post('/api/upload/service-detail/:key', requireAuth, upload.single('image'), (req, res) => {
+    if (!req.file) return res.status(400).json({ error: 'No file' });
+    const db = readDB();
+    if (!db.serviceDetails) db.serviceDetails = {};
+    if (!db.serviceDetails.hasOwnProperty(req.params.key)) return res.status(404).json({ error: 'Unknown service detail' });
+    db.serviceDetails[req.params.key] = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    writeDB(db);
+    syncToGitHub();
+    res.json({ success: true, path: db.serviceDetails[req.params.key].path });
+});
+
 // Upload gallery image
 app.post('/api/upload/gallery', requireAuth, upload.single('image'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No file' });
@@ -208,6 +234,7 @@ app.post('/api/remove/:section/:key', requireAuth, (req, res) => {
     const db = readDB();
     if (section === 'product' && db.products.hasOwnProperty(key)) db.products[key] = null;
     else if (section === 'service' && db.services.hasOwnProperty(key)) db.services[key] = null;
+    else if (section === 'service-detail' && db.serviceDetails && db.serviceDetails.hasOwnProperty(key)) db.serviceDetails[key] = null;
     else return res.status(400).json({ error: 'Invalid section/key' });
     writeDB(db);
     syncToGitHub();

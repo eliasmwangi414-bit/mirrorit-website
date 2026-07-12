@@ -95,7 +95,9 @@
 
     /* GRID LAYOUTS */
     .products-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+    @media (max-width: 1200px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } }
     .mini-card { background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 20px; }
     .mini-card h4 { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 12px; }
     .mini-image-preview {
@@ -372,10 +374,38 @@
     'custom': 'Custom Mirrors'
   };
   const SERVICES = {
-    'custom-fabrication': 'Custom Mirror Fabrication',
-    'professional-installation': 'Professional Installation',
-    'design-consultation': 'Design Consultation',
-    'delivery-logistics': 'Delivery & Logistics'
+    'custom-fabrication': {
+      label: 'Custom Mirror Fabrication',
+      details: [
+        { key: 'custom-fabrication-0', label: 'Detail 1: Precision Cutting' },
+        { key: 'custom-fabrication-1', label: 'Detail 2: Premium Silvering' },
+        { key: 'custom-fabrication-2', label: 'Detail 3: Custom LED Integration' }
+      ]
+    },
+    'professional-installation': {
+      label: 'Professional Installation',
+      details: [
+        { key: 'professional-installation-0', label: 'Detail 1: Site Survey & Measurement' },
+        { key: 'professional-installation-1', label: 'Detail 2: Secure Mounting Systems' },
+        { key: 'professional-installation-2', label: 'Detail 3: Electrical Connection' }
+      ]
+    },
+    'design-consultation': {
+      label: 'Design Consultation',
+      details: [
+        { key: 'design-consultation-0', label: 'Detail 1: Aesthetic Planning' },
+        { key: 'design-consultation-1', label: 'Detail 2: Technical Recommendations' },
+        { key: 'design-consultation-2', label: 'Detail 3: 3D Visualization' }
+      ]
+    },
+    'delivery-logistics': {
+      label: 'Delivery & Logistics',
+      details: [
+        { key: 'delivery-logistics-0', label: 'Detail 1: Specialized Packaging' },
+        { key: 'delivery-logistics-1', label: 'Detail 2: Dedicated Fleet' },
+        { key: 'delivery-logistics-2', label: 'Detail 3: Nationwide Shipping' }
+      ]
+    }
   };
 
   let siteContent = {};
@@ -458,19 +488,45 @@
   }
 
   function renderServices() {
-    const grid = document.getElementById('services-grid');
-    grid.innerHTML = Object.entries(SERVICES).map(([key, label]) => {
-      const img = siteContent.services?.[key];
+    const container = document.getElementById('services-grid');
+    if (!container) return;
+    
+    // We render a grid block for each category
+    container.innerHTML = Object.entries(SERVICES).map(([catKey, cat]) => {
+      const mainImg = siteContent.services?.[catKey];
+      
+      const detailsHtml = cat.details.map(detail => {
+        const detailImg = siteContent.serviceDetails?.[detail.key];
+        return `
+          <div class="mini-card" style="background:#1d1d1d; border-color:rgba(255,255,255,0.04);">
+            <h5 style="font-size:12px; margin-bottom:8px; color:#aaa; font-weight:600;">${detail.label}</h5>
+            <div class="mini-image-preview" style="aspect-ratio: 4/3;">
+              ${detailImg ? `<img src="/${detailImg.path}?t=${Date.now()}" alt="${detail.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
+            </div>
+            <div class="mini-actions">
+              <label for="srv-det-${detail.key}">Upload</label>
+              <input type="file" id="srv-det-${detail.key}" accept="image/*" onchange="uploadSection(this,'service-detail','${detail.key}')">
+              ${detailImg ? `<div class="mini-remove" onclick="removeSection('service-detail','${detail.key}')">Remove</div>` : ''}
+            </div>
+          </div>`;
+      }).join('');
+
       return `
-        <div class="mini-card">
-          <h4>${label} ${img ? '<span class="live-badge">✓ Live</span>' : '<span class="empty-badge">Empty</span>'}</h4>
-          <div class="mini-image-preview">
-            ${img ? `<img src="/${img.path}?t=${Date.now()}" alt="${label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
-          </div>
-          <div class="mini-actions">
-            <label for="srv-${key}">Upload</label>
-            <input type="file" id="srv-${key}" accept="image/*" onchange="uploadSection(this,'service','${key}')">
-            ${img ? `<div class="mini-remove" onclick="removeSection('service','${key}')">Remove</div>` : ''}
+        <div class="service-block" style="grid-column: 1 / -1; margin-bottom: 24px; padding: 20px; background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px;">
+          <h4 style="font-family:'Outfit',sans-serif; color:#fff; font-size:16px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">${cat.label}</h4>
+          <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+            <div class="mini-card" style="background:#1d1d1d; border-color:rgba(255,255,255,0.04);">
+              <h5 style="font-size:12px; margin-bottom:8px; color:#fff; font-weight:600;">Homepage Card Image</h5>
+              <div class="mini-image-preview" style="aspect-ratio: 4/3;">
+                ${mainImg ? `<img src="/${mainImg.path}?t=${Date.now()}" alt="${cat.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
+              </div>
+              <div class="mini-actions">
+                <label for="srv-${catKey}">Upload</label>
+                <input type="file" id="srv-${catKey}" accept="image/*" onchange="uploadSection(this,'service','${catKey}')">
+                ${mainImg ? `<div class="mini-remove" onclick="removeSection('service','${catKey}')">Remove</div>` : ''}
+              </div>
+            </div>
+            ${detailsHtml}
           </div>
         </div>`;
     }).join('');
@@ -584,7 +640,8 @@
     const url = section === 'hero' ? '/api/upload/hero'
               : section === 'logo' ? '/api/upload/logo'
               : section === 'product' ? `/api/upload/product/${key}`
-              : `/api/upload/service/${key}`;
+              : section === 'service' ? `/api/upload/service/${key}`
+              : `/api/upload/service-detail/${key}`;
     try {
       const res = await fetch(url, { method: 'POST', body: fd });
       const json = await res.json();

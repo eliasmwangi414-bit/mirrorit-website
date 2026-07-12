@@ -312,7 +312,7 @@
     
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0APrecision%20Cutting" alt="Precision Cutting" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0APrecision%20Cutting" id="detail-img-custom-fabrication-0" alt="Precision Cutting" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Precision Cutting</h2>
@@ -326,7 +326,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0APremium%20Silvering" alt="Premium Silvering" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0APremium%20Silvering" id="detail-img-custom-fabrication-1" alt="Premium Silvering" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Premium Silvering</h2>
@@ -340,7 +340,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0ACustom%20LED%20Integration" alt="Custom LED Integration" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Custom%20Mirror%20Fabrication%0ACustom%20LED%20Integration" id="detail-img-custom-fabrication-2" alt="Custom LED Integration" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Custom LED Integration</h2>
@@ -446,9 +446,21 @@
         try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
         catch { res = await fetch('site-content.json?t=' + t); }
         const data = await res.json();
+        
+        // Logo
         if (data.logo) {
           document.querySelectorAll('.logo-icon').forEach(img => {
             img.src = data.logo.path;
+          });
+        }
+        
+        // Service detail images
+        if (data.serviceDetails) {
+          Object.entries(data.serviceDetails).forEach(([key, val]) => {
+            if (val && val.path) {
+              const imgEl = document.getElementById('detail-img-' + key);
+              if (imgEl) imgEl.src = val.path;
+            }
           });
         }
       } catch(e) {}

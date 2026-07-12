@@ -312,7 +312,7 @@
     
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ASpecialized%20Packaging" alt="Specialized Packaging" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ASpecialized%20Packaging" id="detail-img-delivery-logistics-0" alt="Specialized Packaging" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Specialized Packaging</h2>
@@ -326,7 +326,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ADedicated%20Fleet" alt="Dedicated Fleet" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ADedicated%20Fleet" id="detail-img-delivery-logistics-1" alt="Dedicated Fleet" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Dedicated Fleet</h2>
@@ -340,7 +340,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ANationwide%20Shipping" alt="Nationwide Shipping" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Delivery%20%26%20Logistics%0ANationwide%20Shipping" id="detail-img-delivery-logistics-2" alt="Nationwide Shipping" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Nationwide Shipping</h2>
@@ -446,9 +446,21 @@
         try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
         catch { res = await fetch('site-content.json?t=' + t); }
         const data = await res.json();
+        
+        // Logo
         if (data.logo) {
           document.querySelectorAll('.logo-icon').forEach(img => {
             img.src = data.logo.path;
+          });
+        }
+        
+        // Service detail images
+        if (data.serviceDetails) {
+          Object.entries(data.serviceDetails).forEach(([key, val]) => {
+            if (val && val.path) {
+              const imgEl = document.getElementById('detail-img-' + key);
+              if (imgEl) imgEl.src = val.path;
+            }
           });
         }
       } catch(e) {}

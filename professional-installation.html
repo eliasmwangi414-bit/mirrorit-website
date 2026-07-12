@@ -312,7 +312,7 @@
     
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Professional%20Installation%0ASite%20Survey%20%26%20Measurement" alt="Site Survey & Measurement" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Professional%20Installation%0ASite%20Survey%20%26%20Measurement" id="detail-img-professional-installation-0" alt="Site Survey & Measurement" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Site Survey & Measurement</h2>
@@ -326,7 +326,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Professional%20Installation%0ASecure%20Mounting%20Systems" alt="Secure Mounting Systems" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Professional%20Installation%0ASecure%20Mounting%20Systems" id="detail-img-professional-installation-1" alt="Secure Mounting Systems" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Secure Mounting Systems</h2>
@@ -340,7 +340,7 @@
 
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text=Professional%20Installation%0AElectrical%20Connection" alt="Electrical Connection" class="detail-img" />
+        <img src="https://placehold.co/800x600?text=Professional%20Installation%0AElectrical%20Connection" id="detail-img-professional-installation-2" alt="Electrical Connection" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">Electrical Connection</h2>
@@ -446,9 +446,21 @@
         try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
         catch { res = await fetch('site-content.json?t=' + t); }
         const data = await res.json();
+        
+        // Logo
         if (data.logo) {
           document.querySelectorAll('.logo-icon').forEach(img => {
             img.src = data.logo.path;
+          });
+        }
+        
+        // Service detail images
+        if (data.serviceDetails) {
+          Object.entries(data.serviceDetails).forEach(([key, val]) => {
+            if (val && val.path) {
+              const imgEl = document.getElementById('detail-img-' + key);
+              if (imgEl) imgEl.src = val.path;
+            }
           });
         }
       } catch(e) {}

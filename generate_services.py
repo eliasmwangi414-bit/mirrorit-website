@@ -450,9 +450,21 @@ template = """<!DOCTYPE html>
         try {{ res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }}
         catch {{ res = await fetch('site-content.json?t=' + t); }}
         const data = await res.json();
+        
+        // Logo
         if (data.logo) {{
           document.querySelectorAll('.logo-icon').forEach(img => {{
             img.src = data.logo.path;
+          }});
+        }}
+        
+        // Service detail images
+        if (data.serviceDetails) {{
+          Object.entries(data.serviceDetails).forEach(([key, val]) => {{
+            if (val && val.path) {{
+              const imgEl = document.getElementById('detail-img-' + key);
+              if (imgEl) imgEl.src = val.path;
+            }}
           }});
         }}
       }} catch(e) {{}}
@@ -471,10 +483,13 @@ for filename, title, subtitle, sections in services:
         
         img_text = urllib.parse.quote(f"{title}\n{sec_title}")
         
+        # Determine the key name for this service detail section
+        key_name = f"{filename.replace('.html','')}-{idx}"
+        
         details_html += f'''
     <div class="detail-row">
       <div class="detail-img-wrapper">
-        <img src="https://placehold.co/800x600?text={img_text}" alt="{sec_title}" class="detail-img" />
+        <img src="https://placehold.co/800x600?text={img_text}" id="detail-img-{key_name}" alt="{sec_title}" class="detail-img" />
       </div>
       <div class="detail-content">
         <h2 class="detail-title">{sec_title}</h2>
