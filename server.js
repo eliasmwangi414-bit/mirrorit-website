@@ -176,6 +176,18 @@ app.post('/api/delete/gallery/:id', requireAuth, (req, res) => {
     res.json({ success: true });
 });
 
+// Update gallery image description
+app.post('/api/update/gallery-desc/:id', requireAuth, (req, res) => {
+    const { description } = req.body;
+    const db = readDB();
+    const item = db.gallery.find(img => img.id === req.params.id);
+    if (!item) return res.status(404).json({ error: 'Item not found' });
+    item.description = description || '';
+    writeDB(db);
+    syncToGitHub();
+    res.json({ success: true });
+});
+
 // Remove any section image (hero, logo, product, service)
 app.post('/api/remove/hero', requireAuth, (req, res) => {
     const db = readDB();

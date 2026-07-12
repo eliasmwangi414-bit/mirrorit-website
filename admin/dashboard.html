@@ -500,6 +500,13 @@
           <div class="gallery-slot">
             <span class="slot-num">#${slotNum}</span>
             <img class="slot-img" src="/${img.path}?t=${Date.now()}" alt="Slot ${slotNum}" />
+            <div style="padding: 10px 10px 0;">
+              <textarea 
+                style="width: 100%; background: #0c0c0c; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-size: 11px; padding: 6px; resize: none; font-family: 'Inter', sans-serif; height: 42px;" 
+                placeholder="Write description..." 
+                onchange="saveDescription('${img.id}', this.value)"
+              >${img.description || ''}</textarea>
+            </div>
             <div class="slot-footer">
               <label class="slot-replace-label" for="${inputId}">Replace</label>
               <input type="file" id="${inputId}" accept="image/*" style="display:none" onchange="uploadGallerySlot(this, '${img.id}')">
@@ -521,6 +528,28 @@
     grid.innerHTML = html;
   }
 
+  // ---- Save Slot Description ----
+  async function saveDescription(id, text) {
+    try {
+      const res = await fetch(`/api/update/gallery-desc/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description: text })
+      });
+      const json = await res.json();
+      if (json.success) {
+        toast('Description saved and live!');
+        // Update local memory
+        const contentRes = await fetch('/api/site-content?t=' + Date.now());
+        siteContent = await contentRes.json();
+      } else {
+        toast('Failed to save description', 'err');
+      }
+    } catch {
+      toast('Failed to save description', 'err');
+    }
+  }
+
   // ---- Upload to a gallery slot ----
   async function uploadGallerySlot(input, existingId) {
     if (!input.files[0]) return;
@@ -536,7 +565,7 @@
       const res = await fetch('/api/upload/gallery', { method: 'POST', body: fd });
       const json = await res.json();
       if (json.success) {
-        toast('Image uploaded!');
+        toast('Image uploaded! You can now write a description below.');
         await loadContent();
       } else {
         toast('Upload failed', 'err');
