@@ -134,6 +134,74 @@
     }
     .upload-gallery-btn:hover { opacity: 0.88; }
     .gallery-grid-admin { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+    /* GALLERY TABS */
+    .gallery-tabs {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;
+    }
+    .gtab {
+      padding: 8px 16px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04); color: #888; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .gtab:hover { background: rgba(255,255,255,0.1); color: #ccc; }
+    .gtab.active { background: #fff; color: #000; border-color: #fff; font-weight: 700; }
+
+    /* GALLERY SLOT GRID */
+    .gallery-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1200px) { .gallery-slot-grid { grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width: 900px)  { .gallery-slot-grid { grid-template-columns: repeat(3, 1fr); } }
+    .gallery-slot {
+      background: #161616; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px; overflow: hidden; position: relative;
+    }
+    .gallery-slot .slot-img {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;
+    }
+    .gallery-slot .slot-empty {
+      width: 100%; aspect-ratio: 1/1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #111 0%, #181818 100%);
+      border: 2px dashed rgba(255,255,255,0.08);
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .gallery-slot .slot-empty:hover { border-color: rgba(255,255,255,0.25); background: #1a1a1a; }
+    .gallery-slot .slot-empty span { font-size: 28px; margin-bottom: 6px; opacity: 0.3; }
+    .gallery-slot .slot-empty p { font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 1px; }
+    .slot-num {
+      position: absolute; top: 6px; left: 8px;
+      font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3);
+    }
+    .slot-footer {
+      padding: 8px 10px; display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .slot-footer-empty {
+      padding: 8px 10px; text-align: center;
+    }
+    .slot-upload-label {
+      display: block; width: 100%; padding: 7px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px; font-size: 11px; color: #aaa; text-align: center;
+      cursor: pointer; transition: all 0.2s; font-weight: 500;
+    }
+    .slot-upload-label:hover { background: rgba(255,255,255,0.14); color: #fff; }
+    .slot-del-btn {
+      padding: 5px 10px; background: rgba(255,60,60,0.08); color: #ff6060;
+      border: 1px solid rgba(255,60,60,0.2); border-radius: 5px;
+      font-size: 11px; cursor: pointer; transition: all 0.2s;
+    }
+    .slot-del-btn:hover { background: rgba(255,60,60,0.18); }
+    .slot-replace-label {
+      padding: 5px 10px; background: rgba(255,255,255,0.06); color: #aaa;
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 5px;
+      font-size: 11px; cursor: pointer; transition: all 0.2s;
+    }
+    .slot-replace-label:hover { background: rgba(255,255,255,0.14); color: #fff; }
     .gallery-admin-item {
       background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; overflow: hidden;
     }
@@ -292,25 +360,9 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const PRODUCTS = {
-    'wooden-framed': 'Wooden Framed Mirrors',
-    'thin-framed': 'Thin Framed Mirrors',
-    'frameless': 'Frameless Mirrors',
-    'wall-mirrors': 'Wall Mirrors',
-    'aluminium-framed': 'Aluminium Framed Mirrors',
-    'smart-mirrors': 'Smart Mirrors',
-    'vanity': 'Vanity Mirrors',
-    'accent': 'Accent Mirrors',
-    'custom': 'Custom Mirrors'
-  };
-  const SERVICES = {
-    'custom-fabrication': 'Custom Mirror Fabrication',
-    'professional-installation': 'Professional Installation',
-    'design-consultation': 'Design Consultation',
-    'delivery-logistics': 'Delivery & Logistics'
-  };
-
   let siteContent = {};
+  let currentGalleryTab = 'Wooden Framed Mirror';
+  const TOTAL_SLOTS = 20;
 
   // ---- Navigation ----
   function showPanel(name) {
@@ -337,7 +389,7 @@
       renderLogo();
       renderProducts();
       renderServices();
-      renderGallery();
+      renderGallerySlots();
     } catch(e) {
       console.error(e);
       toast('Failed to load content', 'err');
@@ -406,22 +458,75 @@
     }).join('');
   }
 
-  function renderGallery() {
-    const grid = document.getElementById('gallery-grid');
-    const gallery = siteContent.gallery || [];
-    if (!gallery.length) {
-      grid.innerHTML = '<div class="empty-gallery">No photos uploaded yet.</div>';
-      return;
+  // ---- Gallery slot tab switch ----
+  function switchGalleryTab(mirrorType, btn) {
+    currentGalleryTab = mirrorType;
+    document.querySelectorAll('.gtab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('gallery-tab-title').textContent = mirrorType + ' — Slots';
+    renderGallerySlots();
+  }
+
+  // ---- Render gallery slots for current tab ----
+  function renderGallerySlots() {
+    const grid = document.getElementById('gallery-slot-grid');
+    if (!grid) return;
+    const gallery = (siteContent.gallery || []).filter(img => img.mirrorType === currentGalleryTab);
+    let html = '';
+    for (let i = 0; i < TOTAL_SLOTS; i++) {
+      const img = gallery[i];
+      const slotNum = i + 1;
+      const inputId = `slot-input-${i}`;
+      if (img) {
+        html += `
+          <div class="gallery-slot">
+            <span class="slot-num">#${slotNum}</span>
+            <img class="slot-img" src="/${img.path}?t=${Date.now()}" alt="Slot ${slotNum}" />
+            <div class="slot-footer">
+              <label class="slot-replace-label" for="${inputId}">Replace</label>
+              <input type="file" id="${inputId}" accept="image/*" style="display:none" onchange="uploadGallerySlot(this, '${img.id}')">
+              <button class="slot-del-btn" onclick="deleteGallery('${img.id}')">Delete</button>
+            </div>
+          </div>`;
+      } else {
+        html += `
+          <div class="gallery-slot">
+            <span class="slot-num">#${slotNum}</span>
+            <label class="slot-empty" for="${inputId}">
+              <span>+</span>
+              <p>Upload</p>
+            </label>
+            <input type="file" id="${inputId}" accept="image/*" style="display:none" onchange="uploadGallerySlot(this, null)">
+          </div>`;
+      }
     }
-    grid.innerHTML = gallery.map(img => `
-      <div class="gallery-admin-item">
-        <img src="/${img.path}?t=${Date.now()}" alt="${img.mirrorType}">
-        <div class="gallery-admin-info">
-          <strong>${img.mirrorType}</strong>
-          <span>${(img.description || '').replace(/\r\n|\r|\n/g, '<br>')}</span>
-        </div>
-        <button onclick="deleteGallery('${img.id}')">🗑 Delete</button>
-      </div>`).join('');
+    grid.innerHTML = html;
+  }
+
+  // ---- Upload to a gallery slot ----
+  async function uploadGallerySlot(input, existingId) {
+    if (!input.files[0]) return;
+    // If replacing, delete old first
+    if (existingId) {
+      try { await fetch(`/api/delete/gallery/${existingId}`, { method: 'POST' }); } catch {}
+    }
+    const fd = new FormData();
+    fd.append('image', input.files[0]);
+    fd.append('mirrorType', currentGalleryTab);
+    fd.append('description', '');
+    try {
+      const res = await fetch('/api/upload/gallery', { method: 'POST', body: fd });
+      const json = await res.json();
+      if (json.success) {
+        toast('Image uploaded!');
+        await loadContent();
+      } else {
+        toast('Upload failed', 'err');
+      }
+    } catch {
+      toast('Upload failed', 'err');
+    }
+    input.value = '';
   }
 
   // ---- Upload hero / logo / product / service ----
@@ -463,29 +568,9 @@
     }
   }
 
-  // ---- Upload gallery ----
-  async function uploadGallery(e) {
-    e.preventDefault();
-    const form = document.getElementById('gallery-form');
-    const fd = new FormData(form);
-    try {
-      const res = await fetch('/api/upload/gallery', { method: 'POST', body: fd });
-      const json = await res.json();
-      if (json.success) {
-        toast('Photo added to gallery!');
-        form.reset();
-        await loadContent();
-      } else {
-        toast('Upload failed', 'err');
-      }
-    } catch {
-      toast('Upload failed', 'err');
-    }
-  }
-
   // ---- Delete gallery item ----
   async function deleteGallery(id) {
-    if (!confirm('Delete this photo from the gallery?')) return;
+    if (!confirm('Delete this photo?')) return;
     try {
       const res = await fetch(`/api/delete/gallery/${id}`, { method: 'POST' });
       const json = await res.json();
@@ -503,3 +588,4 @@
 </script>
 </body>
 </html>
+
