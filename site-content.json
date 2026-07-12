@@ -5,10 +5,7 @@
     "uploadedAt": "2026-06-27T10:03:30.810Z"
   },
   "products": {
-    "wooden-framed": {
-      "path": "images/uploads/1783863614503-505322291.JPG",
-      "uploadedAt": "2026-07-12T13:40:14.530Z"
-    },
+    "wooden-framed": null,
     "thin-framed": null,
     "frameless": {
       "path": "images/uploads/1783863594742-206054002.JPG",
