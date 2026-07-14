@@ -58,22 +58,22 @@ template = """<!DOCTYPE html>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
       font-family: 'Inter', sans-serif;
-      background: #0c0c0c;
-      color: #e8e8e8;
+      background: #ffffff;
+      color: #1a1a1a;
       overflow-x: hidden;
       line-height: 1.6;
     }}
     :root {{
-      --bg-primary:   #0c0c0c;
-      --bg-secondary: #121212;
-      --border:       rgba(255,255,255,0.08);
-      --glass-bg:     rgba(255,255,255,0.04);
-      --glass-border: rgba(255,255,255,0.1);
-      --text-primary: #f0f0f0;
-      --text-secondary:#a0a0a0;
-      --text-muted:   #606060;
-      --accent-bright:#ffffff;
-      --divider:      rgba(255,255,255,0.06);
+      --bg-primary:   #ffffff;
+      --bg-secondary: #f5f5f7;
+      --border:       rgba(0,0,0,0.08);
+      --glass-bg:     rgba(255,255,255,0.8);
+      --glass-border: rgba(0,0,0,0.08);
+      --text-primary: #111111;
+      --text-secondary:#4a4a5a;
+      --text-muted:   #8a8a9a;
+      --accent-bright:#111111;
+      --divider:      rgba(0,0,0,0.06);
       --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }}
     a {{ text-decoration: none; }}
@@ -88,9 +88,9 @@ template = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(12,12,12,0.85);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
     }}
     .nav-logo {{ display: flex; align-items: center; gap: 10px; }}
     .logo-icon {{ height: 40px; width: auto; max-width: 150px; object-fit: contain; flex-shrink: 0; display: block; }}
@@ -106,28 +106,28 @@ template = """<!DOCTYPE html>
       position: absolute;
       top: 100%;
       left: 0;
-      background: #1a1a1a;
+      background: #ffffff;
       min-width: 220px;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(0,0,0,0.08);
       border-radius: 8px;
       padding: 8px 0;
       z-index: 2000;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
     }}
     .dropdown:hover .dropdown-content {{ display: block; }}
     .dropdown-content a {{
       display: block;
       padding: 10px 20px;
-      color: #c0c0c0 !important;
+      color: #4a4a5a !important;
       font-size: 14px;
       text-decoration: none;
     }}
     .dropdown-content a::after {{ display: none !important; }}
     .dropdown-content a:hover {{
-      background: rgba(255,255,255,0.07);
-      color: #ffffff !important;
+      background: rgba(0,0,0,0.03);
+      color: #111111 !important;
     }}
-    .nav-cta {{ padding: 9px 22px; background: var(--accent-bright); color: #0c0c0c !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
+    .nav-cta {{ padding: 9px 22px; background: #111111; color: #ffffff !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
 
     /* ===== MOBILE NAV ===== */
     .nav-hamburger {{
@@ -151,10 +151,10 @@ template = """<!DOCTYPE html>
         flex-direction: column;
         position: fixed;
         top: 72px; left: 0; right: 0;
-        background: rgba(12,12,12,0.98);
+        background: rgba(255,255,255,0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid rgba(0,0,0,0.07);
         gap: 20px;
         z-index: 999;
         max-height: calc(100vh - 72px);
@@ -163,7 +163,7 @@ template = """<!DOCTYPE html>
       .dropdown-content {{
         position: static;
         display: none;
-        background: rgba(255,255,255,0.03);
+        background: rgba(0,0,0,0.03);
         border: none;
         box-shadow: none;
         padding: 4px 0 4px 15px;
@@ -197,8 +197,8 @@ template = """<!DOCTYPE html>
     /* Service Hero styles */
     .service-hero {{
       padding: 140px 5% 80px;
-      background: linear-gradient(180deg, #0e0e0e 0%, var(--bg-primary) 100%);
-      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
       text-align: center;
     }}
     .service-hero-title {{
@@ -267,18 +267,18 @@ template = """<!DOCTYPE html>
       align-items: center;
       gap: 8px;
       padding: 12px 24px;
-      background: var(--accent-bright);
-      color: #0c0c0c;
+      background: #111111;
+      color: #ffffff;
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
       font-size: 14px;
       border-radius: 4px;
       transition: var(--transition);
-      border: 2px solid var(--accent-bright);
+      border: 2px solid #111111;
     }}
     .inquire-btn:hover {{
       background: transparent;
-      color: var(--accent-bright);
+      color: #111111;
     }}
     @media (max-width: 900px) {{
       .detail-row {{ grid-template-columns: 1fr; gap: 32px; }}
@@ -286,12 +286,12 @@ template = """<!DOCTYPE html>
     }}
 
     /* Footer styles */
-    footer {{ padding: 80px 5% 32px; background: #080808; border-top: 1px solid var(--border); }}
+    footer {{ padding: 80px 5% 32px; background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }}
     .footer-grid {{ display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }}
     .footer-brand p {{ color: var(--text-secondary); font-size: 14px; margin: 20px 0; max-width: 320px; }}
     .footer-socials {{ display: flex; gap: 12px; }}
-    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: var(--glass-bg); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; color: var(--text-primary); transition: var(--transition); }}
-    .social-btn:hover {{ background: var(--accent-bright); color: var(--bg-primary); transform: translateY(-3px); }}
+    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: var(--transition); }}
+    .social-btn:hover {{ background: #111111; color: #ffffff; transform: translateY(-3px); }}
     .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }}
     .footer-links {{ list-style: none; }}
     .footer-links li {{ margin-bottom: 12px; }}
