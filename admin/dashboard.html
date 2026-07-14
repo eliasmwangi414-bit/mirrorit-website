@@ -75,23 +75,23 @@
     .image-actions label:hover { background: #e8e8f0; color: #111; }
     .image-actions input[type="file"] { display: none; }
     .remove-btn {
-      padding: 9px 18px; background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.15);
-      border-radius: 6px; color: #dc2626; font-size: 13px; font-weight: 500;
+      padding: 9px 18px; background: #000000; border: 1px solid #000000;
+      border-radius: 6px; color: #ffffff; font-size: 13px; font-weight: 500;
       cursor: pointer; transition: all 0.2s; text-align: center;
     }
-    .remove-btn:hover { background: rgba(220,38,38,0.1); }
+    .remove-btn:hover { background: #222222; }
     .upload-status { font-size: 12px; margin-top: 4px; }
-    .upload-status.ok { color: #16a34a; }
-    .upload-status.err { color: #dc2626; }
+    .upload-status.ok { color: #000000; font-weight: 600; }
+    .upload-status.err { color: #000000; font-weight: 600; text-decoration: underline; }
     .live-badge {
       display: inline-block; font-size: 10px; padding: 2px 8px;
-      background: rgba(22,163,74,0.1); color: #16a34a; border-radius: 20px;
-      border: 1px solid rgba(22,163,74,0.2); margin-left: 10px; vertical-align: middle;
+      background: rgba(0,0,0,0.05); color: #000000; border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.15); margin-left: 10px; vertical-align: middle;
     }
     .empty-badge {
       display: inline-block; font-size: 10px; padding: 2px 8px;
-      background: rgba(245,158,11,0.1); color: #d97706; border-radius: 20px;
-      border: 1px solid rgba(245,158,11,0.2); margin-left: 10px; vertical-align: middle;
+      background: transparent; color: #666666; border-radius: 20px;
+      border: 1px dashed rgba(0,0,0,0.2); margin-left: 10px; vertical-align: middle;
     }
 
     /* GRID LAYOUTS */
@@ -114,10 +114,10 @@
       flex: 1; padding: 7px 10px; text-align: center; border-radius: 5px; font-size: 12px;
       font-weight: 500; cursor: pointer; transition: all 0.2s;
     }
-    .mini-actions label { background: #f0f0f4; border: 1px solid rgba(0,0,0,0.1); color: #555; }
-    .mini-actions label:hover { background: #e8e8f0; color: #111; }
-    .mini-actions .mini-remove { background: rgba(220,38,38,0.06); border: 1px solid rgba(220,38,38,0.15); color: #dc2626; }
-    .mini-actions .mini-remove:hover { background: rgba(220,38,38,0.12); }
+    .mini-actions label { background: #ffffff; border: 1px solid rgba(0,0,0,0.15); color: #000; }
+    .mini-actions label:hover { background: #f0f0f4; }
+    .mini-actions .mini-remove { background: #000000; border: 1px solid #000000; color: #ffffff; }
+    .mini-actions .mini-remove:hover { background: #222222; }
     .mini-actions input[type="file"] { display: none; }
 
     /* GALLERY SECTION */
@@ -198,17 +198,17 @@
     }
     .slot-upload-label:hover { background: #e4e4ec; color: #111; }
     .slot-del-btn {
-      padding: 5px 10px; background: rgba(220,38,38,0.06); color: #dc2626;
-      border: 1px solid rgba(220,38,38,0.15); border-radius: 5px;
+      padding: 5px 10px; background: #000000; color: #ffffff;
+      border: 1px solid #000000; border-radius: 5px;
       font-size: 11px; cursor: pointer; transition: all 0.2s;
     }
-    .slot-del-btn:hover { background: rgba(220,38,38,0.12); }
+    .slot-del-btn:hover { background: #222222; }
     .slot-replace-label {
-      padding: 5px 10px; background: #f0f0f4; color: #555;
-      border: 1px solid rgba(0,0,0,0.08); border-radius: 5px;
+      padding: 5px 10px; background: #ffffff; color: #000;
+      border: 1px solid rgba(0,0,0,0.15); border-radius: 5px;
       font-size: 11px; cursor: pointer; transition: all 0.2s;
     }
-    .slot-replace-label:hover { background: #e4e4ec; color: #111; }
+    .slot-replace-label:hover { background: #f0f0f4; }
     .gallery-admin-item {
       background: #ffffff; border: 1px solid rgba(0,0,0,0.07); border-radius: 8px; overflow: hidden;
     }
@@ -227,15 +227,15 @@
     /* TOAST */
     .toast {
       position: fixed; bottom: 30px; right: 30px; padding: 14px 22px;
-      background: #ffffff; border: 1px solid rgba(0,0,0,0.08);
-      border-radius: 8px; font-size: 14px; color: #111;
+      background: #ffffff; border: 1px solid #000000;
+      border-radius: 8px; font-size: 14px; color: #000000;
       box-shadow: 0 8px 30px rgba(0,0,0,0.1); z-index: 9999;
       transform: translateY(20px); opacity: 0; transition: all 0.3s ease;
       pointer-events: none;
     }
     .toast.show { transform: translateY(0); opacity: 1; }
-    .toast.ok { border-color: rgba(22,163,74,0.3); color: #16a34a; background: #f0fdf4; }
-    .toast.err { border-color: rgba(220,38,38,0.3); color: #dc2626; background: #fef2f2; }
+    .toast.ok { border-color: #000000; color: #ffffff; background: #000000; }
+    .toast.err { border-color: #000000; color: #000000; background: #ffffff; text-decoration: underline; }
 
     @media (max-width: 1024px) {
       .products-grid { grid-template-columns: 1fr 1fr; }
@@ -366,7 +366,7 @@
         <h1>Blog Management</h1>
         <p>Create, edit, delete, and upload images for articles in the website's Blog section.</p>
       </div>
-      <button onclick="createNewBlogPost()" style="padding:10px 20px; background:#111; color:#fff; border:none; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer;">+ Add New Post</button>
+      <button onclick="createNewBlogPost()" style="padding:10px 20px; background:#000000; color:#ffffff; border:none; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer;">+ Add New Post</button>
     </div>
     <div id="blog-admin-grid" style="display:flex; flex-direction:column; gap:20px;">
       <!-- Rendered by JS -->
@@ -532,8 +532,8 @@
           <textarea id="blog-summary-${post.id}" placeholder="Short summary displayed on cards..." style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:13px; min-height:50px; resize:vertical;">${post.summary || ''}</textarea>
           <textarea id="blog-content-${post.id}" placeholder="Full article content..." style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:13px; min-height:80px; resize:vertical;">${post.content || ''}</textarea>
           <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:4px;">
-            <button onclick="deleteBlogPost('${post.id}')" style="padding:8px 16px; background:rgba(220,38,38,0.08); color:#dc2626; border:1px solid rgba(220,38,38,0.2); border-radius:6px; cursor:pointer; font-weight:500; font-size:12px;">Delete Post</button>
-            <button onclick="saveBlogPost('${post.id}')" style="padding:8px 20px; background:#111; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px;">Save Changes</button>
+            <button onclick="deleteBlogPost('${post.id}')" style="padding:8px 16px; background:#ffffff; color:#000000; border:1px solid rgba(0,0,0,0.15); border-radius:6px; cursor:pointer; font-weight:500; font-size:12px;">Delete Post</button>
+            <button onclick="saveBlogPost('${post.id}')" style="padding:8px 20px; background:#000000; color:#ffffff; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px;">Save Changes</button>
           </div>
         </div>
       </div>
@@ -594,8 +594,8 @@
       const detailsHtml = cat.details.map(detail => {
         const detailImg = siteContent.serviceDetails?.[detail.key];
         return `
-          <div class="mini-card" style="background:#1d1d1d; border-color:rgba(255,255,255,0.04);">
-            <h5 style="font-size:12px; margin-bottom:8px; color:#aaa; font-weight:600;">${detail.label}</h5>
+          <div class="mini-card" style="background:#ffffff; border-color:rgba(0,0,0,0.08);">
+            <h5 style="font-size:12px; margin-bottom:8px; color:#555555; font-weight:600;">${detail.label}</h5>
             <div class="mini-image-preview" style="aspect-ratio: 4/3;">
               ${detailImg ? `<img src="/${detailImg.path}?t=${Date.now()}" alt="${detail.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
             </div>
@@ -608,11 +608,11 @@
       }).join('');
 
       return `
-        <div class="service-block" style="grid-column: 1 / -1; margin-bottom: 24px; padding: 20px; background: #161616; border: 1px solid rgba(255,255,255,0.07); border-radius: 8px;">
-          <h4 style="font-family:'Outfit',sans-serif; color:#fff; font-size:16px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:8px;">${cat.label}</h4>
+        <div class="service-block" style="grid-column: 1 / -1; margin-bottom: 24px; padding: 20px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px;">
+          <h4 style="font-family:'Outfit',sans-serif; color:#000000; font-size:16px; margin-bottom:16px; border-bottom:1px solid rgba(0,0,0,0.08); padding-bottom:8px;">${cat.label}</h4>
           <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
-            <div class="mini-card" style="background:#1d1d1d; border-color:rgba(255,255,255,0.04);">
-              <h5 style="font-size:12px; margin-bottom:8px; color:#fff; font-weight:600;">Homepage Card Image</h5>
+            <div class="mini-card" style="background:#ffffff; border-color:rgba(0,0,0,0.08);">
+              <h5 style="font-size:12px; margin-bottom:8px; color:#000000; font-weight:600;">Homepage Card Image</h5>
               <div class="mini-image-preview" style="aspect-ratio: 4/3;">
                 ${mainImg ? `<img src="/${mainImg.path}?t=${Date.now()}" alt="${cat.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
               </div>
@@ -654,7 +654,7 @@
             <img class="slot-img" src="/${img.path}?t=${Date.now()}" alt="Slot ${slotNum}" />
             <div style="padding: 10px 10px 0;">
               <textarea 
-                style="width: 100%; background: #0c0c0c; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; color: #fff; font-size: 11px; padding: 6px; resize: none; font-family: 'Inter', sans-serif; height: 42px;" 
+                style="width: 100%; background: #ffffff; border: 1px solid rgba(0,0,0,0.12); border-radius: 4px; color: #000; font-size: 11px; padding: 6px; resize: none; font-family: 'Inter', sans-serif; height: 42px;" 
                 placeholder="Write description..." 
                 onchange="saveDescription('${img.id}', this.value)"
               >${img.description || ''}</textarea>
