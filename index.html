@@ -613,7 +613,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#process">How We Work</a></li>
         <li><a href="#testimonials">Reviews</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
       <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
@@ -1062,21 +1062,6 @@
     </div>
   </section>
 
-  <!-- BLOG SECTION -->
-  <section id="blog" class="section">
-    <div class="container">
-      <div class="section-header center">
-        <span class="badge">Design Insights & Tips</span>
-        <div class="divider"></div>
-        <h2 class="section-title">The <span class="gradient-gold">MIRRORIT Blog</span></h2>
-        <p class="section-desc">Expert advice on styling, maintenance, and interior transformations with mirrors.</p>
-      </div>
-      <div class="blog-grid" id="dynamic-blog-grid">
-        <!-- Rendered dynamically by loadSiteContent -->
-      </div>
-    </div>
-  </section>
-
   <!-- GALLERY CTA -->
   <section id="gallery-cta">
     <h2 class="section-title" style="font-size:clamp(28px,4vw,44px);margin-bottom:16px;">Ready to Transform<br/><span class="gradient-gold">Your Space?</span></h2>
@@ -1226,7 +1211,7 @@
             <li><a href="#services">Professional Fitting</a></li>
             <li><a href="#services">Furniture Crafting</a></li>
             <li><a href="#services">Safe Delivery</a></li>
-            <li><a href="#blog">Design Blog</a></li>
+            <li><a href="blog.html">Design Blog</a></li>
           </ul>
         </div>
         <div>
@@ -1377,55 +1362,9 @@
           }
         });
 
-        // Blog
-        renderBlogSection(data.blog || []);
       } catch(e) {
         console.error('Failed to load dynamic content:', e);
-        renderBlogSection([]);
       }
-    }
-
-    function renderBlogSection(posts) {
-      const grid = document.getElementById('dynamic-blog-grid');
-      if (!grid) return;
-      if (!posts || posts.length === 0) {
-        posts = [
-          {
-            id: "blog-1",
-            title: "How to Choose the Perfect LED Mirror for Your Bathroom",
-            date: "July 10, 2026",
-            summary: "Discover the difference between front-lit and backlit mirrors, optimal color temperatures (3000K vs 6000K), and why copper-free glass is essential for preventing edge corrosion in humid Nairobi bathrooms.",
-            image: "images/products/kitchen-splashback.jpg"
-          },
-          {
-            id: "blog-2",
-            title: "5 Ways Custom Mirrored Furniture Elevates Modern Interiors",
-            date: "June 28, 2026",
-            summary: "Mirrored console tables and dressers naturally reflect light, making dark apartment hallways and living rooms feel twice as spacious and luxurious.",
-            image: "images/products/led-mirror.jpg"
-          },
-          {
-            id: "blog-3",
-            title: "The Art of Custom Mirror Fabrication: From Sheet to Wall",
-            date: "June 15, 2026",
-            summary: "Take a behind-the-scenes look at our Nairobi workshop where we precision-cut, bevel, and polish custom mirrors to fit uneven walls and architectural alcoves perfectly.",
-            image: "images/products/glass-railing.jpg"
-          }
-        ];
-      }
-      grid.innerHTML = posts.map(post => `
-        <div class="blog-card reveal">
-          <div class="blog-card-img-wrap">
-            <img src="${post.image}?t=${Date.now()}" alt="${post.title}" class="blog-card-img" loading="lazy" onerror="this.src='images/products/led-mirror.jpg'" />
-          </div>
-          <div class="blog-card-body">
-            <div class="blog-card-date">${post.date || 'Article'}</div>
-            <h3 class="blog-card-title">${post.title}</h3>
-            <p class="blog-card-summary">${post.summary || ''}</p>
-            <span class="blog-card-link">Read Guide →</span>
-          </div>
-        </div>
-      `).join('');
     }
 
     document.addEventListener("DOMContentLoaded", () => {

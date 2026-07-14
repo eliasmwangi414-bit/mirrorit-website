@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIRRORIT Blog | Design Insights & Custom Mirror Guides</title>
+  <meta name="description" content="Explore expert tips, interior styling guides, and technical insights on LED mirrors, mirrored furniture, and custom fabrication in Nairobi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=Montserrat:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: hsl(0 0% 5%);
+      --bg-card: hsl(0 0% 8%);
+      --bg-card2: hsl(0 0% 11%);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --fg: #ffffff;
+      --fg-60: rgba(255, 255, 255, 0.65);
+      --fg-50: rgba(255, 255, 255, 0.5);
+      --radius: 12px;
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(13, 13, 13, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 80px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-img { height: 44px; width: 44px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block; border: 1px solid rgba(212,175,55,0.3); }
+    .logo-text-wrap { display: flex; flex-direction: column; }
+    .logo-text { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: #fff; letter-spacing: 0.5px; line-height: 1.1; }
+    .logo-tagline { font-family: 'Montserrat', sans-serif; font-size: 8.5px; font-weight: 500; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+    
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a {
+      padding: 8px 16px; border-radius: 6px;
+      font-size: 14px; font-weight: 500; color: var(--fg-60);
+      transition: var(--transition); text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-links a.active { border-bottom: 2px solid var(--gold); border-radius: 6px 6px 0 0; }
+    .nav-cta { padding: 10px 24px !important; background: linear-gradient(135deg, #d4af37, #aa820a) !important; color: #000 !important; font-weight: 600 !important; border-radius: 8px !important; }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212,175,55,0.25); }
+
+    /* Dropdown */
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 8px); left: 0;
+      min-width: 220px; padding: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 8px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); z-index: 2000;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 10px 14px; font-size: 13px; color: var(--fg-60) !important; border-bottom: none !important; border-radius: 6px; }
+    .dropdown-menu a:hover { background: rgba(255,255,255,0.08); color: #fff !important; }
+
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #fff; margin: 5px 0; transition: var(--transition); }
+
+    @media (max-width: 1024px) {
+      .nav-links { display: none; position: absolute; top: 80px; left: 0; right: 0; background: var(--bg-card); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--border); }
+      .nav-links.show { display: flex; }
+      .nav-hamburger { display: block; }
+    }
+
+    /* ===== HERO ===== */
+    .blog-hero {
+      padding: 100px 2rem 60px;
+      text-align: center;
+      background: linear-gradient(180deg, hsl(0 0% 7%) 0%, hsl(0 0% 5%) 100%);
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+    .badge {
+      display: inline-block; padding: 6px 14px; background: rgba(212,175,55,0.1);
+      border: 1px solid rgba(212,175,55,0.3); border-radius: 30px;
+      font-size: 12px; font-weight: 600; color: var(--gold);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif; font-size: clamp(36px, 5vw, 56px);
+      font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 18px;
+    }
+    .gradient-gold {
+      background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-desc {
+      font-size: 16px; color: var(--fg-60); max-width: 650px; margin: 0 auto; line-height: 1.7;
+    }
+
+    /* ===== BLOG SECTION ===== */
+    .blog-container { max-width: 1400px; margin: 0 auto; padding: 60px 2rem 100px; }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } }
+    
+    .blog-card {
+      background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column; transition: var(--transition);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.2); cursor: pointer;
+    }
+    .blog-card:hover { transform: translateY(-8px); border-color: rgba(212,175,55,0.3); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .blog-card-img-wrap { width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative; background: var(--bg-card2); }
+    .blog-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25,1,0.5,1); }
+    .blog-card:hover .blog-card-img { transform: scale(1.08); }
+    .blog-card-body { padding: 32px; display: flex; flex-direction: column; flex: 1; }
+    .blog-card-date { font-size: 11px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .blog-card-title { font-family: 'Cinzel', serif; font-size: 21px; font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.35; transition: color 0.3s; }
+    .blog-card:hover .blog-card-title { color: var(--gold-light); }
+    .blog-card-summary { font-size: 14px; color: var(--fg-60); line-height: 1.7; margin-bottom: 28px; flex: 1; }
+    .blog-card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; transition: gap 0.3s, color 0.3s; }
+    .blog-card:hover .blog-card-link { gap: 12px; color: #fff; }
+
+    /* ===== ARTICLE MODAL ===== */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+      z-index: 3000; display: none; align-items: center; justify-content: center;
+      padding: 2rem; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show { display: flex; opacity: 1; }
+    .modal-box {
+      background: var(--bg-card); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; max-width: 850px; width: 100%; max-height: 90vh;
+      overflow-y: auto; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+      animation: modalSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal-close {
+      position: sticky; top: 20px; float: right; margin: 20px 20px 0 0;
+      width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1);
+      border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; z-index: 10; transition: background 0.2s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+    .modal-hero-img { width: 100%; max-height: 400px; object-fit: cover; }
+    .modal-content-wrap { padding: 40px 48px 48px; }
+    @media (max-width: 600px) { .modal-content-wrap { padding: 28px 24px; } }
+    .modal-date { font-size: 12px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .modal-title { font-family: 'Cinzel', serif; font-size: clamp(24px, 3.5vw, 34px); font-weight: 700; color: #fff; margin-bottom: 24px; line-height: 1.3; }
+    .modal-body { font-size: 16px; color: rgba(255,255,255,0.8); line-height: 1.85; white-space: pre-line; }
+
+    /* ===== GALLERY CTA ===== */
+    .cta-section {
+      background: linear-gradient(135deg, hsl(0 0% 8%) 0%, hsl(0 0% 11%) 100%);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      padding: 80px 2rem; text-align: center;
+    }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 15px; text-decoration: none; transition: var(--transition); }
+    .btn-primary { background: linear-gradient(135deg, #d4af37, #aa820a); color: #000; }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212,175,55,0.3); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.25); color: #fff; }
+    .btn-outline:hover { background: #fff; color: #000; }
+
+    /* ===== FOOTER ===== */
+    footer { background: hsl(0 0% 4%); padding: 64px 2rem 32px; border-top: 1px solid var(--border-soft); }
+    .footer-inner { max-width: 1400px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--border-soft); }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand-desc { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.75; margin: 16px 0 24px; max-width: 280px; }
+    .footer-col-title { font-family: 'Cinzel', serif; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #fff; margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-links a { color: rgba(255,255,255,0.65); font-size: 13.5px; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; font-size: 13px; color: rgba(255,255,255,0.45); }
+    @media (max-width: 600px) { .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
+        <div class="logo-text-wrap">
+          <span class="logo-text">MIRRORIT</span>
+          <span class="logo-tagline">You Are Enough</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li class="dropdown">
+          <a href="index.html#products">Products ▾</a>
+          <div class="dropdown-menu">
+            <a href="wooden-framed.html">Wooden Mirrors</a>
+            <a href="thin-framed.html">Thin Framed Mirrors</a>
+            <a href="frameless.html">Frameless Mirrors</a>
+            <a href="aluminium-framed.html">Aluminium Framed</a>
+            <a href="smart-mirrors.html">Smart Mirrors</a>
+            <a href="vanity.html">Vanity Mirrors</a>
+            <a href="accent.html">Artistic Mirrors</a>
+            <a href="wall-mirrors.html">Wall Mirrors</a>
+            <a href="furniture.html">Mirror Furniture</a>
+          </div>
+        </li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#process">How We Work</a></li>
+        <li><a href="index.html#testimonials">Reviews</a></li>
+        <li><a href="blog.html" class="active">Blog</a></li>
+        <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="blog-hero">
+    <span class="badge">Design & Architecture</span>
+    <h1 class="hero-title">The <span class="gradient-gold">MIRRORIT Journal</span></h1>
+    <p class="hero-desc">Explore expert interior design guides, maintenance secrets, and behind-the-scenes craftsmanship from our Nairobi mirror workshop.</p>
+  </header>
+
+  <!-- BLOG GRID -->
+  <main class="blog-container">
+    <div class="blog-grid" id="dynamic-blog-grid">
+      <!-- Rendered dynamically by JS -->
+    </div>
+  </main>
+
+  <!-- ARTICLE MODAL -->
+  <div class="modal-overlay" id="article-modal" onclick="closeModalOutside(event)">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <img id="modal-img" class="modal-hero-img" src="" alt="Article cover" />
+      <div class="modal-content-wrap">
+        <div id="modal-date" class="modal-date"></div>
+        <h2 id="modal-title" class="modal-title"></h2>
+        <div id="modal-body" class="modal-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY CTA -->
+  <section class="cta-section">
+    <h2 style="font-family:'Cinzel',serif; font-size:clamp(28px,4vw,44px); margin-bottom:16px;">Ready to Transform <span class="gradient-gold">Your Space?</span></h2>
+    <p style="color:rgba(255,255,255,0.7); max-width:600px; margin:0 auto 36px; font-size:16px;">Speak directly with our fabrication specialists to bring your custom mirror vision to life.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="index.html#contact" class="btn btn-primary">
+        Get a Free Quote
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://wa.me/254794439669" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+        Chat on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="nav-logo" style="margin-bottom: 16px;">
+            <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
+            <div class="logo-text-wrap">
+              <span class="logo-text">MIRRORIT</span>
+              <span class="logo-tagline">You Are Enough</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">Specialists in premium custom LED, vanity, and decorative mirrors. We focus exclusively on mirrors, with custom mirror furniture available on request.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Products</div>
+          <ul class="footer-links">
+            <li><a href="wooden-framed.html">Wooden Mirrors</a></li>
+            <li><a href="thin-framed.html">Thin Framed Mirrors</a></li>
+            <li><a href="frameless.html">Frameless Mirrors</a></li>
+            <li><a href="aluminium-framed.html">Aluminium Framed</a></li>
+            <li><a href="smart-mirrors.html">Smart Mirrors</a></li>
+            <li><a href="vanity.html">Vanity Mirrors</a></li>
+            <li><a href="accent.html">Artistic Mirrors</a></li>
+            <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
+            <li><a href="furniture.html">Mirror Furniture</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Mirror Fabrication</a></li>
+            <li><a href="index.html#services">Professional Fitting</a></li>
+            <li><a href="index.html#services">Furniture Crafting</a></li>
+            <li><a href="index.html#services">Safe Delivery</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="index.html#process">How We Work</a></li>
+            <li><a href="index.html#testimonials">Reviews</a></li>
+            <li><a href="blog.html">Design Blog</a></li>
+            <li><a href="index.html#contact">Contact & Quotes</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 MIRRORIT. All rights reserved.</div>
+        <div>Nairobi, Kenya | +254 794 439 669</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleNav() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+
+    let allPosts = [];
+
+    async function loadBlogPosts() {
+      try {
+        const t = Date.now();
+        let res;
+        try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
+        catch { res = await fetch('site-content.json?t=' + t); }
+        const data = await res.json();
+        
+        // Check logo
+        if (data.logo && data.logo.path) {
+          document.querySelectorAll('.logo-img').forEach(img => img.src = `${data.logo.path}?t=${t}`);
+        }
+
+        allPosts = data.blog || [];
+      } catch(e) {
+        console.error('Failed to load dynamic blog posts:', e);
+      }
+
+      if (!allPosts || allPosts.length === 0) {
+        allPosts = [
+          {
+            id: "blog-1",
+            title: "How to Choose the Perfect LED Mirror for Your Bathroom",
+            date: "July 10, 2026",
+            summary: "Discover the difference between front-lit and backlit mirrors, optimal color temperatures (3000K vs 6000K), and why copper-free glass is essential for preventing edge corrosion in humid Nairobi bathrooms.",
+            image: "images/products/kitchen-splashback.jpg",
+            content: "When selecting an LED mirror for your bathroom, the most critical factor is the glass quality. Standard copper-backed mirrors often develop black edges when exposed to steam over time. At MIRRORIT, all our bathroom mirrors use premium 5mm and 6mm copper-free silver mirror glass, ensuring pristine, crystal-clear reflections that endure for decades.\n\nFurthermore, understanding color temperature is vital for grooming and makeup application. A neutral 4000K or daylight 6000K LED provides crisp, shadow-free illumination ideal for daily routines. All our custom smart mirrors include integrated heated defogger pads to keep your reflection crystal clear even after a hot shower."
+          },
+          {
+            id: "blog-2",
+            title: "5 Ways Custom Mirrored Furniture Elevates Modern Interiors",
+            date: "June 28, 2026",
+            summary: "Mirrored console tables and dressers naturally reflect light, making dark apartment hallways and living rooms feel twice as spacious and luxurious.",
+            image: "images/products/led-mirror.jpg",
+            content: "Mirrored furniture is one of interior design's best-kept secrets. By reflecting both natural sunlight and architectural lighting, a bespoke mirrored console table transforms tight entryways into grand foyers. Each piece crafted by MIRRORIT is precision-aligned and built on solid hardwood cores for maximum durability.\n\nWhether you are styling a master bedroom with a Hollywood mirrored vanity dresser or anchoring your living room with a beveled mirrored side table, the reflective surfaces instantly amplify ambient brightness and create an undeniable sensation of luxury."
+          },
+          {
+            id: "blog-3",
+            title: "The Art of Custom Mirror Fabrication: From Sheet to Wall",
+            date: "June 15, 2026",
+            summary: "Take a behind-the-scenes look at our Nairobi workshop where we precision-cut, bevel, and polish custom mirrors to fit uneven walls and architectural alcoves perfectly.",
+            image: "images/products/glass-railing.jpg",
+            content: "No two walls are completely perfectly flat or level. That is why off-the-shelf mirrors frequently leave unsightly gaps or rattle. Our custom fabrication process begins with exact laser measurements on site, followed by precision edge-polishing and custom mounting directly onto your walls.\n\nAt our workshop next to Getrudes, our master glasssmiths bevel, groove, and polish mirror edges to perfection. By handling both the fabrication and the professional installation, we guarantee a flawless fit every time."
+          }
+        ];
+      }
+
+      renderBlogGrid(allPosts);
+    }
+
+    function renderBlogGrid(posts) {
+      const grid = document.getElementById('dynamic-blog-grid');
+      if (!grid) return;
+      grid.innerHTML = posts.map(post => `
+        <article class="blog-card" onclick="openArticle('${post.id}')">
+          <div class="blog-card-img-wrap">
+            <img src="${post.image}?t=${Date.now()}" alt="${post.title}" class="blog-card-img" loading="lazy" onerror="this.src='images/products/led-mirror.jpg'" />
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">${post.date || 'Article'}</div>
+            <h3 class="blog-card-title">${post.title}</h3>
+            <p class="blog-card-summary">${post.summary || ''}</p>
+            <span class="blog-card-link">Read Full Guide →</span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function openArticle(id) {
+      const post = allPosts.find(p => p.id === id);
+      if (!post) return;
+      document.getElementById('modal-img').src = `${post.image}?t=${Date.now()}`;
+      document.getElementById('modal-date').textContent = post.date || 'Article';
+      document.getElementById('modal-title').textContent = post.title || '';
+      document.getElementById('modal-body').textContent = post.content || post.summary || '';
+      const modal = document.getElementById('article-modal');
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('article-modal');
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOutside(e) {
+      if (e.target.id === 'article-modal') closeModal();
+    }
+
+    document.addEventListener("DOMContentLoaded", loadBlogPosts);
+  </script>
+</body>
+</html>
