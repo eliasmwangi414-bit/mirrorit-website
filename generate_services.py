@@ -25,7 +25,7 @@ services = [
     (
         "design-consultation.html", 
         "Design Consultation",
-        "Collaborate with our experts to design the perfect mirror solution for your interior.",
+        "Collaborate with our design workshop to build custom mirror furniture or bespoke accents tailored to your rooms.",
         [
             ("Aesthetic Planning", "We help you select the right mirror style, size, and lighting color temperature to complement your room's existing decor and lighting."),
             ("Technical Recommendations", "Our team advises on anti-fog integration, touch sensors, edge finishes, and the optimal glass thickness for your specific application."),
@@ -338,9 +338,9 @@ template = """<!DOCTYPE html>
         <a href="index.html#services">Services</a>
         <div class="dropdown-content">
           <a href="custom-fabrication.html">Custom Mirror Fabrication</a>
-          <a href="professional-installation.html">Professional Installation</a>
-          <a href="design-consultation.html">Design Consultation</a>
-          <a href="delivery-logistics.html">Delivery & Logistics</a>
+          <a href="professional-installation.html">Professional Fitting</a>
+          <a href="design-consultation.html">Furniture Crafting</a>
+          <a href="delivery-logistics.html">Safe Delivery</a>
         </div>
       </li>
       <li><a href="index.html#why-us">About</a></li>
@@ -371,7 +371,7 @@ template = """<!DOCTYPE html>
             <div class="logo-tagline">You Are Enough!</div>
           </div>
         </a>
-        <p>Quality mirrors for homes & businesses. Handmade locally in Nairobi, Kenya — mirrors, furniture mirrors, and custom projects across all 47 counties.</p>
+        <p>Specialists in premium custom LED, vanity, and decorative mirrors, plus custom mirrored furniture on request. Based in Nairobi, Kenya.</p>
         <div class="footer-socials">
           <a href="https://www.facebook.com/profile.php?id=61565452296495" class="social-btn" id="facebook-btn" title="Facebook" target="_blank" rel="noopener noreferrer">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 320 512" fill="currentColor"><path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"/></svg>
@@ -401,10 +401,10 @@ template = """<!DOCTYPE html>
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-links">
-          <li><a href="custom-fabrication.html">Custom Mirror Fabrication</a></li>
-          <li><a href="professional-installation.html">Professional Installation</a></li>
-          <li><a href="design-consultation.html">Design Consultation</a></li>
-          <li><a href="delivery-logistics.html">Delivery & Logistics</a></li>
+          <li><a href="custom-fabrication.html">Mirror Fabrication</a></li>
+          <li><a href="professional-installation.html">Professional Fitting</a></li>
+          <li><a href="design-consultation.html">Furniture Crafting</a></li>
+          <li><a href="delivery-logistics.html">Safe Delivery</a></li>
         </ul>
       </div>
       <div>
