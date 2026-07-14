@@ -338,15 +338,7 @@ template = """<!DOCTYPE html>
             <a href="wall-mirrors.html">Wall Mirrors</a>
           </div>
         </li>
-        <li class="dropdown">
-          <a href="index.html#services">Services</a>
-          <div class="dropdown-content">
-            <a href="custom-fabrication.html">Mirror Fabrication</a>
-            <a href="professional-installation.html">Professional Fitting</a>
-            <a href="design-consultation.html">Furniture Crafting</a>
-            <a href="delivery-logistics.html">Safe Delivery</a>
-          </div>
-        </li>
+        <li><a href="index.html#services">Services</a></li>
         <li><a href="index.html#why-us">About</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="tel:+254794439669" class="nav-cta">Call Us</a></li>
