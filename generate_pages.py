@@ -53,16 +53,20 @@ template = """<!DOCTYPE html>
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      padding: 0 5%;
-      height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
       background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }}
-    .nav-logo {{ display: flex; align-items: center; gap: 10px; }}
+    .nav-inner {{
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }}
+    .nav-logo {{ display: flex; align-items: center; gap: 12px; text-decoration: none; }}
     .logo-icon {{ height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block; }}
     .logo-text-wrap {{ display: flex; flex-direction: column; gap: 0px; }}
     .logo-text {{ font-family: 'Cinzel', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.1; }}
@@ -120,14 +124,14 @@ template = """<!DOCTYPE html>
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 72px; left: 0; right: 0;
+        top: 80px; left: 0; right: 0;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
         border-bottom: 1px solid var(--border);
         gap: 20px;
         z-index: 999;
-        max-height: calc(100vh - 72px);
+        max-height: calc(100vh - 80px);
         overflow-y: auto;
       }}
       .dropdown-content {{
@@ -311,44 +315,45 @@ template = """<!DOCTYPE html>
 </head>
 <body>
   <nav id="navbar">
-    <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" class="logo-icon" alt="MIRRORIT logo" />
-      <div class="logo-text-wrap">
-        <div class="logo-text">MIRRORIT</div>
-        <div class="logo-tagline">You Are Enough</div>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
+        <div class="logo-text-wrap">
+          <span class="logo-text">MIRRORIT</span>
+          <span class="logo-tagline">You Are Enough</span>
+        </div>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html#hero">Home</a></li>
+        <li class="dropdown">
+          <a href="index.html#products">Products</a>
+          <div class="dropdown-content">
+            <a href="wooden-framed.html">Wooden Mirrors</a>
+            <a href="thin-framed.html">Thin Framed Mirrors</a>
+            <a href="frameless.html">Frameless Mirrors</a>
+            <a href="aluminium-framed.html">Aluminium Framed</a>
+            <a href="smart-mirrors.html">Smart Mirrors</a>
+            <a href="vanity.html">Vanity Mirrors</a>
+            <a href="accent.html">Artistic Mirrors</a>
+            <a href="wall-mirrors.html">Wall Mirrors</a>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="index.html#services">Services</a>
+          <div class="dropdown-content">
+            <a href="custom-fabrication.html">Mirror Fabrication</a>
+            <a href="professional-installation.html">Professional Fitting</a>
+            <a href="design-consultation.html">Furniture Crafting</a>
+            <a href="delivery-logistics.html">Safe Delivery</a>
+          </div>
+        </li>
+        <li><a href="index.html#why-us">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="tel:+254794439669" class="nav-cta">Call Us</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+        <span></span><span></span><span></span>
       </div>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="index.html#hero">Home</a></li>
-      <li class="dropdown">
-        <a href="index.html#products">Products</a>
-        <div class="dropdown-content">
-          <a href="wooden-framed.html">Wooden Framed Mirrors</a>
-          <a href="thin-framed.html">Thin Framed Mirrors</a>
-          <a href="frameless.html">Frameless Mirrors</a>
-          <a href="wall-mirrors.html">Wall Mirrors</a>
-          <a href="aluminium-framed.html">Aluminium Framed Mirrors</a>
-          <a href="smart-mirrors.html">Smart Mirrors</a>
-          <a href="vanity.html">Vanity Mirrors</a>
-          <a href="accent.html">Accent Mirrors</a>
-          <a href="custom.html">Custom Mirrors</a>
-        </div>
-      </li>
-      <li class="dropdown">
-        <a href="index.html#services">Services</a>
-        <div class="dropdown-content">
-          <a href="custom-fabrication.html">Custom Mirror Fabrication</a>
-          <a href="professional-installation.html">Professional Fitting</a>
-          <a href="design-consultation.html">Furniture Crafting</a>
-          <a href="delivery-logistics.html">Safe Delivery</a>
-        </div>
-      </li>
-      <li><a href="index.html#why-us">About</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="tel:+254794439669" class="nav-cta">Call Us</a></li>
-    </ul>
-    <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
-      <span></span><span></span><span></span>
     </div>
   </nav>
 
@@ -461,7 +466,7 @@ template = """<!DOCTYPE html>
 
         // Dynamic logo loading (without leading slash for relative compatibility)
         if (data.logo) {{
-          document.querySelectorAll('.logo-icon').forEach(img => {{
+          document.querySelectorAll('.logo-icon, .logo-img').forEach(img => {{
             img.src = data.logo.path;
           }});
         }}
