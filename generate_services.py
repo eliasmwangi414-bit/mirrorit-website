@@ -83,30 +83,34 @@ template = """<!DOCTYPE html>
     
     /* Navbar styles */
     #navbar {{
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 72px; display: flex; align-items: center;
+      padding: 0 2rem;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
     }}
-    .nav-inner {{
-      max-width: 1200px;
-      margin: 0 auto;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
+    #navbar.scrolled {{
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }}
-    .nav-logo {{ display: flex; align-items: center; gap: 12px; text-decoration: none; }}
+    .nav-inner {{ display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }}
+    .nav-logo {{ display: flex; align-items: center; gap: 10px; text-decoration: none; }}
     .logo-img {{ height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block; }}
     .logo-text-wrap {{ display: flex; flex-direction: column; gap: 0px; }}
-    .logo-text {{ font-family: 'Cinzel', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.1; }}
+    .logo-text {{ font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.3px; line-height: 1.1; }}
     .logo-tagline {{ font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 500; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }}
-    .nav-links {{ display: flex; align-items: center; gap: 36px; list-style: none; }}
-    .nav-links a {{ color: var(--text-secondary); font-size: 14px; font-weight: 500; position: relative; }}
-    .nav-links a:hover {{ color: var(--text-primary); }}
+    .nav-links {{ display: flex; align-items: center; gap: 8px; list-style: none; }}
+    .nav-links a {{
+      padding: 8px 14px; border-radius: 4px;
+      font-size: 14px; font-weight: 500; color: var(--text-secondary);
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+    }}
+    .nav-links a:hover {{ color: #000000; background: rgba(0, 0, 0, 0.04); }}
     .dropdown {{ position: relative; }}
     .dropdown-menu {{
       display: none; position: absolute; top: calc(100% + 8px); left: 0;
@@ -131,7 +135,8 @@ template = """<!DOCTYPE html>
       background: #000000;
       color: #ffffff !important;
     }}
-    .nav-cta {{ padding: 9px 22px; background: var(--accent); color: var(--text-primary) !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
+    .nav-cta {{ padding: 9px 22px !important; background: #000000 !important; color: #ffffff !important; border-radius: 8px !important; font-weight: 600 !important; font-size: 13px !important; }}
+    .nav-cta:hover {{ background: #222222 !important; color: #ffffff !important; }}
 
     /* ===== MOBILE NAV ===== */
     .nav-hamburger {{
@@ -154,14 +159,14 @@ template = """<!DOCTYPE html>
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 80px; left: 0; right: 0;
+        top: 72px; left: 0; right: 0;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
         border-bottom: 1px solid var(--border);
-        gap: 20px;
+        gap: 4px;
         z-index: 999;
-        max-height: calc(100vh - 80px);
+        max-height: calc(100vh - 72px);
         overflow-y: auto;
       }}
       .dropdown-menu {{
@@ -434,9 +439,23 @@ template = """<!DOCTYPE html>
   </a>
 
   <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {{
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }}, {{ passive: true }});
+
     function toggleNav() {{
       document.getElementById('navLinks').classList.toggle('open');
     }}
+
+    // Close mobile nav on link click (excluding dropdown toggles)
+    document.querySelectorAll('#navLinks a:not(.dropdown > a)').forEach(a => {{
+      a.addEventListener('click', () => {{
+        document.getElementById('navLinks').classList.remove('open');
+      }});
+    }});
+
     document.querySelectorAll('.dropdown > a').forEach(trigger => {{
       trigger.addEventListener('click', function(e) {{
         if (window.innerWidth <= 768) {{

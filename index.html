@@ -467,6 +467,27 @@
     .form-select option { background: var(--bg-card); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
+    /* ===== BLOG SECTION ===== */
+    #blog { background: var(--bg-card); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+    @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .blog-grid { grid-template-columns: 1fr; } }
+    .blog-card {
+      background: var(--bg); border: 1px solid var(--border-soft); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column; transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.02); cursor: pointer;
+    }
+    .blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.15); }
+    .blog-card-img-wrap { width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative; background: var(--bg-card2); }
+    .blog-card-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25,1,0.5,1); }
+    .blog-card:hover .blog-card-img { transform: scale(1.08); }
+    .blog-card-body { padding: 28px; display: flex; flex-direction: column; flex: 1; }
+    .blog-card-date { font-size: 11px; font-weight: 600; color: var(--fg-50); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+    .blog-card-title { font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700; color: var(--fg); margin-bottom: 12px; line-height: 1.35; }
+    .blog-card-summary { font-size: 14px; color: var(--fg-60); line-height: 1.6; margin-bottom: 24px; flex: 1; }
+    .blog-card-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--fg); text-transform: uppercase; letter-spacing: 1px; transition: color 0.2s; }
+    .blog-card:hover .blog-card-link { color: #000000; }
+
     /* ===== FOOTER ===== */
     footer {
       background: hsl(0 0% 5%);
@@ -592,6 +613,7 @@
         <li><a href="#services">Services</a></li>
         <li><a href="#process">How We Work</a></li>
         <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
       <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
@@ -676,7 +698,7 @@
         <!-- Wooden Framed Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/led-mirror.jpg" alt="Wooden Framed Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-wooden-framed" src="images/products/led-mirror.jpg" alt="Wooden Framed Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -692,7 +714,7 @@
         <!-- Thin Framed Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/vanity-mirror.jpg" alt="Thin Framed Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-thin-framed" src="images/products/vanity-mirror.jpg" alt="Thin Framed Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -708,7 +730,7 @@
         <!-- Frameless Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/shower-cubicle.jpg" alt="Frameless Wall Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-frameless" src="images/products/shower-cubicle.jpg" alt="Frameless Wall Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -724,7 +746,7 @@
         <!-- Aluminium Framed Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/glass-tiles.jpg" alt="Aluminium Framed Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-aluminium-framed" src="images/products/glass-tiles.jpg" alt="Aluminium Framed Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -740,7 +762,7 @@
         <!-- Smart Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/kitchen-splashback.jpg" alt="Smart LED Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-smart-mirrors" src="images/products/kitchen-splashback.jpg" alt="Smart LED Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -756,7 +778,7 @@
         <!-- Vanity Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/vanity-mirror.jpg" alt="Hollywood Vanity Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-vanity" src="images/products/vanity-mirror.jpg" alt="Hollywood Vanity Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -772,7 +794,7 @@
         <!-- Artistic Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/office-partition.jpg" alt="Artistic Accent Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-accent" src="images/products/office-partition.jpg" alt="Artistic Accent Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -788,7 +810,7 @@
         <!-- Wall Mirrors -->
         <div class="product-card">
           <div class="product-card-img-wrap">
-            <img src="images/products/glass-railing.jpg" alt="Wall Mirror" class="product-card-img" loading="lazy" />
+            <img id="prod-img-wall-mirrors" src="images/products/glass-railing.jpg" alt="Wall Mirror" class="product-card-img" loading="lazy" />
             <div class="product-card-overlay"></div>
           </div>
           <div class="product-card-body">
@@ -796,6 +818,22 @@
             <div class="product-card-name">Wall Mirrors</div>
             <p class="product-card-desc">Large full-length wall mirrors and bathroom vanity panels cut exactly to your wall measurements.</p>
             <a href="wall-mirrors.html" class="product-card-link">
+              Shop Now
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+        <!-- Mirror Furniture -->
+        <div class="product-card">
+          <div class="product-card-img-wrap">
+            <img id="prod-img-furniture" src="images/products/led-mirror.jpg" alt="Mirror Furniture" class="product-card-img" loading="lazy" />
+            <div class="product-card-overlay"></div>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-tag">Luxury & Functional</div>
+            <div class="product-card-name">Mirror Furniture</div>
+            <p class="product-card-desc">Bespoke mirrored console tables, dressers, bedside cabinets, and decorative accents tailored to your room.</p>
+            <a href="furniture.html" class="product-card-link">
               Shop Now
               <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
@@ -810,7 +848,7 @@
     <div class="container">
       <div class="why-us-grid">
         <div class="why-us-image">
-          <img src="images/products/glass-railing.jpg" alt="MIRRORIT craftsmanship" />
+          <img id="why-us-img" src="images/products/glass-railing.jpg" alt="MIRRORIT craftsmanship" />
           <div class="why-us-badge-float">
             <div class="why-us-badge-num">200+</div>
             <div class="why-us-badge-label">Happy clients served</div>
@@ -861,7 +899,7 @@
         <!-- Service 1 -->
         <div class="service-card">
           <div class="service-img-wrap">
-            <img src="images/products/led-mirror.jpg" alt="Custom Mirror Fabrication" loading="lazy" />
+            <img id="svc-img-custom-fabrication" src="images/products/led-mirror.jpg" alt="Custom Mirror Fabrication" loading="lazy" />
           </div>
           <div class="service-number">01</div>
           <div class="service-title">Custom Cutting & Polishing</div>
@@ -870,7 +908,7 @@
         <!-- Service 2 -->
         <div class="service-card">
           <div class="service-img-wrap">
-            <img src="images/products/glass-railing.jpg" alt="Professional Fitting" loading="lazy" />
+            <img id="svc-img-professional-installation" src="images/products/glass-railing.jpg" alt="Professional Fitting" loading="lazy" />
           </div>
           <div class="service-number">02</div>
           <div class="service-title">Fitting & Wall Mounting</div>
@@ -879,7 +917,7 @@
         <!-- Service 3 -->
         <div class="service-card">
           <div class="service-img-wrap">
-            <img src="images/products/kitchen-splashback.jpg" alt="Mirror Furniture Crafting" loading="lazy" />
+            <img id="svc-img-design-consultation" src="images/products/kitchen-splashback.jpg" alt="Mirror Furniture Crafting" loading="lazy" />
           </div>
           <div class="service-number">03</div>
           <div class="service-title">Custom Mirrored Furniture</div>
@@ -888,7 +926,7 @@
         <!-- Service 4 -->
         <div class="service-card">
           <div class="service-img-wrap">
-            <img src="images/products/vanity-mirror.jpg" alt="Safe Delivery & Transport" loading="lazy" />
+            <img id="svc-img-delivery-logistics" src="images/products/vanity-mirror.jpg" alt="Safe Delivery & Transport" loading="lazy" />
           </div>
           <div class="service-number">04</div>
           <div class="service-title">Safe Delivery</div>
@@ -1020,6 +1058,21 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOG SECTION -->
+  <section id="blog" class="section">
+    <div class="container">
+      <div class="section-header center">
+        <span class="badge">Design Insights & Tips</span>
+        <div class="divider"></div>
+        <h2 class="section-title">The <span class="gradient-gold">MIRRORIT Blog</span></h2>
+        <p class="section-desc">Expert advice on styling, maintenance, and interior transformations with mirrors.</p>
+      </div>
+      <div class="blog-grid" id="dynamic-blog-grid">
+        <!-- Rendered dynamically by loadSiteContent -->
       </div>
     </div>
   </section>
@@ -1173,6 +1226,7 @@
             <li><a href="#services">Professional Fitting</a></li>
             <li><a href="#services">Furniture Crafting</a></li>
             <li><a href="#services">Safe Delivery</a></li>
+            <li><a href="#blog">Design Blog</a></li>
           </ul>
         </div>
         <div>
@@ -1275,6 +1329,107 @@
       Array.from(children).forEach((child, index) => {
         child.style.transitionDelay = `${index * 0.1}s`;
       });
+    });
+
+    const PRODUCT_KEYS = ['wooden-framed','thin-framed','frameless','aluminium-framed','smart-mirrors','vanity','accent','wall-mirrors','furniture'];
+    const SERVICE_KEYS = ['custom-fabrication','professional-installation','design-consultation','delivery-logistics'];
+
+    async function loadSiteContent() {
+      try {
+        const t = Date.now();
+        let res;
+        try { res = await fetch('/api/site-content?t=' + t); if (!res.ok) throw new Error(); }
+        catch { res = await fetch('site-content.json?t=' + t); }
+        const data = await res.json();
+
+        // Hero
+        const heroBg = document.querySelector('.hero-bg');
+        if (heroBg && data.hero && data.hero.path) {
+          heroBg.style.backgroundImage = `url('${data.hero.path}?t=${t}')`;
+        }
+
+        // Logo
+        if (data.logo && data.logo.path) {
+          document.querySelectorAll('.logo-img').forEach(img => {
+            img.src = `${data.logo.path}?t=${t}`;
+          });
+        }
+
+        // Products
+        PRODUCT_KEYS.forEach(key => {
+          const el = document.getElementById('prod-img-' + key);
+          if (el && data.products && data.products[key] && data.products[key].path) {
+            el.src = `${data.products[key].path}?t=${t}`;
+          }
+        });
+
+        // Why Us
+        const whyUsEl = document.getElementById('why-us-img');
+        if (whyUsEl && data.whyUs && data.whyUs.path) {
+          whyUsEl.src = `${data.whyUs.path}?t=${t}`;
+        }
+
+        // Services
+        SERVICE_KEYS.forEach(key => {
+          const el = document.getElementById('svc-img-' + key);
+          if (el && data.services && data.services[key] && data.services[key].path) {
+            el.src = `${data.services[key].path}?t=${t}`;
+          }
+        });
+
+        // Blog
+        renderBlogSection(data.blog || []);
+      } catch(e) {
+        console.error('Failed to load dynamic content:', e);
+        renderBlogSection([]);
+      }
+    }
+
+    function renderBlogSection(posts) {
+      const grid = document.getElementById('dynamic-blog-grid');
+      if (!grid) return;
+      if (!posts || posts.length === 0) {
+        posts = [
+          {
+            id: "blog-1",
+            title: "How to Choose the Perfect LED Mirror for Your Bathroom",
+            date: "July 10, 2026",
+            summary: "Discover the difference between front-lit and backlit mirrors, optimal color temperatures (3000K vs 6000K), and why copper-free glass is essential for preventing edge corrosion in humid Nairobi bathrooms.",
+            image: "images/products/kitchen-splashback.jpg"
+          },
+          {
+            id: "blog-2",
+            title: "5 Ways Custom Mirrored Furniture Elevates Modern Interiors",
+            date: "June 28, 2026",
+            summary: "Mirrored console tables and dressers naturally reflect light, making dark apartment hallways and living rooms feel twice as spacious and luxurious.",
+            image: "images/products/led-mirror.jpg"
+          },
+          {
+            id: "blog-3",
+            title: "The Art of Custom Mirror Fabrication: From Sheet to Wall",
+            date: "June 15, 2026",
+            summary: "Take a behind-the-scenes look at our Nairobi workshop where we precision-cut, bevel, and polish custom mirrors to fit uneven walls and architectural alcoves perfectly.",
+            image: "images/products/glass-railing.jpg"
+          }
+        ];
+      }
+      grid.innerHTML = posts.map(post => `
+        <div class="blog-card reveal">
+          <div class="blog-card-img-wrap">
+            <img src="${post.image}?t=${Date.now()}" alt="${post.title}" class="blog-card-img" loading="lazy" onerror="this.src='images/products/led-mirror.jpg'" />
+          </div>
+          <div class="blog-card-body">
+            <div class="blog-card-date">${post.date || 'Article'}</div>
+            <h3 class="blog-card-title">${post.title}</h3>
+            <p class="blog-card-summary">${post.summary || ''}</p>
+            <span class="blog-card-link">Read Guide →</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadSiteContent();
     });
   </script>
 </body>

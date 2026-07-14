@@ -261,7 +261,9 @@
     <a class="active" onclick="showPanel('hero')" data-panel="hero"><span class="icon">🖼</span> Hero Banner</a>
     <a onclick="showPanel('logo')" data-panel="logo"><span class="icon">🏷️</span> Logo</a>
     <a onclick="showPanel('products')" data-panel="products"><span class="icon">🪞</span> Products</a>
+    <a onclick="showPanel('why-us')" data-panel="why-us"><span class="icon">🏆</span> Why Us Image</a>
     <a onclick="showPanel('services')" data-panel="services"><span class="icon">🔧</span> Services</a>
+    <a onclick="showPanel('blog')" data-panel="blog"><span class="icon">📝</span> Blog Posts</a>
     <a onclick="showPanel('gallery')" data-panel="gallery"><span class="icon">📸</span> Gallery</a>
   </nav>
   <div class="sidebar-footer">
@@ -325,6 +327,29 @@
     <div class="products-grid" id="products-grid"></div>
   </div>
 
+  <!-- WHY US PANEL -->
+  <div class="panel" id="panel-why-us">
+    <div class="page-header">
+      <h1>Why Us Section Image</h1>
+      <p>Upload the showcase photo displayed in the "Why Choose Us" section on the homepage.</p>
+    </div>
+    <div class="section-card">
+      <h3>Why Us Image <span id="why-us-badge"></span></h3>
+      <p>Recommended: Portrait image (e.g. 800×1000px) highlighting craftsmanship or mirror quality.</p>
+      <div class="image-slot">
+        <div class="image-preview" id="why-us-preview">
+          <div class="no-image"><span>🏆</span>No image yet</div>
+        </div>
+        <div class="image-actions">
+          <label for="why-us-file">📤 Upload Image</label>
+          <input type="file" id="why-us-file" accept="image/*" onchange="uploadSection(this,'why-us')">
+          <div class="remove-btn" onclick="removeSection('why-us')">🗑 Remove Image</div>
+          <div class="upload-status" id="why-us-status"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SERVICES PANEL -->
   <div class="panel" id="panel-services">
     <div class="page-header">
@@ -332,6 +357,20 @@
       <p>Upload images for the four service areas shown in the services section.</p>
     </div>
     <div class="services-grid" id="services-grid"></div>
+  </div>
+
+  <!-- BLOG PANEL -->
+  <div class="panel" id="panel-blog">
+    <div class="page-header" style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <h1>Blog Management</h1>
+        <p>Create, edit, delete, and upload images for articles in the website's Blog section.</p>
+      </div>
+      <button onclick="createNewBlogPost()" style="padding:10px 20px; background:#111; color:#fff; border:none; border-radius:6px; font-weight:600; font-size:13px; cursor:pointer;">+ Add New Post</button>
+    </div>
+    <div id="blog-admin-grid" style="display:flex; flex-direction:column; gap:20px;">
+      <!-- Rendered by JS -->
+    </div>
   </div>
 
   <!-- GALLERY PANEL -->
@@ -352,6 +391,7 @@
       <button class="gtab" onclick="switchGalleryTab('Vanity Mirror', this)">Vanity</button>
       <button class="gtab" onclick="switchGalleryTab('Accent Mirror', this)">Accent</button>
       <button class="gtab" onclick="switchGalleryTab('Custom Mirror', this)">Custom</button>
+      <button class="gtab" onclick="switchGalleryTab('Mirror Furniture', this)">Mirror Furniture</button>
     </div>
 
     <div class="section-card" style="margin-top:16px;">
@@ -376,7 +416,8 @@
     'smart-mirrors': 'Smart Mirrors',
     'vanity': 'Vanity Mirrors',
     'accent': 'Accent Mirrors',
-    'custom': 'Custom Mirrors'
+    'custom': 'Custom Mirrors',
+    'furniture': 'Mirror Furniture'
   };
   const SERVICES = {
     'custom-fabrication': {
@@ -441,12 +482,62 @@
       renderHero();
       renderLogo();
       renderProducts();
+      renderWhyUs();
       renderServices();
+      renderBlog();
       renderGallerySlots();
     } catch(e) {
       console.error(e);
       toast('Failed to load content', 'err');
     }
+  }
+
+  function renderWhyUs() {
+    const preview = document.getElementById('why-us-preview');
+    const badge = document.getElementById('why-us-badge');
+    if (!preview || !badge) return;
+    if (siteContent.whyUs) {
+      preview.innerHTML = `<img src="/${siteContent.whyUs.path}?t=${Date.now()}" alt="Why Us">`;
+      badge.innerHTML = '<span class="live-badge">✓ Live</span>';
+    } else {
+      preview.innerHTML = '<div class="no-image"><span>🏆</span>No image yet</div>';
+      badge.innerHTML = '<span class="empty-badge">Empty</span>';
+    }
+  }
+
+  function renderBlog() {
+    const grid = document.getElementById('blog-admin-grid');
+    if (!grid) return;
+    const posts = siteContent.blog || [];
+    if (posts.length === 0) {
+      grid.innerHTML = '<p class="empty-gallery">No blog posts found. Click "+ Add New Post" to create one.</p>';
+      return;
+    }
+    grid.innerHTML = posts.map(post => `
+      <div class="mini-card" style="display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:start;">
+        <div>
+          <div class="mini-image-preview" style="aspect-ratio: 16/10; margin-bottom:10px;">
+            <img src="/${post.image}?t=${Date.now()}" alt="${post.title}" onerror="this.src='/images/products/led-mirror.jpg'">
+          </div>
+          <div class="mini-actions">
+            <label for="blog-img-${post.id}">Change Image</label>
+            <input type="file" id="blog-img-${post.id}" accept="image/*" onchange="uploadBlogImage(this, '${post.id}')">
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:grid; grid-template-columns: 1fr 180px; gap:10px;">
+            <input type="text" id="blog-title-${post.id}" value="${post.title || ''}" placeholder="Article Title" style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-weight:600; font-size:14px;">
+            <input type="text" id="blog-date-${post.id}" value="${post.date || ''}" placeholder="Date (e.g. July 14, 2026)" style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:13px;">
+          </div>
+          <textarea id="blog-summary-${post.id}" placeholder="Short summary displayed on cards..." style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:13px; min-height:50px; resize:vertical;">${post.summary || ''}</textarea>
+          <textarea id="blog-content-${post.id}" placeholder="Full article content..." style="padding:8px 12px; background:#f5f5f7; border:1px solid rgba(0,0,0,0.1); border-radius:6px; font-size:13px; min-height:80px; resize:vertical;">${post.content || ''}</textarea>
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:4px;">
+            <button onclick="deleteBlogPost('${post.id}')" style="padding:8px 16px; background:rgba(220,38,38,0.08); color:#dc2626; border:1px solid rgba(220,38,38,0.2); border-radius:6px; cursor:pointer; font-weight:500; font-size:12px;">Delete Post</button>
+            <button onclick="saveBlogPost('${post.id}')" style="padding:8px 20px; background:#111; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600; font-size:12px;">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
   }
 
   function renderHero() {
@@ -637,13 +728,14 @@
     input.value = '';
   }
 
-  // ---- Upload hero / logo / product / service ----
+  // ---- Upload hero / logo / product / service / why-us ----
   async function uploadSection(input, section, key) {
     if (!input.files[0]) return;
     const fd = new FormData();
     fd.append('image', input.files[0]);
     const url = section === 'hero' ? '/api/upload/hero'
               : section === 'logo' ? '/api/upload/logo'
+              : section === 'why-us' ? '/api/upload/why-us'
               : section === 'product' ? `/api/upload/product/${key}`
               : section === 'service' ? `/api/upload/service/${key}`
               : `/api/upload/service-detail/${key}`;
@@ -662,9 +754,9 @@
     input.value = '';
   }
 
-  // ---- Remove hero / logo / product / service ----
+  // ---- Remove hero / logo / product / service / why-us ----
   async function removeSection(section, key) {
-    const url = (section === 'hero' || section === 'logo') ? `/api/remove/${section}` : `/api/remove/${section}/${key}`;
+    const url = (section === 'hero' || section === 'logo' || section === 'why-us') ? `/api/remove/${section}` : `/api/remove/${section}/${key}`;
     try {
       const res = await fetch(url, { method: 'POST' });
       const json = await res.json();
@@ -675,6 +767,82 @@
     } catch {
       toast('Remove failed', 'err');
     }
+  }
+
+  // ---- Blog management actions ----
+  async function createNewBlogPost() {
+    try {
+      const res = await fetch('/api/blog/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: 'New Mirror Design Guide',
+          summary: 'Enter a summary of your blog article here.',
+          content: 'Full article text goes here...'
+        })
+      });
+      const json = await res.json();
+      if (json.success) {
+        toast('New blog post created!');
+        await loadContent();
+      }
+    } catch {
+      toast('Failed to create post', 'err');
+    }
+  }
+
+  async function saveBlogPost(id) {
+    const title = document.getElementById(`blog-title-${id}`)?.value;
+    const date = document.getElementById(`blog-date-${id}`)?.value;
+    const summary = document.getElementById(`blog-summary-${id}`)?.value;
+    const content = document.getElementById(`blog-content-${id}`)?.value;
+    try {
+      const res = await fetch(`/api/blog/update/${id}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, date, summary, content })
+      });
+      const json = await res.json();
+      if (json.success) {
+        toast('Blog post updated!');
+        await loadContent();
+      }
+    } catch {
+      toast('Failed to update post', 'err');
+    }
+  }
+
+  async function deleteBlogPost(id) {
+    if (!confirm('Delete this blog post?')) return;
+    try {
+      const res = await fetch(`/api/blog/delete/${id}`, { method: 'POST' });
+      const json = await res.json();
+      if (json.success) {
+        toast('Blog post deleted.');
+        await loadContent();
+      }
+    } catch {
+      toast('Failed to delete post', 'err');
+    }
+  }
+
+  async function uploadBlogImage(input, id) {
+    if (!input.files[0]) return;
+    const fd = new FormData();
+    fd.append('image', input.files[0]);
+    try {
+      const res = await fetch(`/api/upload/blog/${id}`, { method: 'POST', body: fd });
+      const json = await res.json();
+      if (json.success) {
+        toast('Blog image uploaded!');
+        await loadContent();
+      } else {
+        toast('Failed to upload image', 'err');
+      }
+    } catch {
+      toast('Failed to upload image', 'err');
+    }
+    input.value = '';
   }
 
   // ---- Delete gallery item ----
