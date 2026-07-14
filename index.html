@@ -19,29 +19,29 @@
     /* ===== DESIGN TOKENS ===== */
     :root {
       --bg:          #ffffff;
-      --bg-card:     #f9fafb;
-      --bg-card2:    #f3f4f6;
-      --border:      rgba(0, 0, 0, 0.08);
-      --border-soft: rgba(0, 0, 0, 0.05);
+      --bg-card:     #ffffff;
+      --bg-card2:    #f9fafb;
+      --border:      rgba(0, 0, 0, 0.12);
+      --border-soft: rgba(0, 0, 0, 0.06);
 
-      --primary:     hsl(142 75% 22%);
-      --primary-mid: hsl(142 70% 32%);
+      --primary:     #000000;
+      --primary-mid: #111111;
       --primary-fg:  #ffffff;
-      --accent-bg:   hsl(142 50% 92%);
-      --accent-fg:   hsl(142 75% 18%);
+      --accent-bg:   #f3f4f6;
+      --accent-fg:   #000000;
 
-      --fg:          #111827;
-      --fg-80:       #374151;
-      --fg-50:       #6b7280;
+      --fg:          #000000;
+      --fg-80:       #111111;
+      --fg-50:       #4b5563;
       --muted:       #9ca3af;
 
-      --radius:      0.75rem;
-      --shadow-gold: 0 10px 40px -10px hsl(142 75% 22% / 0.15);
-      --shadow-el:   0 20px 40px -15px rgba(0,0,0,0.08);
+      --radius:      0.5rem;
+      --shadow-gold: 0 10px 30px rgba(0, 0, 0, 0.05);
+      --shadow-el:   0 20px 40px -15px rgba(0,0,0,0.06);
 
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body:    'DM Sans', system-ui, sans-serif;
-      --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition:   all 0.3s ease;
     }
 
     body {
@@ -65,7 +65,7 @@
       padding: 4px 12px; border-radius: 999px;
       font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
       background: var(--accent-bg); color: var(--accent-fg);
-      border: 1px solid hsl(142 75% 22% / 0.3);
+      border: 1px solid rgba(0,0,0,0.12);
     }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -85,8 +85,7 @@
     }
     .btn-outline:hover { border-color: var(--primary); color: var(--primary-mid); background: var(--accent-bg); }
     .gradient-gold {
-      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: #000000;
     }
     .section-badge { margin-bottom: 16px; }
     .section-title {
@@ -139,7 +138,7 @@
       font-size: 14px; font-weight: 500; color: var(--fg-80);
       transition: color 0.2s, background 0.2s;
     }
-    .nav-links a:hover { color: var(--primary-mid); background: rgba(0, 0, 0, 0.03); }
+    .nav-links a:hover { color: #000000; background: rgba(0, 0, 0, 0.04); }
     .nav-links .dropdown { position: relative; }
     .nav-links .dropdown-menu {
       display: none; position: absolute; top: calc(100% + 8px); left: 0;
@@ -153,7 +152,7 @@
       display: block; padding: 8px 12px; border-radius: calc(var(--radius) - 4px);
       font-size: 13px; color: var(--fg-80);
     }
-    .nav-links .dropdown-menu a:hover { background: var(--accent-bg); color: var(--accent-fg); }
+    .nav-links .dropdown-menu a:hover { background: #000000; color: #ffffff; }
     .nav-cta { padding: 9px 22px !important; background: var(--primary) !important; color: var(--primary-fg) !important; border-radius: var(--radius) !important; }
     .nav-cta:hover { background: var(--primary-mid) !important; color: var(--primary-fg) !important; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
@@ -171,7 +170,7 @@
     .hero-bg::after {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, hsl(0 0% 4% / 0.9) 0%, hsl(0 0% 8% / 0.65) 50%, hsl(142 75% 10% / 0.5) 100%);
+      background: linear-gradient(135deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,0.85) 100%);
     }
     .hero-content {
       position: relative; z-index: 2;
@@ -181,12 +180,12 @@
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 6px 16px; border-radius: 999px; margin-bottom: 28px;
-      border: 1px solid hsl(142 75% 22% / 0.4);
-      background: hsl(142 50% 12% / 0.8);
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
       font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent-fg);
+      color: #ffffff;
     }
-    .hero-eyebrow .dot { width: 6px; height: 6px; background: var(--primary-mid); border-radius: 50%; animation: pulse 2s infinite; }
+    .hero-eyebrow .dot { width: 6px; height: 6px; background: #ffffff; border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .hero-title {
       font-family: var(--font-heading);
@@ -195,16 +194,14 @@
       max-width: 800px;
     }
     .hero-title .accent-line {
-      background: linear-gradient(135deg, var(--primary), var(--primary-mid), hsl(142 80% 55%));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: #ffffff;
     }
     .hero-desc { font-size: 17px; color: var(--fg-80); max-width: 520px; line-height: 1.8; margin-bottom: 40px; }
     .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
     .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
     .hero-stat-num {
       font-family: var(--font-heading); font-size: 36px; font-weight: 700;
-      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: #ffffff;
       line-height: 1;
     }
     .hero-stat-label { font-size: 12px; color: var(--fg-50); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
@@ -254,7 +251,7 @@
       cursor: pointer; group: true;
       transition: var(--transition);
     }
-    .product-card:hover { border-color: hsl(142 75% 22% / 0.4); transform: translateY(-6px); box-shadow: var(--shadow-el); }
+    .product-card:hover { border-color: rgba(0,0,0,0.15); transform: translateY(-6px); box-shadow: var(--shadow-el); }
     .product-card-img-wrap { aspect-ratio: 4/3; overflow: hidden; position: relative; }
     .product-card-img {
       width: 100%; height: 100%; object-fit: cover;
@@ -296,7 +293,7 @@
     .why-us-image img { width: 100%; height: 100%; object-fit: cover; }
     .why-us-image::after {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, transparent 60%, hsl(142 75% 22% / 0.15));
+      background: linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.05));
     }
     .why-us-badge-float {
       position: absolute; bottom: 24px; left: 24px;
@@ -312,7 +309,7 @@
       background: var(--bg-card); border: 1px solid var(--border-soft);
       transition: var(--transition);
     }
-    .feature-item:hover { border-color: hsl(142 75% 22% / 0.4); box-shadow: var(--shadow-gold); }
+    .feature-item:hover { border-color: rgba(0,0,0,0.15); box-shadow: var(--shadow-gold); }
     .feature-icon {
       width: 40px; height: 40px; border-radius: calc(var(--radius) - 4px);
       background: var(--accent-bg); display: flex; align-items: center; justify-content: center;
@@ -335,13 +332,13 @@
       background: linear-gradient(90deg, var(--primary), var(--primary-mid));
       opacity: 0; transition: opacity 0.3s;
     }
-    .service-card:hover { border-color: hsl(142 75% 22% / 0.35); transform: translateY(-4px); }
+    .service-card:hover { border-color: rgba(0,0,0,0.12); transform: translateY(-4px); }
     .service-card:hover::before { opacity: 1; }
     .service-number {
       font-family: var(--font-heading); font-size: 48px; font-weight: 700; line-height: 1;
       color: #e5e7eb; margin-bottom: 20px; transition: color 0.3s;
     }
-    .service-card:hover .service-number { color: hsl(142 75% 22% / 0.15); }
+    .service-card:hover .service-number { color: rgba(0,0,0,0.05); }
     .service-title { font-family: var(--font-heading); font-size: 22px; font-weight: 600; margin-bottom: 12px; }
     .service-desc { font-size: 14px; color: var(--fg-50); line-height: 1.7; margin-bottom: 20px; }
     .service-link {
@@ -357,12 +354,12 @@
     .process-steps::before {
       content: ''; position: absolute;
       top: 36px; left: 12.5%; right: 12.5%; height: 1px;
-      background: linear-gradient(90deg, transparent, hsl(142 75% 22% / 0.3), hsl(142 75% 22% / 0.3), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0,0,0,0.12), rgba(0,0,0,0.12), transparent);
     }
     .process-step { text-align: center; padding: 0 24px; position: relative; z-index: 1; }
     .process-num {
       width: 72px; height: 72px; border-radius: 50%;
-      background: var(--accent-bg); border: 2px solid hsl(142 75% 22% / 0.3);
+      background: var(--accent-bg); border: 2px solid rgba(0,0,0,0.12);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-heading); font-size: 22px; font-weight: 700; color: var(--primary-mid);
       margin: 0 auto 24px;
@@ -383,16 +380,16 @@
     .testimonial-card::before {
       content: '"'; position: absolute; top: 12px; right: 20px;
       font-family: var(--font-heading); font-size: 80px; line-height: 1;
-      color: hsl(142 75% 22% / 0.12); font-weight: 700;
+      color: rgba(0,0,0,0.05); font-weight: 700;
     }
-    .testimonial-card:hover { border-color: hsl(142 75% 22% / 0.3); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
+    .testimonial-card:hover { border-color: rgba(0,0,0,0.12); transform: translateY(-4px); box-shadow: var(--shadow-gold); }
     .stars { display: flex; gap: 3px; margin-bottom: 16px; }
     .star { color: var(--primary-mid); font-size: 16px; }
     .testimonial-text { font-size: 14px; color: var(--fg-80); line-height: 1.75; margin-bottom: 24px; font-style: italic; }
     .testimonial-author { display: flex; align-items: center; gap: 12px; }
     .testimonial-avatar {
       width: 42px; height: 42px; border-radius: 50%;
-      background: var(--accent-bg); border: 2px solid hsl(142 75% 22% / 0.3);
+      background: var(--accent-bg); border: 2px solid rgba(0,0,0,0.12);
       display: flex; align-items: center; justify-content: center;
       font-family: var(--font-heading); font-size: 15px; font-weight: 600; color: var(--primary-mid);
       flex-shrink: 0;
@@ -402,9 +399,9 @@
 
     /* ===== GALLERY CTA ===== */
     #gallery-cta {
-      background: linear-gradient(135deg, hsl(142 75% 10%), hsl(142 60% 16%));
-      border-top: 1px solid hsl(142 75% 22% / 0.3);
-      border-bottom: 1px solid hsl(142 75% 22% / 0.3);
+      background: #000000;
+      border-top: 1px solid #111111;
+      border-bottom: 1px solid #111111;
       text-align: center; padding: 80px 2rem;
     }
     #gallery-cta .section-title { color: var(--fg); margin-bottom: 16px; }
@@ -434,7 +431,7 @@
     }
     .form-input::placeholder, .form-textarea::placeholder { color: var(--fg-50); }
     .form-input:focus, .form-textarea:focus, .form-select:focus {
-      border-color: var(--primary); box-shadow: 0 0 0 3px hsl(142 75% 22% / 0.15);
+      border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,0,0,0.05);
     }
     .form-textarea { height: 140px; resize: vertical; }
     .form-select option { background: var(--bg-card); }
@@ -966,13 +963,13 @@
   <!-- GALLERY CTA -->
   <section id="gallery-cta">
     <h2 class="section-title" style="font-size:clamp(28px,4vw,44px);margin-bottom:16px;">Ready to Transform<br/><span class="gradient-gold">Your Space?</span></h2>
-    <p class="section-desc" style="margin:0 auto 40px;color:hsl(142 80% 98%/0.7);">Join over 2,000 satisfied clients who have trusted MIRRORIT to deliver premium glass solutions across Africa.</p>
+    <p class="section-desc" style="margin:0 auto 40px;color:rgba(255,255,255,0.7);">Join over 2,000 satisfied clients who have trusted MIRRORIT to deliver premium glass solutions across Africa.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <a href="#contact" class="btn btn-primary" style="font-size:15px;padding:14px 32px;">
         Get a Free Quote
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="https://wa.me/254000000000" class="btn btn-outline" style="border-color:hsl(142 75%22%/0.5);color:#fff;font-size:15px;padding:14px 32px;" target="_blank">
+      <a href="https://wa.me/254000000000" class="btn btn-outline" style="border-color:rgba(255,255,255,0.2);color:#fff;font-size:15px;padding:14px 32px;" target="_blank">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157z"/></svg>
         Chat on WhatsApp
       </a>

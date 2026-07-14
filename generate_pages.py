@@ -39,11 +39,11 @@ template = """<!DOCTYPE html>
       --text-primary: #111827;
       --text-secondary: #374151;
       --text-muted:   #9ca3af;
-      --accent:       hsl(142 75% 22%);
-      --accent-mid:   hsl(142 70% 32%);
-      --accent-bright: hsl(142 75% 22%);
-      --accent-light: hsl(142 50% 92%);
-      --accent-dark:  hsl(142 80% 15%);
+      --accent:       #000000;
+      --accent-mid:   #111111;
+      --accent-bright: #000000;
+      --accent-light: #f3f4f6;
+      --accent-dark:  #000000;
       --divider:      rgba(0, 0, 0, 0.06);
       --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }}
