@@ -64,10 +64,8 @@ template = """<!DOCTYPE html>
       border-bottom: 1px solid var(--border);
     }}
     .nav-logo {{ display: flex; align-items: center; gap: 10px; }}
-    .logo-icon {{ height: 40px; width: auto; max-width: 150px; object-fit: contain; flex-shrink: 0; display: block; }}
-    .logo-text-wrap {{ display: flex; flex-direction: column; gap: 0px; }}
+    .logo-icon {{ height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block; }}
     .logo-text {{ font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1; }}
-    .logo-tagline {{ font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }}
     .nav-links {{ display: flex; align-items: center; gap: 36px; list-style: none; }}
     .nav-links a {{ color: var(--text-secondary); font-size: 14px; font-weight: 500; position: relative; }}
     .nav-links a:hover {{ color: var(--text-primary); }}
@@ -302,11 +300,8 @@ template = """<!DOCTYPE html>
 <body>
   <nav id="navbar">
     <a href="index.html" class="nav-logo">
-      <img src="images/logo.png" class="logo-icon" alt="MIRROR-IT logo" />
-      <div class="logo-text-wrap">
-        <div class="logo-text">MIRROR-IT</div>
-        <div class="logo-tagline">You Are Enough!</div>
-      </div>
+      <img src="images/logo.png" class="logo-icon" alt="MIRRORIT logo" />
+      <div class="logo-text">MIRRORIT</div>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="index.html#hero">Home</a></li>

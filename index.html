@@ -124,14 +124,15 @@
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }
     .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .logo-diamond {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-mid));
-      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    .logo-img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      object-fit: contain;
       flex-shrink: 0;
+      display: block;
     }
     .logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--fg); letter-spacing: 0.3px; }
-    .logo-text span { color: var(--primary-mid); }
     .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
     .nav-links a {
       padding: 8px 14px; border-radius: calc(var(--radius) - 4px);
@@ -511,8 +512,8 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <div class="logo-diamond"></div>
-        <span class="logo-text">MIRRORIT <span>Glass</span></span>
+        <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
+        <span class="logo-text">MIRRORIT</span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero">Home</a></li>
@@ -1073,8 +1074,8 @@
       <div class="footer-grid">
         <div>
           <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:0;">
-            <div class="logo-diamond"></div>
-            <span class="logo-text">MIRRORIT <span>Glass</span></span>
+            <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
+            <span class="logo-text">MIRRORIT</span>
           </a>
           <p class="footer-brand-desc">Africa's leading provider of premium LED mirrors, decorative glass tiles, shower cubicles, and custom glass installations. Based in Nairobi, Kenya.</p>
           <div class="footer-socials">
