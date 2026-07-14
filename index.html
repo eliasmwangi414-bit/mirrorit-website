@@ -124,15 +124,9 @@
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }
     .nav-logo { display: flex; align-items: center; gap: 10px; }
-    .logo-img {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      object-fit: contain;
-      flex-shrink: 0;
-      display: block;
-    }
-    .logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--fg); letter-spacing: 0.3px; }
+    .logo-text-wrap { display: flex; flex-direction: column; gap: 0px; }
+    .logo-text { font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: var(--fg); letter-spacing: 0.3px; line-height: 1.1; }
+    .logo-tagline { font-family: var(--font-body); font-size: 9px; font-weight: 500; color: var(--fg-50); letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
     .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
     .nav-links a {
       padding: 8px 14px; border-radius: calc(var(--radius) - 4px);
@@ -193,25 +187,43 @@
       font-size: clamp(40px, 6vw, 80px);
       font-weight: 700; line-height: 1.1; margin-bottom: 24px;
       max-width: 800px;
+      color: #ffffff;
     }
     .hero-title .accent-line {
       color: #ffffff;
     }
-    .hero-desc { font-size: 17px; color: var(--fg-80); max-width: 520px; line-height: 1.8; margin-bottom: 40px; }
+    .hero-desc { font-size: 17px; color: rgba(255,255,255,0.85); max-width: 520px; line-height: 1.8; margin-bottom: 40px; }
     .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+    #hero .btn-primary {
+      background: #ffffff;
+      color: #000000;
+    }
+    #hero .btn-primary:hover {
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 10px 30px rgba(255,255,255,0.25);
+    }
+    #hero .btn-outline {
+      color: #ffffff;
+      border-color: rgba(255,255,255,0.4);
+    }
+    #hero .btn-outline:hover {
+      color: #000000;
+      background: #ffffff;
+      border-color: #ffffff;
+    }
     .hero-stats { display: flex; gap: 48px; flex-wrap: wrap; }
     .hero-stat-num {
       font-family: var(--font-heading); font-size: 36px; font-weight: 700;
       color: #ffffff;
       line-height: 1;
     }
-    .hero-stat-label { font-size: 12px; color: var(--fg-50); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
     .hero-scroll-cue {
       position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2;
-      color: var(--fg-50); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(255,255,255,0.6); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
     }
-    .hero-scroll-cue .arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--primary), transparent); margin-top: 4px; animation: scrollArrow 2s ease-in-out infinite; }
+    .hero-scroll-cue .arrow { width: 1px; height: 40px; background: linear-gradient(to bottom, #ffffff, transparent); margin-top: 4px; animation: scrollArrow 2s ease-in-out infinite; }
     @keyframes scrollArrow { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.3;transform:scaleY(0.7)} }
 
     /* ===== MARQUEE ===== */
@@ -512,8 +524,11 @@
   <nav id="navbar">
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
-        <span class="logo-text">MIRRORIT</span>
+        <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
+        <div class="logo-text-wrap">
+          <span class="logo-text">MIRRORIT</span>
+          <span class="logo-tagline">You Are Enough</span>
+        </div>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero">Home</a></li>
@@ -1074,8 +1089,11 @@
       <div class="footer-grid">
         <div>
           <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:0;">
-            <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
-            <span class="logo-text">MIRRORIT</span>
+            <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
+            <div class="logo-text-wrap">
+              <span class="logo-text" style="color: #ffffff;">MIRRORIT</span>
+              <span class="logo-tagline" style="color: rgba(255,255,255,0.45);">You Are Enough</span>
+            </div>
           </a>
           <p class="footer-brand-desc">Africa's leading provider of premium LED mirrors, decorative glass tiles, shower cubicles, and custom glass installations. Based in Nairobi, Kenya.</p>
           <div class="footer-socials">
