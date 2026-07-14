@@ -1,15 +1,14 @@
 import os
 
 pages = [
-    ("wooden-framed.html", "Wooden Framed Mirror", "Wooden Framed Mirrors"),
+    ("wooden-framed.html", "Wooden Framed Mirror", "Wooden Mirrors"),
     ("thin-framed.html", "Thin Framed Mirror", "Thin Framed Mirrors"),
     ("frameless.html", "Frameless Mirror", "Frameless Mirrors"),
-    ("wall-mirrors.html", "Wall Mirror", "Wall Mirrors"),
-    ("aluminium-framed.html", "Aluminium Framed Mirror", "Aluminium Framed Mirrors"),
+    ("aluminium-framed.html", "Aluminium Framed Mirror", "Aluminium Framed"),
     ("smart-mirrors.html", "Smart Mirror", "Smart Mirrors"),
     ("vanity.html", "Vanity Mirror", "Vanity Mirrors"),
-    ("accent.html", "Accent Mirror", "Accent Mirrors"),
-    ("custom.html", "Custom Mirror", "Custom Mirrors")
+    ("accent.html", "Artistic Mirror", "Artistic Mirrors"),
+    ("wall-mirrors.html", "Wall Mirror", "Wall Mirrors")
 ]
 
 template = """<!DOCTYPE html>
