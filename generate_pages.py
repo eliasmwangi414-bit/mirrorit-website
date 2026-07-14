@@ -84,6 +84,9 @@ template = """<!DOCTYPE html>
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       z-index: 2000;
     }}
+    .dropdown-menu::before {{
+      content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px;
+    }}
     .dropdown:hover .dropdown-menu {{ display: block; }}
     .dropdown-menu a {{
       display: block; padding: 8px 12px; border-radius: 4px;
