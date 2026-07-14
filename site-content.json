@@ -1,19 +1,10 @@
 {
   "hero": null,
-  "logo": {
-    "path": "images/uploads/1782554610807-8189286.png",
-    "uploadedAt": "2026-06-27T10:03:30.810Z"
-  },
+  "logo": null,
   "products": {
-    "wooden-framed": {
-      "path": "images/uploads/1783867910113-871956363.jpeg",
-      "uploadedAt": "2026-07-12T14:51:50.115Z"
-    },
+    "wooden-framed": null,
     "thin-framed": null,
-    "frameless": {
-      "path": "images/uploads/1783867965966-838501688.JPG",
-      "uploadedAt": "2026-07-12T14:52:45.970Z"
-    },
+    "frameless": null,
     "wall-mirrors": null,
     "aluminium-framed": null,
     "smart-mirrors": null,
@@ -23,37 +14,23 @@
   },
   "services": {
     "custom-fabrication": null,
-    "professional-installation": {
-      "path": "images/uploads/1783863391645-281906924.JPG",
-      "uploadedAt": "2026-07-12T13:36:31.670Z"
-    },
-    "design-consultation": {
-      "path": "images/uploads/1783861962125-91327547.JPG",
-      "uploadedAt": "2026-07-12T13:12:42.139Z"
-    },
+    "professional-installation": null,
+    "design-consultation": null,
     "delivery-logistics": null
   },
-  "gallery": [
-    {
-      "id": "1783867984348",
-      "path": "images/uploads/1783867984345-306152258.JPG",
-      "description": "",
-      "mirrorType": "Frameless Mirror",
-      "uploadedAt": "2026-07-12T14:53:04.348Z"
-    },
-    {
-      "id": "1783867696063",
-      "path": "images/uploads/1783867696055-992368506.jpeg",
-      "description": "Sunburst  Mirror replica of the sun rays, made with pure mahogany\n\n",
-      "mirrorType": "Wooden Framed Mirror",
-      "uploadedAt": "2026-07-12T14:48:16.063Z"
-    },
-    {
-      "id": "1783867680525",
-      "path": "images/uploads/1783867680517-242779287.jpg",
-      "description": "",
-      "mirrorType": "Wooden Framed Mirror",
-      "uploadedAt": "2026-07-12T14:48:00.525Z"
-    }
-  ]
+  "serviceDetails": {
+    "custom-fabrication-0": null,
+    "custom-fabrication-1": null,
+    "custom-fabrication-2": null,
+    "professional-installation-0": null,
+    "professional-installation-1": null,
+    "professional-installation-2": null,
+    "design-consultation-0": null,
+    "design-consultation-1": null,
+    "design-consultation-2": null,
+    "delivery-logistics-0": null,
+    "delivery-logistics-1": null,
+    "delivery-logistics-2": null
+  },
+  "gallery": []
 }
