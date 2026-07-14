@@ -282,6 +282,18 @@
     @media (max-width: 768px) {
       .product-desc, .product-link { opacity: 1; transform: translateY(0); }
     }
+
+    /* ===== SCROLL REVEAL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform, opacity;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -340,11 +352,11 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="display:inline-flex;">
-          <img src="images/logo.png" class="logo-icon" alt="MIRROR-IT diamond logo" />
-          <div class="logo-text-wrap">
-            <div class="logo-text" style="color: #ffffff;">MIRRORIT</div>
-            <div class="logo-tagline" style="color: rgba(255,255,255,0.45);">You Are Enough</div>
+        <a href="index.html" class="nav-logo" style="display:inline-flex; margin-bottom:0; text-decoration:none;">
+          <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
+          <div class="logo-text-wrap" style="display: flex; flex-direction: column; justify-content: center; margin-left: 12px;">
+            <span class="logo-text" style="color: #ffffff; font-family: 'Cinzel', serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; line-height: 1;">MIRRORIT</span>
+            <span class="logo-tagline" style="color: rgba(255,255,255,0.45); font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;">You Are Enough</span>
           </div>
         </a>
         <p>Specialists in premium custom LED, vanity, and decorative mirrors, plus custom mirrored furniture on request. Based in Nairobi, Kenya.</p>
@@ -363,15 +375,14 @@
       <div>
         <div class="footer-col-title">Our Mirrors</div>
         <ul class="footer-links">
-          <li><a href="wooden-framed.html">Wooden Framed Mirrors</a></li>
+          <li><a href="wooden-framed.html">Wooden Mirrors</a></li>
           <li><a href="thin-framed.html">Thin Framed Mirrors</a></li>
           <li><a href="frameless.html">Frameless Mirrors</a></li>
-          <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
-          <li><a href="aluminium-framed.html">Aluminium Framed Mirrors</a></li>
+          <li><a href="aluminium-framed.html">Aluminium Framed</a></li>
           <li><a href="smart-mirrors.html">Smart Mirrors</a></li>
           <li><a href="vanity.html">Vanity Mirrors</a></li>
-          <li><a href="accent.html">Accent Mirrors</a></li>
-          <li><a href="custom.html">Custom Mirrors</a></li>
+          <li><a href="accent.html">Artistic Mirrors</a></li>
+          <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
         </ul>
       </div>
       <div>
@@ -387,9 +398,9 @@
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
           <li><a href="tel:+254794439669">+254 794 439 669</a></li>
-          <li><a href="https://www.instagram.com/mirrorit.ke/" target="_blank">@mirrorit.ke on Instagram</a></li>
+          <li><a href="mailto:mirroritco@gmail.com">mirroritco@gmail.com</a></li>
           <li><a href="#">Manyanja Rd, Nairobi</a></li>
-          <li><a href="#">Opp. Gertrude's Children Hospital</a></li>
+          <li><a href="#">Next to Gertrude's Hospital</a></li>
           <li><a href="#">Mon to Sat: 8am to 6pm</a></li>
         </ul>
       </div>
@@ -472,6 +483,23 @@
         });
       }
       grid.innerHTML = html;
+
+      // Observe newly added cards for scroll reveal
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05, rootMargin: "0px 0px -40px 0px" });
+
+      const cards = grid.querySelectorAll('.product-card');
+      cards.forEach((card, index) => {
+        card.classList.add('reveal');
+        card.style.transitionDelay = `${index * 0.15}s`;
+        observer.observe(card);
+      });
     }
     document.addEventListener("DOMContentLoaded", loadPageContent);
   </script>

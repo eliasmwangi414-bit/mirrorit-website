@@ -530,6 +530,18 @@
       .why-us-features { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; }
     }
+
+    /* ===== SCROLL REVEAL ANIMATIONS ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform, opacity;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -1019,7 +1031,7 @@
         Get a Free Quote
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="https://wa.me/254000000000" class="btn btn-outline" style="border-color:rgba(255,255,255,0.2);color:#fff;font-size:15px;padding:14px 32px;" target="_blank">
+      <a href="https://wa.me/254794439669" class="btn btn-outline" style="border-color:rgba(255,255,255,0.2);color:#fff;font-size:15px;padding:14px 32px;" target="_blank">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157z"/></svg>
         Chat on WhatsApp
       </a>
@@ -1039,21 +1051,21 @@
             <div class="contact-icon">📍</div>
             <div>
               <div class="contact-label">Location</div>
-              <div class="contact-value">Manyanja Road, Nairobi<br/><span style="color:var(--fg-50);font-size:13px;">Opp. Gertrude's Children Hospital</span></div>
+              <div class="contact-value">Manyanja Road, Nairobi<br/><span style="color:var(--fg-50);font-size:13px;">Next to Gertrude's Children Hospital</span></div>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-icon">📞</div>
             <div>
               <div class="contact-label">Phone</div>
-              <div class="contact-value"><a href="tel:+254000000000" style="color:var(--primary-mid);">+254 000 000 000</a></div>
+              <div class="contact-value"><a href="tel:+254794439669" style="color:var(--fg-80);">+254 794 439 669</a></div>
             </div>
           </div>
           <div class="contact-info-item">
             <div class="contact-icon">✉️</div>
             <div>
               <div class="contact-label">Email</div>
-              <div class="contact-value"><a href="mailto:info@mirroritglass.co.ke" style="color:var(--primary-mid);">info@mirroritglass.co.ke</a></div>
+              <div class="contact-value"><a href="mailto:mirroritco@gmail.com" style="color:var(--fg-80);">mirroritco@gmail.com</a></div>
             </div>
           </div>
           <div class="contact-info-item">
@@ -1121,11 +1133,11 @@
     <div class="footer-inner">
       <div class="footer-grid">
         <div>
-          <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:0;">
+          <a href="index.html" class="nav-logo" style="display:inline-flex; margin-bottom:0; text-decoration:none;">
             <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
-            <div class="logo-text-wrap">
-              <span class="logo-text" style="color: #ffffff;">MIRRORIT</span>
-              <span class="logo-tagline" style="color: rgba(255,255,255,0.45);">You Are Enough</span>
+            <div class="logo-text-wrap" style="display: flex; flex-direction: column; justify-content: center; margin-left: 12px;">
+              <span class="logo-text" style="color: #ffffff; font-family: 'Cinzel', serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; line-height: 1;">MIRRORIT</span>
+              <span class="logo-tagline" style="color: rgba(255,255,255,0.45); font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;">You Are Enough</span>
             </div>
           </a>
           <p class="footer-brand-desc">Specialists in premium custom LED, vanity, and decorative mirrors. We focus exclusively on mirrors, with custom mirror furniture available on request.</p>
@@ -1167,8 +1179,9 @@
           <div class="footer-col-title">Contact</div>
           <ul class="footer-links">
             <li><a href="tel:+254794439669">+254 794 439 669</a></li>
-            <li><a href="mailto:info@mirrorit.co.ke">info@mirrorit.co.ke</a></li>
+            <li><a href="mailto:mirroritco@gmail.com">mirroritco@gmail.com</a></li>
             <li><a href="#">Manyanja Rd, Nairobi</a></li>
+            <li><a href="#">Next to Gertrude's Hospital</a></li>
             <li><a href="#">Mon–Sat: 8am – 6pm</a></li>
           </ul>
         </div>
@@ -1180,7 +1193,7 @@
   </footer>
 
   <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/254000000000" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/254794439669" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
   </a>
 
@@ -1216,20 +1229,38 @@
     }
 
     // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
+    const observerOptions = {
+      root: null,
+      threshold: 0.05,
+      rootMargin: "0px 0px -40px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); // Stop observing once revealed
         }
       });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    document.querySelectorAll('.product-card, .service-card, .testimonial-card, .feature-item, .process-step').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(24px)';
-      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    // Apply reveal class and observe
+    const targets = document.querySelectorAll(
+      '.product-card, .service-card, .testimonial-card, .feature-item, .process-step, .why-us-image, .contact-info-item, .form-group'
+    );
+    
+    targets.forEach(el => {
+      el.classList.add('reveal');
       observer.observe(el);
+    });
+
+    // Staggered reveal for grid elements
+    const grids = document.querySelectorAll('.products-grid, .services-grid, .testimonials-grid, .why-us-features, .process-steps');
+    grids.forEach(grid => {
+      const children = grid.children;
+      Array.from(children).forEach((child, index) => {
+        child.style.transitionDelay = `${index * 0.1}s`;
+      });
     });
   </script>
 </body>
