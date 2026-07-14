@@ -26,21 +26,25 @@ template = """<!DOCTYPE html>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
       font-family: 'Inter', sans-serif;
-      background: #ffffff;
-      color: #1a1a1a;
+      background: #f7f8f8;
+      color: #111827;
       overflow-x: hidden;
       line-height: 1.6;
     }}
     :root {{
-      --bg-primary:   #ffffff;
-      --bg-card:      #f5f5f7;
-      --border:       rgba(0,0,0,0.08);
-      --glass-bg:     rgba(255,255,255,0.8);
-      --glass-border: rgba(0,0,0,0.08);
-      --text-primary: #111111;
-      --text-secondary:#4a4a5a;
-      --text-muted:   #8a8a9a;
-      --accent-bright:#111111;
+      --bg-primary:   #f7f8f8;
+      --bg-card:      #ffffff;
+      --border:       rgba(0,0,0,0.07);
+      --glass-bg:     rgba(255,255,255,0.85);
+      --glass-border: rgba(0,0,0,0.07);
+      --text-primary: #111827;
+      --text-secondary:#374151;
+      --text-muted:   #6b7280;
+      --accent:       #1a6b7a;
+      --accent-mid:   #23879a;
+      --accent-bright:#1a6b7a;
+      --accent-light: #e6f3f5;
+      --accent-dark:  #124e59;
       --divider:      rgba(0,0,0,0.06);
       --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }}
@@ -95,7 +99,7 @@ template = """<!DOCTYPE html>
       background: rgba(0,0,0,0.03);
       color: #111111 !important;
     }}
-    .nav-cta {{ padding: 9px 22px; background: #111111; color: #ffffff !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
+    .nav-cta {{ padding: 9px 22px; background: var(--accent); color: #ffffff !important; border-radius: 5px; font-weight: 600 !important; font-size: 13px !important; }}
 
     /* ===== MOBILE NAV ===== */
     .nav-hamburger {{
@@ -273,22 +277,22 @@ template = """<!DOCTYPE html>
     .placeholder-text {{ font-size: 12px; color: #888; letter-spacing: 1px; text-transform: uppercase; }}
 
     /* Footer styles */
-    footer {{ padding: 80px 5% 32px; background: #f5f5f7; border-top: 1px solid rgba(0,0,0,0.07); }}
+    footer {{ padding: 80px 5% 32px; background: #111827; border-top: none; }}
     .footer-grid {{ display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }}
-    .footer-brand p {{ color: var(--text-secondary); font-size: 14px; margin: 20px 0; max-width: 320px; }}
+    .footer-brand p {{ color: rgba(255,255,255,0.5); font-size: 14px; margin: 20px 0; max-width: 320px; }}
     .footer-socials {{ display: flex; gap: 12px; }}
-    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); transition: var(--transition); }}
-    .social-btn:hover {{ background: #111111; color: #ffffff; transform: translateY(-3px); }}
-    .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }}
+    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: var(--transition); }}
+    .social-btn:hover {{ background: var(--accent); color: #ffffff; transform: translateY(-3px); }}
+    .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: rgba(255,255,255,0.9); }}
     .footer-links {{ list-style: none; }}
     .footer-links li {{ margin-bottom: 12px; }}
-    .footer-links a {{ color: var(--text-secondary); font-size: 14px; transition: var(--transition); }}
-    .footer-links a:hover {{ color: var(--accent-bright); padding-left: 4px; }}
-    .footer-bottom {{ display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--divider); }}
-    .footer-copy {{ color: var(--text-muted); font-size: 13px; }}
+    .footer-links a {{ color: rgba(255,255,255,0.45); font-size: 14px; transition: var(--transition); }}
+    .footer-links a:hover {{ color: rgba(255,255,255,0.9); padding-left: 4px; }}
+    .footer-bottom {{ display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); }}
+    .footer-copy {{ color: rgba(255,255,255,0.35); font-size: 13px; }}
     .footer-bottom-links {{ display: flex; gap: 24px; }}
-    .footer-bottom-links a {{ color: var(--text-muted); font-size: 13px; text-decoration: none; transition: var(--transition); }}
-    .footer-bottom-links a:hover {{ color: var(--accent-bright); }}
+    .footer-bottom-links a {{ color: rgba(255,255,255,0.35); font-size: 13px; text-decoration: none; transition: var(--transition); }}
+    .footer-bottom-links a:hover {{ color: rgba(255,255,255,0.85); }}
     @media (max-width: 900px) {{ .footer-grid {{ grid-template-columns: 1fr 1fr; }} }}
     @media (max-width: 600px) {{ .footer-grid {{ grid-template-columns: 1fr; }} .footer-bottom {{ flex-direction: column; gap: 16px; text-align: center; }} }}
     @media (max-width: 768px) {{
