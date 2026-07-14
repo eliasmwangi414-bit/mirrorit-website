@@ -57,19 +57,19 @@ template = """<!DOCTYPE html>
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
       font-family: 'DM Sans', sans-serif;
-      background: hsl(0 0% 9%);
-      color: hsl(0 0% 98%);
+      background: #ffffff;
+      color: #000000;
       overflow-x: hidden;
       line-height: 1.6;
     }}
     :root {{
       --bg-primary:   #ffffff;
-      --bg-secondary: #f3f4f6;
-      --border:       rgba(0, 0, 0, 0.08);
-      --glass-bg:     rgba(0, 0, 0, 0.03);
-      --glass-border: rgba(0, 0, 0, 0.05);
-      --text-primary: #111827;
-      --text-secondary: #374151;
+      --bg-secondary: #f9fafb;
+      --border:       rgba(0, 0, 0, 0.12);
+      --glass-bg:     rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(0, 0, 0, 0.06);
+      --text-primary: #000000;
+      --text-secondary: #111111;
       --text-muted:   #9ca3af;
       --accent:       #000000;
       --accent-mid:   #111111;
@@ -77,7 +77,7 @@ template = """<!DOCTYPE html>
       --accent-light: #f3f4f6;
       --accent-dark:  #000000;
       --divider:      rgba(0, 0, 0, 0.06);
-      --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition:   all 0.3s ease;
     }}
     a {{ text-decoration: none; }}
     
@@ -200,8 +200,7 @@ template = """<!DOCTYPE html>
     /* Service Hero styles */
     .service-hero {{
       padding: 140px 5% 80px;
-      background: linear-gradient(180deg, #f3f4f6 0%, var(--bg-primary) 100%);
-      border-bottom: 1px solid var(--border);
+      background: #ffffff;
       text-align: center;
     }}
     .service-hero-title {{
@@ -289,19 +288,20 @@ template = """<!DOCTYPE html>
     }}
 
     /* Footer styles */
-    footer {{ padding: 80px 5% 32px; background: hsl(0 0% 5%); border-top: 1px solid var(--border); }}
-    .footer-grid {{ display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }}
-    .footer-brand p {{ color: var(--text-muted); font-size: 14px; margin: 20px 0; max-width: 320px; }}
-    .footer-socials {{ display: flex; gap: 12px; }}
-    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: var(--transition); }}
-    .social-btn:hover {{ background: var(--accent); color: #ffffff; transform: translateY(-3px); }}
-    .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }}
-    .footer-links {{ list-style: none; }}
-    .footer-links li {{ margin-bottom: 12px; }}
-    .footer-links a {{ color: var(--text-secondary); font-size: 14px; transition: var(--transition); }}
-    .footer-links a:hover {{ color: var(--accent-bright); padding-left: 4px; }}
-    .footer-bottom {{ display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--divider); }}
-    .footer-copy {{ color: var(--text-muted); font-size: 13px; }}
+    footer {{ padding: 64px 2rem 32px; background: hsl(0 0% 5%); border-top: 1px solid var(--border); }}
+    .footer-grid {{ display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06); }}
+    .footer-brand p {{ color: rgba(255,255,255,0.7); font-size: 14px; margin: 16px 0 24px; max-width: 280px; line-height: 1.75; }}
+    .footer-socials {{ display: flex; gap: 10px; }}
+    .social-btn {{ width: 36px; height: 36px; border-radius: calc(var(--radius) - 4px); background: hsl(0 0% 14%); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7); transition: var(--transition); text-decoration: none; }}
+    .social-btn:hover {{ background: #ffffff; color: #000000; border-color: #ffffff; }}
+    .footer-col-title {{ font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #ffffff; margin-bottom: 20px; }}
+    .footer-links {{ list-style: none; display: flex; flex-direction: column; gap: 10px; }}
+    .footer-links li {{ font-size: 13px; color: rgba(255,255,255,0.7); }}
+    .footer-links a {{ color: rgba(255,255,255,0.7); font-size: 13px; transition: var(--transition); text-decoration: none; }}
+    .footer-links a:hover {{ color: #ffffff; }}
+    .footer-bottom {{ display: flex; justify-content: space-between; align-items: center; padding-top: 32px; }}
+    .footer-copy {{ color: rgba(255,255,255,0.5); font-size: 12px; }}
+    .footer-copy span {{ color: #ffffff; }}
     .footer-bottom-links {{ display: flex; gap: 24px; }}
     .footer-bottom-links a {{ color: var(--text-muted); font-size: 13px; text-decoration: none; transition: var(--transition); }}
     .footer-bottom-links a:hover {{ color: var(--accent-bright); }}
@@ -367,8 +367,8 @@ template = """<!DOCTYPE html>
         <a href="index.html" class="nav-logo" style="display:inline-flex;">
           <img src="images/logo.png" class="logo-icon" alt="MIRROR-IT diamond logo" />
           <div class="logo-text-wrap">
-            <div class="logo-text">MIRROR-IT</div>
-            <div class="logo-tagline">You Are Enough!</div>
+            <div class="logo-text" style="color: #ffffff;">MIRRORIT</div>
+            <div class="logo-tagline" style="color: rgba(255,255,255,0.45);">You Are Enough</div>
           </div>
         </a>
         <p>Specialists in premium custom LED, vanity, and decorative mirrors, plus custom mirrored furniture on request. Based in Nairobi, Kenya.</p>
@@ -419,7 +419,7 @@ template = """<!DOCTYPE html>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 MIRROR-IT. All rights reserved. &nbsp;&middot;&nbsp; <em>You Are Enough!</em></p>
+      <p class="footer-copy">© 2025 <span>MIRRORIT Ltd</span>. All rights reserved. &nbsp;&middot;&nbsp; Premium Mirror Solutions in Africa</p>
       <div class="footer-bottom-links">
       </div>
     </div>
