@@ -127,16 +127,22 @@ function syncToGitHub() {
     }, 500); // small delay so the file write completes first
 }
 
-// ========== MULTER SETUP ==========
-const uploadDir = path.resolve(__dirname, 'images', 'uploads');
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, uploadDir),
-    filename: (req, file, cb) => {
-        const suffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, suffix + path.extname(file.originalname));
+// ========== CLOUDINARY SETUP ==========
+require('dotenv').config();
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: {
+        folder: 'mirrorit_uploads',
+        allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'gif', 'svg']
     }
 });
 const upload = multer({ storage });
@@ -158,7 +164,7 @@ app.get('/api/site-content', (req, res) => {
 app.post('/api/upload/hero', requireAuth, upload.single('image'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No file' });
     const db = readDB();
-    db.hero = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.hero = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.hero.path });
@@ -168,7 +174,7 @@ app.post('/api/upload/hero', requireAuth, upload.single('image'), (req, res) => 
 app.post('/api/upload/logo', requireAuth, upload.single('image'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No file' });
     const db = readDB();
-    db.logo = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.logo = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.logo.path });
@@ -179,7 +185,7 @@ app.post('/api/upload/product/:key', requireAuth, upload.single('image'), (req, 
     if (!req.file) return res.status(400).json({ error: 'No file' });
     const db = readDB();
     if (!db.products.hasOwnProperty(req.params.key)) return res.status(404).json({ error: 'Unknown product' });
-    db.products[req.params.key] = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.products[req.params.key] = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.products[req.params.key].path });
@@ -190,7 +196,7 @@ app.post('/api/upload/service/:key', requireAuth, upload.single('image'), (req, 
     if (!req.file) return res.status(400).json({ error: 'No file' });
     const db = readDB();
     if (!db.services.hasOwnProperty(req.params.key)) return res.status(404).json({ error: 'Unknown service' });
-    db.services[req.params.key] = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.services[req.params.key] = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.services[req.params.key].path });
@@ -202,7 +208,7 @@ app.post('/api/upload/service-detail/:key', requireAuth, upload.single('image'),
     const db = readDB();
     if (!db.serviceDetails) db.serviceDetails = {};
     if (!db.serviceDetails.hasOwnProperty(req.params.key)) return res.status(404).json({ error: 'Unknown service detail' });
-    db.serviceDetails[req.params.key] = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.serviceDetails[req.params.key] = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.serviceDetails[req.params.key].path });
@@ -215,7 +221,7 @@ app.post('/api/upload/gallery', requireAuth, upload.single('image'), (req, res) 
     const db = readDB();
     db.gallery.unshift({
         id: Date.now().toString(),
-        path: `images/uploads/${req.file.filename}`,
+        path: req.file.path,
         description,
         mirrorType,
         uploadedAt: new Date().toISOString()
@@ -250,7 +256,7 @@ app.post('/api/update/gallery-desc/:id', requireAuth, (req, res) => {
 app.post('/api/upload/why-us', requireAuth, upload.single('image'), (req, res) => {
     if (!req.file) return res.status(400).json({ error: 'No file' });
     const db = readDB();
-    db.whyUs = { path: `images/uploads/${req.file.filename}`, uploadedAt: new Date().toISOString() };
+    db.whyUs = { path: req.file.path, uploadedAt: new Date().toISOString() };
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: db.whyUs.path });
@@ -271,7 +277,7 @@ app.post('/api/upload/blog/:id', requireAuth, upload.single('image'), (req, res)
     const db = readDB();
     const post = db.blog.find(b => b.id === req.params.id);
     if (!post) return res.status(404).json({ error: 'Post not found' });
-    post.image = `images/uploads/${req.file.filename}`;
+    post.image = req.file.path;
     writeDB(db);
     syncToGitHub();
     res.json({ success: true, path: post.image });

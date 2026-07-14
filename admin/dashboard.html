@@ -407,6 +407,7 @@
 <div class="toast" id="toast"></div>
 
 <script>
+  const resolveImg = (p) => p ? (p.startsWith('http') ? p : '/' + p) : '';
   const PRODUCTS = {
     'wooden-framed': 'Wooden Framed Mirrors',
     'thin-framed': 'Thin Framed Mirrors',
@@ -497,7 +498,7 @@
     const badge = document.getElementById('why-us-badge');
     if (!preview || !badge) return;
     if (siteContent.whyUs) {
-      preview.innerHTML = `<img src="/${siteContent.whyUs.path}?t=${Date.now()}" alt="Why Us">`;
+      preview.innerHTML = `<img src="${resolveImg(siteContent.whyUs.path)}?t=${Date.now()}" alt="Why Us">`;
       badge.innerHTML = '<span class="live-badge">✓ Live</span>';
     } else {
       preview.innerHTML = '<div class="no-image"><span>🏆</span>No image yet</div>';
@@ -517,7 +518,7 @@
       <div class="mini-card" style="display:grid; grid-template-columns: 220px 1fr; gap:20px; align-items:start;">
         <div>
           <div class="mini-image-preview" style="aspect-ratio: 16/10; margin-bottom:10px;">
-            <img src="/${post.image}?t=${Date.now()}" alt="${post.title}" onerror="this.src='/images/products/led-mirror.jpg'">
+            <img src="${resolveImg(post.image)}?t=${Date.now()}" alt="${post.title}" onerror="this.src='/images/products/led-mirror.jpg'">
           </div>
           <div class="mini-actions">
             <label for="blog-img-${post.id}">Change Image</label>
@@ -544,7 +545,7 @@
     const preview = document.getElementById('hero-preview');
     const badge = document.getElementById('hero-badge');
     if (siteContent.hero) {
-      preview.innerHTML = `<img src="/${siteContent.hero.path}?t=${Date.now()}" alt="Hero">`;
+      preview.innerHTML = `<img src="${resolveImg(siteContent.hero.path)}?t=${Date.now()}" alt="Hero">`;
       badge.innerHTML = '<span class="live-badge">✓ Live</span>';
     } else {
       preview.innerHTML = '<div class="no-image"><span>🖼</span>No image yet</div>';
@@ -556,7 +557,7 @@
     const preview = document.getElementById('logo-preview');
     const badge = document.getElementById('logo-badge');
     if (siteContent.logo) {
-      preview.innerHTML = `<img src="/${siteContent.logo.path}?t=${Date.now()}" alt="Logo" style="object-fit: contain; max-height: 100%; max-width: 100%;">`;
+      preview.innerHTML = `<img src="${resolveImg(siteContent.logo.path)}?t=${Date.now()}" alt="Logo" style="object-fit: contain; max-height: 100%; max-width: 100%;">`;
       badge.innerHTML = '<span class="live-badge">✓ Live</span>';
     } else {
       preview.innerHTML = '<div class="no-image"><span>🏷️</span>No logo yet</div>';
@@ -572,7 +573,7 @@
         <div class="mini-card">
           <h4>${label} ${img ? '<span class="live-badge">✓ Live</span>' : '<span class="empty-badge">Empty</span>'}</h4>
           <div class="mini-image-preview">
-            ${img ? `<img src="/${img.path}?t=${Date.now()}" alt="${label}">` : '<div class="no-img"><span>🪞</span>No image</div>'}
+            ${img ? `<img src="${resolveImg(img.path)}?t=${Date.now()}" alt="${label}">` : '<div class="no-img"><span>🪞</span>No image</div>'}
           </div>
           <div class="mini-actions">
             <label for="prod-${key}">Upload</label>
@@ -597,7 +598,7 @@
           <div class="mini-card" style="background:#ffffff; border-color:rgba(0,0,0,0.08);">
             <h5 style="font-size:12px; margin-bottom:8px; color:#555555; font-weight:600;">${detail.label}</h5>
             <div class="mini-image-preview" style="aspect-ratio: 4/3;">
-              ${detailImg ? `<img src="/${detailImg.path}?t=${Date.now()}" alt="${detail.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
+              ${detailImg ? `<img src="${resolveImg(detailImg.path)}?t=${Date.now()}" alt="${detail.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
             </div>
             <div class="mini-actions">
               <label for="srv-det-${detail.key}">Upload</label>
@@ -614,7 +615,7 @@
             <div class="mini-card" style="background:#ffffff; border-color:rgba(0,0,0,0.08);">
               <h5 style="font-size:12px; margin-bottom:8px; color:#000000; font-weight:600;">Homepage Card Image</h5>
               <div class="mini-image-preview" style="aspect-ratio: 4/3;">
-                ${mainImg ? `<img src="/${mainImg.path}?t=${Date.now()}" alt="${cat.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
+                ${mainImg ? `<img src="${resolveImg(mainImg.path)}?t=${Date.now()}" alt="${cat.label}">` : '<div class="no-img"><span>🔧</span>No image</div>'}
               </div>
               <div class="mini-actions">
                 <label for="srv-${catKey}">Upload</label>
@@ -651,7 +652,7 @@
         html += `
           <div class="gallery-slot">
             <span class="slot-num">#${slotNum}</span>
-            <img class="slot-img" src="/${img.path}?t=${Date.now()}" alt="Slot ${slotNum}" />
+            <img class="slot-img" src="${resolveImg(img.path)}?t=${Date.now()}" alt="Slot ${slotNum}" />
             <div style="padding: 10px 10px 0;">
               <textarea 
                 style="width: 100%; background: #ffffff; border: 1px solid rgba(0,0,0,0.12); border-radius: 4px; color: #000; font-size: 11px; padding: 6px; resize: none; font-family: 'Inter', sans-serif; height: 42px;" 
