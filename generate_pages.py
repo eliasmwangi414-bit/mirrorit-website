@@ -19,33 +19,32 @@ template = """<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{display_name} | MIRROR-IT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Cinzel:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
   <style>
     /* Add basic styles */
     *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
-      font-family: 'Inter', sans-serif;
-      background: #f7f8f8;
-      color: #111827;
+      font-family: 'DM Sans', sans-serif;
+      background: hsl(0 0% 9%);
+      color: hsl(0 0% 98%);
       overflow-x: hidden;
       line-height: 1.6;
     }}
     :root {{
-      --bg-primary:   #f7f8f8;
-      --bg-card:      #ffffff;
-      --border:       rgba(0,0,0,0.07);
-      --glass-bg:     rgba(255,255,255,0.85);
-      --glass-border: rgba(0,0,0,0.07);
-      --text-primary: #111827;
-      --text-secondary:#374151;
-      --text-muted:   #6b7280;
-      --accent:       #1a6b7a;
-      --accent-mid:   #23879a;
-      --accent-bright:#1a6b7a;
-      --accent-light: #e6f3f5;
-      --accent-dark:  #124e59;
-      --divider:      rgba(0,0,0,0.06);
+      --bg-primary:   hsl(0 0% 9%);
+      --bg-card:      hsl(0 0% 14%);
+      --border:       hsl(0 0% 32%);
+      --glass-bg:     rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.1);
+      --text-primary: hsl(0 0% 98%);
+      --text-secondary: hsl(0 0% 98% / 0.8);
+      --text-muted:   hsl(0 0% 63%);
+      --accent:       hsl(142 75% 22%);
+      --accent-mid:   hsl(142 70% 32%);
+      --accent-bright: hsl(142 75% 22%);
+      --accent-light: hsl(142 50% 12%);
+      --accent-dark:  hsl(142 80% 15%);
+      --divider:      rgba(255,255,255,0.06);
       --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }}
     a {{ text-decoration: none; }}
@@ -60,14 +59,14 @@ template = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(255,255,255,0.92);
+      background: hsl(0 0% 9% / 0.85);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+      border-bottom: 1px solid var(--border);
     }}
     .nav-logo {{ display: flex; align-items: center; gap: 10px; }}
     .logo-icon {{ height: 40px; width: auto; max-width: 150px; object-fit: contain; flex-shrink: 0; display: block; }}
     .logo-text-wrap {{ display: flex; flex-direction: column; gap: 0px; }}
-    .logo-text {{ font-family: 'Cinzel', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1; }}
+    .logo-text {{ font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: var(--text-primary); letter-spacing: 0.5px; text-transform: uppercase; line-height: 1; }}
     .logo-tagline {{ font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: var(--text-muted); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }}
     .nav-links {{ display: flex; align-items: center; gap: 36px; list-style: none; }}
     .nav-links a {{ color: var(--text-secondary); font-size: 14px; font-weight: 500; position: relative; }}
@@ -78,28 +77,28 @@ template = """<!DOCTYPE html>
       position: absolute;
       top: 100%;
       left: 0;
-      background: #ffffff;
+      background: var(--bg-card);
       min-width: 220px;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 0;
       z-index: 2000;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
     }}
     .dropdown:hover .dropdown-content {{ display: block; }}
     .dropdown-content a {{
       display: block;
       padding: 10px 20px;
-      color: #4a4a5a !important;
+      color: var(--text-secondary) !important;
       font-size: 14px;
       text-decoration: none;
     }}
     .dropdown-content a::after {{ display: none !important; }}
     .dropdown-content a:hover {{
-      background: rgba(0,0,0,0.03);
-      color: #111111 !important;
+      background: var(--accent-light);
+      color: var(--accent) !important;
     }}
-    .nav-cta {{ padding: 9px 22px; background: var(--accent); color: #ffffff !important; border-radius: 5px; font-weight: 600 !important; font-size: 13px !important; }}
+    .nav-cta {{ padding: 9px 22px; background: var(--accent); color: var(--text-primary) !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
 
     /* ===== MOBILE NAV ===== */
     .nav-hamburger {{
@@ -123,10 +122,10 @@ template = """<!DOCTYPE html>
         flex-direction: column;
         position: fixed;
         top: 72px; left: 0; right: 0;
-        background: rgba(255,255,255,0.98);
+        background: hsl(0 0% 9% / 0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
-        border-bottom: 1px solid rgba(0,0,0,0.07);
+        border-bottom: 1px solid var(--border);
         gap: 20px;
         z-index: 999;
         max-height: calc(100vh - 72px);
@@ -135,7 +134,7 @@ template = """<!DOCTYPE html>
       .dropdown-content {{
         position: static;
         display: none;
-        background: rgba(0,0,0,0.03);
+        background: rgba(255,255,255,0.03);
         border: none;
         box-shadow: none;
         padding: 4px 0 4px 15px;
@@ -268,21 +267,21 @@ template = """<!DOCTYPE html>
     .placeholder-card {{ cursor: pointer; }}
     .placeholder-img {{
       width: 100%; height: 100%;
-      background: linear-gradient(135deg, #f0f0f4 0%, #e8e8f0 50%, #f0f0f4 100%);
+      background: linear-gradient(135deg, #111 0%, #222 50%, #111 100%);
       display: flex; align-items: center; justify-content: center;
-      border: 2px dashed rgba(0,0,0,0.1);
+      border: 2px dashed rgba(255,255,255,0.1);
     }}
     .placeholder-inner {{ text-align: center; opacity: 0.5; }}
     .placeholder-icon {{ font-size: 40px; margin-bottom: 8px; }}
     .placeholder-text {{ font-size: 12px; color: #888; letter-spacing: 1px; text-transform: uppercase; }}
 
     /* Footer styles */
-    footer {{ padding: 80px 5% 32px; background: #111827; border-top: none; }}
+    footer {{ padding: 80px 5% 32px; background: hsl(0 0% 5%); border-top: 1px solid var(--border); }}
     .footer-grid {{ display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }}
-    .footer-brand p {{ color: rgba(255,255,255,0.5); font-size: 14px; margin: 20px 0; max-width: 320px; }}
+    .footer-brand p {{ color: var(--text-muted); font-size: 14px; margin: 20px 0; max-width: 320px; }}
     .footer-socials {{ display: flex; gap: 12px; }}
-    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.5); transition: var(--transition); }}
-    .social-btn:hover {{ background: var(--accent); color: #ffffff; transform: translateY(-3px); }}
+    .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: var(--transition); }}
+    .social-btn:hover {{ background: var(--accent); color: var(--text-primary); transform: translateY(-3px); }}
     .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: rgba(255,255,255,0.9); }}
     .footer-links {{ list-style: none; }}
     .footer-links li {{ margin-bottom: 12px; }}
