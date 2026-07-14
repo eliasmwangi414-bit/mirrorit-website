@@ -175,7 +175,7 @@ SUBPAGE_NAV_HTML_TEMPLATE = """  <nav id="navbar">
         <li><a href="index.html#services">Services</a></li>
         <li><a href="index.html#process">How We Work</a></li>
         <li><a href="index.html#testimonials">Reviews</a></li>
-        <li><a href="blog.html" class="{blog_active}">Blog</a></li>
+        <li><a href="blog.html">Blog</a></li>
         <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
       <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
@@ -301,8 +301,7 @@ for filepath in html_files:
         nav_html = HOMEPAGE_NAV_HTML
         footer_html = HOMEPAGE_FOOTER_HTML
     else:
-        blog_active = "active" if filename == "blog.html" else ""
-        nav_html = SUBPAGE_NAV_HTML_TEMPLATE.format(blog_active=blog_active)
+        nav_html = SUBPAGE_NAV_HTML_TEMPLATE
         footer_html = SUBPAGE_FOOTER_HTML
 
     # Replace nav element
