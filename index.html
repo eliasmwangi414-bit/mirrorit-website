@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Abrit Glass Ltd | Premium LED Mirrors & Glass Solutions in Africa</title>
-  <meta name="description" content="Africa's leading provider of premium LED mirrors, decorative glass tiles, shower cubicles, and custom glass installations. Transform your space with Abrit Glass." />
-  <meta name="keywords" content="LED mirrors Africa, glass tiles Nairobi, shower cubicles, bathroom mirrors, wall decor, Abrit Glass" />
-  <link rel="canonical" href="https://abritglass.co.ke" />
+  <title>MIRRORIT Ltd | Premium LED Mirrors & Glass Solutions in Africa</title>
+  <meta name="description" content="Africa's leading provider of premium LED mirrors, decorative glass tiles, shower cubicles, and custom glass installations. Transform your space with MIRRORIT." />
+  <meta name="keywords" content="LED mirrors Africa, glass tiles Nairobi, shower cubicles, bathroom mirrors, wall decor, MIRRORIT" />
+  <link rel="canonical" href="https://mirroritglass.co.ke" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
@@ -18,26 +18,26 @@
 
     /* ===== DESIGN TOKENS ===== */
     :root {
-      --bg:          hsl(0 0% 9%);
-      --bg-card:     hsl(0 0% 14%);
-      --bg-card2:    hsl(0 0% 11%);
-      --border:      hsl(0 0% 32%);
-      --border-soft: hsl(0 0% 20%);
+      --bg:          #ffffff;
+      --bg-card:     #f9fafb;
+      --bg-card2:    #f3f4f6;
+      --border:      rgba(0, 0, 0, 0.08);
+      --border-soft: rgba(0, 0, 0, 0.05);
 
       --primary:     hsl(142 75% 22%);
       --primary-mid: hsl(142 70% 32%);
-      --primary-fg:  hsl(142 80% 98%);
-      --accent-bg:   hsl(142 50% 12%);
-      --accent-fg:   hsl(142 70% 45%);
+      --primary-fg:  #ffffff;
+      --accent-bg:   hsl(142 50% 92%);
+      --accent-fg:   hsl(142 75% 18%);
 
-      --fg:          hsl(0 0% 98%);
-      --fg-80:       hsl(0 0% 98% / 0.8);
-      --fg-50:       hsl(0 0% 98% / 0.5);
-      --muted:       hsl(0 0% 63%);
+      --fg:          #111827;
+      --fg-80:       #374151;
+      --fg-50:       #6b7280;
+      --muted:       #9ca3af;
 
       --radius:      0.75rem;
-      --shadow-gold: 0 10px 40px -10px hsl(142 75% 22% / 0.3);
-      --shadow-el:   0 25px 50px -12px rgba(0,0,0,0.5);
+      --shadow-gold: 0 10px 40px -10px hsl(142 75% 22% / 0.15);
+      --shadow-el:   0 20px 40px -15px rgba(0,0,0,0.08);
 
       --font-heading: 'Playfair Display', Georgia, serif;
       --font-body:    'DM Sans', system-ui, sans-serif;
@@ -112,15 +112,16 @@
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       height: 72px; display: flex; align-items: center;
       padding: 0 2rem;
-      background: hsl(0 0% 9% / 0.6);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid hsl(0 0% 32% / 0.3);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
       transition: var(--transition);
     }
     #navbar.scrolled {
-      background: hsl(0 0% 9% / 0.95);
-      border-bottom-color: hsl(0 0% 32% / 0.5);
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }
     .nav-logo { display: flex; align-items: center; gap: 10px; }
@@ -138,14 +139,14 @@
       font-size: 14px; font-weight: 500; color: var(--fg-80);
       transition: color 0.2s, background 0.2s;
     }
-    .nav-links a:hover { color: var(--fg); background: hsl(0 0% 100% / 0.05); }
+    .nav-links a:hover { color: var(--primary-mid); background: rgba(0, 0, 0, 0.03); }
     .nav-links .dropdown { position: relative; }
     .nav-links .dropdown-menu {
       display: none; position: absolute; top: calc(100% + 8px); left: 0;
       min-width: 220px; padding: 8px;
-      background: var(--bg-card); border: 1px solid var(--border-soft);
+      background: var(--bg); border: 1px solid var(--border);
       border-radius: var(--radius);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
     .nav-links .dropdown:hover .dropdown-menu { display: block; }
     .nav-links .dropdown-menu a {
@@ -321,11 +322,11 @@
     .feature-desc { font-size: 13px; color: var(--fg-50); line-height: 1.6; }
 
     /* ===== SERVICES ===== */
-    #services { background: var(--bg); }
+    #services { background: var(--bg-card); }
     .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
     .service-card {
       padding: 36px; border-radius: var(--radius);
-      background: var(--bg-card); border: 1px solid var(--border-soft);
+      background: var(--bg); border: 1px solid var(--border-soft);
       transition: var(--transition); position: relative; overflow: hidden;
     }
     .service-card::before {
@@ -338,9 +339,9 @@
     .service-card:hover::before { opacity: 1; }
     .service-number {
       font-family: var(--font-heading); font-size: 48px; font-weight: 700; line-height: 1;
-      color: hsl(0 0% 18%); margin-bottom: 20px; transition: color 0.3s;
+      color: #e5e7eb; margin-bottom: 20px; transition: color 0.3s;
     }
-    .service-card:hover .service-number { color: hsl(142 75% 22% / 0.3); }
+    .service-card:hover .service-number { color: hsl(142 75% 22% / 0.15); }
     .service-title { font-family: var(--font-heading); font-size: 22px; font-weight: 600; margin-bottom: 12px; }
     .service-desc { font-size: 14px; color: var(--fg-50); line-height: 1.7; margin-bottom: 20px; }
     .service-link {
@@ -372,11 +373,11 @@
     .process-step-desc { font-size: 13px; color: var(--fg-50); line-height: 1.65; }
 
     /* ===== TESTIMONIALS ===== */
-    #testimonials { background: var(--bg); }
+    #testimonials { background: var(--bg-card); }
     .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .testimonial-card {
       padding: 32px; border-radius: var(--radius);
-      background: var(--bg-card); border: 1px solid var(--border-soft);
+      background: var(--bg); border: 1px solid var(--border-soft);
       position: relative; overflow: hidden; transition: var(--transition);
     }
     .testimonial-card::before {
@@ -490,7 +491,7 @@
       .nav-links.open {
         display: flex; flex-direction: column;
         position: fixed; top: 72px; left: 0; right: 0;
-        background: hsl(0 0% 9% / 0.98); backdrop-filter: blur(20px);
+        background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px);
         padding: 24px; border-bottom: 1px solid var(--border-soft);
         gap: 4px; z-index: 99;
       }
@@ -514,7 +515,7 @@
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <div class="logo-diamond"></div>
-        <span class="logo-text">Abrit <span>Glass</span></span>
+        <span class="logo-text">MIRRORIT <span>Glass</span></span>
       </a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#hero">Home</a></li>
@@ -748,7 +749,7 @@
     <div class="container">
       <div class="why-us-grid">
         <div class="why-us-image">
-          <img src="images/products/glass-railing.jpg" alt="Abrit Glass craftsmanship" />
+          <img src="images/products/glass-railing.jpg" alt="MIRRORIT craftsmanship" />
           <div class="why-us-badge-float">
             <div class="why-us-badge-num">2,000+</div>
             <div class="why-us-badge-label">Happy clients served</div>
@@ -884,7 +885,7 @@
           <div class="stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
           </div>
-          <p class="testimonial-text">"Absolutely stunning LED mirror in our master bathroom. The quality is incredible — the glass is crystal clear and the backlight is perfectly even. Abrit Glass delivered and installed within a week. Highly recommended!"</p>
+          <p class="testimonial-text">"Absolutely stunning LED mirror in our master bathroom. The quality is incredible — the glass is crystal clear and the backlight is perfectly even. MIRRORIT delivered and installed within a week. Highly recommended!"</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">SW</div>
             <div>
@@ -897,7 +898,7 @@
           <div class="stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
           </div>
-          <p class="testimonial-text">"We fitted our entire showroom with Abrit Glass partitions and it has completely transformed the space. Professional team, excellent glass quality, and the price was very competitive. Will use again for our next branch."</p>
+          <p class="testimonial-text">"We fitted our entire showroom with MIRRORIT partitions and it has completely transformed the space. Professional team, excellent glass quality, and the price was very competitive. Will use again for our next branch."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">JK</div>
             <div>
@@ -936,7 +937,7 @@
           <div class="stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
           </div>
-          <p class="testimonial-text">"Our apartment block's balcony railings were replaced with Abrit Glass frameless panels. The result is spectacular — residents love the unobstructed views and the quality is clearly superior. Great project management."</p>
+          <p class="testimonial-text">"Our apartment block's balcony railings were replaced with MIRRORIT frameless panels. The result is spectacular — residents love the unobstructed views and the quality is clearly superior. Great project management."</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">DM</div>
             <div>
@@ -949,7 +950,7 @@
           <div class="stars">
             <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
           </div>
-          <p class="testimonial-text">"From consultation to installation, the team was professional and responsive. The shower cubicle is exactly as described — strong, frameless, and easy to clean. Best investment for our new home. Thank you Abrit Glass!"</p>
+          <p class="testimonial-text">"From consultation to installation, the team was professional and responsive. The shower cubicle is exactly as described — strong, frameless, and easy to clean. Best investment for our new home. Thank you MIRRORIT!"</p>
           <div class="testimonial-author">
             <div class="testimonial-avatar">FO</div>
             <div>
@@ -965,7 +966,7 @@
   <!-- GALLERY CTA -->
   <section id="gallery-cta">
     <h2 class="section-title" style="font-size:clamp(28px,4vw,44px);margin-bottom:16px;">Ready to Transform<br/><span class="gradient-gold">Your Space?</span></h2>
-    <p class="section-desc" style="margin:0 auto 40px;color:hsl(142 80% 98%/0.7);">Join over 2,000 satisfied clients who have trusted Abrit Glass to deliver premium glass solutions across Africa.</p>
+    <p class="section-desc" style="margin:0 auto 40px;color:hsl(142 80% 98%/0.7);">Join over 2,000 satisfied clients who have trusted MIRRORIT to deliver premium glass solutions across Africa.</p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
       <a href="#contact" class="btn btn-primary" style="font-size:15px;padding:14px 32px;">
         Get a Free Quote
@@ -1005,7 +1006,7 @@
             <div class="contact-icon">✉️</div>
             <div>
               <div class="contact-label">Email</div>
-              <div class="contact-value"><a href="mailto:info@abritglass.co.ke" style="color:var(--primary-mid);">info@abritglass.co.ke</a></div>
+              <div class="contact-value"><a href="mailto:info@mirroritglass.co.ke" style="color:var(--primary-mid);">info@mirroritglass.co.ke</a></div>
             </div>
           </div>
           <div class="contact-info-item">
@@ -1059,10 +1060,10 @@
               Send Enquiry →
             </button>
           </form>
-          <div id="formSuccess" style="display:none;margin-top:16px;padding:32px;text-align:center;border:1px solid hsl(142 75% 22%/0.3);border-radius:var(--radius);background:var(--accent-bg);">
+          <div id="formSuccess" style="display:none;margin-top:16px;padding:32px;text-align:center;border:1px solid var(--primary);border-radius:var(--radius);background:var(--accent-bg);">
             <div style="font-size:40px;margin-bottom:12px;">✓</div>
             <div style="font-family:var(--font-heading);font-size:20px;font-weight:600;color:var(--primary-mid);margin-bottom:8px;">Message Sent!</div>
-            <p style="font-size:14px;color:var(--fg-50);">Thank you! Our team will get back to you within 24 hours.</p>
+            <p style="font-size:14px;color:var(--fg-80);">Thank you! Our team will get back to you within 24 hours.</p>
           </div>
         </div>
       </div>
@@ -1076,7 +1077,7 @@
         <div>
           <a href="#" class="nav-logo" style="display:inline-flex;margin-bottom:0;">
             <div class="logo-diamond"></div>
-            <span class="logo-text">Abrit <span>Glass</span></span>
+            <span class="logo-text">MIRRORIT <span>Glass</span></span>
           </a>
           <p class="footer-brand-desc">Africa's leading provider of premium LED mirrors, decorative glass tiles, shower cubicles, and custom glass installations. Based in Nairobi, Kenya.</p>
           <div class="footer-socials">
@@ -1115,14 +1116,14 @@
           <div class="footer-col-title">Contact</div>
           <ul class="footer-links">
             <li><a href="tel:+254000000000">+254 000 000 000</a></li>
-            <li><a href="mailto:info@abritglass.co.ke">info@abritglass.co.ke</a></li>
+            <li><a href="mailto:info@mirroritglass.co.ke">info@mirroritglass.co.ke</a></li>
             <li><a href="#">Manyanja Rd, Nairobi</a></li>
             <li><a href="#">Mon–Sat: 8am – 6pm</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 <span>Abrit Glass Ltd</span>. All rights reserved. · Premium Glass Solutions in Africa</p>
+        <p class="footer-copy">© 2025 <span>MIRRORIT Ltd</span>. All rights reserved. · Premium Glass Solutions in Africa</p>
       </div>
     </div>
   </footer>

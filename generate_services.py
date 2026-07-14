@@ -63,20 +63,20 @@ template = """<!DOCTYPE html>
       line-height: 1.6;
     }}
     :root {{
-      --bg-primary:   hsl(0 0% 9%);
-      --bg-secondary: hsl(0 0% 11%);
-      --border:       hsl(0 0% 32%);
-      --glass-bg:     rgba(255,255,255,0.06);
-      --glass-border: rgba(255,255,255,0.1);
-      --text-primary: hsl(0 0% 98%);
-      --text-secondary: hsl(0 0% 98% / 0.8);
-      --text-muted:   hsl(0 0% 63%);
+      --bg-primary:   #ffffff;
+      --bg-secondary: #f3f4f6;
+      --border:       rgba(0, 0, 0, 0.08);
+      --glass-bg:     rgba(0, 0, 0, 0.03);
+      --glass-border: rgba(0, 0, 0, 0.05);
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-muted:   #9ca3af;
       --accent:       hsl(142 75% 22%);
       --accent-mid:   hsl(142 70% 32%);
       --accent-bright: hsl(142 75% 22%);
-      --accent-light: hsl(142 50% 12%);
+      --accent-light: hsl(142 50% 92%);
       --accent-dark:  hsl(142 80% 15%);
-      --divider:      rgba(255,255,255,0.06);
+      --divider:      rgba(0, 0, 0, 0.06);
       --transition:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     }}
     a {{ text-decoration: none; }}
@@ -91,7 +91,7 @@ template = """<!DOCTYPE html>
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: hsl(0 0% 9% / 0.85);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }}
@@ -109,13 +109,13 @@ template = """<!DOCTYPE html>
       position: absolute;
       top: 100%;
       left: 0;
-      background: var(--bg-secondary);
+      background: var(--bg-primary);
       min-width: 220px;
       border: 1px solid var(--border);
       border-radius: 8px;
       padding: 8px 0;
       z-index: 2000;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.06);
     }}
     .dropdown:hover .dropdown-content {{ display: block; }}
     .dropdown-content a {{
@@ -154,7 +154,7 @@ template = """<!DOCTYPE html>
         flex-direction: column;
         position: fixed;
         top: 72px; left: 0; right: 0;
-        background: hsl(0 0% 9% / 0.98);
+        background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
         padding: 24px;
         border-bottom: 1px solid var(--border);
@@ -166,7 +166,7 @@ template = """<!DOCTYPE html>
       .dropdown-content {{
         position: static;
         display: none;
-        background: rgba(255,255,255,0.03);
+        background: rgba(0,0,0,0.03);
         border: none;
         box-shadow: none;
         padding: 4px 0 4px 15px;
@@ -200,7 +200,7 @@ template = """<!DOCTYPE html>
     /* Service Hero styles */
     .service-hero {{
       padding: 140px 5% 80px;
-      background: linear-gradient(180deg, hsl(0 0% 5%) 0%, var(--bg-primary) 100%);
+      background: linear-gradient(180deg, #f3f4f6 0%, var(--bg-primary) 100%);
       border-bottom: 1px solid var(--border);
       text-align: center;
     }}
@@ -294,7 +294,7 @@ template = """<!DOCTYPE html>
     .footer-brand p {{ color: var(--text-muted); font-size: 14px; margin: 20px 0; max-width: 320px; }}
     .footer-socials {{ display: flex; gap: 12px; }}
     .social-btn {{ width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: var(--transition); }}
-    .social-btn:hover {{ background: var(--accent); color: var(--text-primary); transform: translateY(-3px); }}
+    .social-btn:hover {{ background: var(--accent); color: #ffffff; transform: translateY(-3px); }}
     .footer-col-title {{ font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 600; margin-bottom: 24px; color: var(--text-primary); }}
     .footer-links {{ list-style: none; }}
     .footer-links li {{ margin-bottom: 12px; }}
@@ -507,7 +507,7 @@ for filename, title, subtitle, sections in services:
     
     html_content = template.format(title=title, subtitle=subtitle, details=details_html)
     
-    with open(f"C:/Users/kerry/.gemini/antigravity/scratch/abrit-glass-replica/{filename}", "w", encoding="utf-8") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(html_content)
 
 print("Services pages generated successfully.")
