@@ -8,7 +8,8 @@ pages = [
     ("smart-mirrors.html", "Smart Mirror", "Smart Mirrors"),
     ("vanity.html", "Vanity Mirror", "Vanity Mirrors"),
     ("accent.html", "Artistic Mirror", "Artistic Mirrors"),
-    ("wall-mirrors.html", "Wall Mirror", "Wall Mirrors")
+    ("wall-mirrors.html", "Wall Mirror", "Wall Mirrors"),
+    ("furniture.html", "Mirror Furniture", "Mirror Furniture")
 ]
 
 template = """<!DOCTYPE html>
@@ -75,31 +76,25 @@ template = """<!DOCTYPE html>
     .nav-links a {{ color: var(--text-secondary); font-size: 14px; font-weight: 500; position: relative; }}
     .nav-links a:hover {{ color: var(--text-primary); }}
     .dropdown {{ position: relative; }}
-    .dropdown-content {{
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--bg-card);
-      min-width: 220px;
-      border: 1px solid var(--border);
+    .dropdown-menu {{
+      display: none; position: absolute; top: calc(100% + 8px); left: 0;
+      min-width: 220px; padding: 8px;
+      background: var(--bg-card); border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 8px 0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
       z-index: 2000;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.5);
     }}
-    .dropdown:hover .dropdown-content {{ display: block; }}
-    .dropdown-content a {{
-      display: block;
-      padding: 10px 20px;
-      color: var(--text-secondary) !important;
-      font-size: 14px;
+    .dropdown:hover .dropdown-menu {{ display: block; }}
+    .dropdown-menu a {{
+      display: block; padding: 8px 12px; border-radius: 4px;
+      font-size: 13px; color: var(--text-secondary) !important;
+      transition: color 0.2s, background 0.2s;
       text-decoration: none;
     }}
-    .dropdown-content a::after {{ display: none !important; }}
-    .dropdown-content a:hover {{
-      background: var(--accent-light);
-      color: var(--accent) !important;
+    .dropdown-menu a::after {{ display: none !important; }}
+    .dropdown-menu a:hover {{
+      background: #000000;
+      color: #ffffff !important;
     }}
     .nav-cta {{ padding: 9px 22px; background: var(--accent); color: var(--text-primary) !important; border-radius: 4px; font-weight: 600 !important; font-size: 13px !important; }}
 
@@ -134,7 +129,7 @@ template = """<!DOCTYPE html>
         max-height: calc(100vh - 80px);
         overflow-y: auto;
       }}
-      .dropdown-content {{
+      .dropdown-menu {{
         position: static;
         display: none;
         background: rgba(0,0,0,0.03);
@@ -144,7 +139,7 @@ template = """<!DOCTYPE html>
         margin-top: 5px;
         min-width: unset;
       }}
-      .dropdown.active .dropdown-content {{
+      .dropdown.active .dropdown-menu {{
         display: block;
       }}
     }}
@@ -327,7 +322,7 @@ template = """<!DOCTYPE html>
         <li><a href="index.html#hero">Home</a></li>
         <li class="dropdown">
           <a href="index.html#products">Products</a>
-          <div class="dropdown-content">
+          <div class="dropdown-menu">
             <a href="wooden-framed.html">Wooden Mirrors</a>
             <a href="thin-framed.html">Thin Framed Mirrors</a>
             <a href="frameless.html">Frameless Mirrors</a>
@@ -336,6 +331,7 @@ template = """<!DOCTYPE html>
             <a href="vanity.html">Vanity Mirrors</a>
             <a href="accent.html">Artistic Mirrors</a>
             <a href="wall-mirrors.html">Wall Mirrors</a>
+            <a href="furniture.html">Mirror Furniture</a>
           </div>
         </li>
         <li><a href="index.html#services">Services</a></li>
@@ -390,6 +386,7 @@ template = """<!DOCTYPE html>
           <li><a href="vanity.html">Vanity Mirrors</a></li>
           <li><a href="accent.html">Artistic Mirrors</a></li>
           <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
+          <li><a href="furniture.html">Mirror Furniture</a></li>
         </ul>
       </div>
       <div>
