@@ -279,13 +279,115 @@
       opacity: 1;
       transform: translateY(0);
     }
+  
+    /* ===== STANDARD NAVBAR CSS ===== */
+    #navbar {
+      position: sticky; top: 0; left: 0; right: 0; z-index: 1000;
+      height: 80px; display: flex; align-items: center;
+      padding: 0 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+    #navbar.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1400px; margin: 0 auto; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-img, .logo-icon { height: 44px; width: 44px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block; border: 1px solid rgba(0,0,0,0.08); }
+    .logo-text-wrap { display: flex; flex-direction: column; gap: 0px; }
+    .logo-text { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; color: #000000; letter-spacing: 0.3px; line-height: 1.1; }
+    .logo-tagline { font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 500; color: #555555; letter-spacing: 1px; text-transform: uppercase; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a {
+      padding: 8px 14px; border-radius: 6px;
+      font-size: 14px; font-weight: 500; color: rgba(0, 0, 0, 0.65);
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #000000; background: rgba(0, 0, 0, 0.05); }
+    .nav-links a.active { border-bottom: 2px solid #000000; border-radius: 6px 6px 0 0; }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 8px); left: 0;
+      min-width: 220px; padding: 8px;
+      background: #ffffff; border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      z-index: 2000;
+    }
+    .dropdown-menu::before {
+      content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px;
+    }
+    .dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a {
+      display: block; padding: 8px 12px; border-radius: 4px;
+      font-size: 13px; color: rgba(0, 0, 0, 0.65) !important;
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+    }
+    .dropdown-menu a::after { display: none !important; }
+    .dropdown-menu a:hover {
+      background: #000000;
+      color: #ffffff !important;
+    }
+    .nav-cta { padding: 9px 22px !important; background: #000000 !important; color: #ffffff !important; border-radius: 8px !important; font-weight: 600 !important; font-size: 13px !important; }
+    .nav-cta:hover { background: #222222 !important; color: #ffffff !important; }
+
+    /* Hamburger & Responsive Nav */
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #000; margin: 5px 0; transition: all 0.3s ease; }
+    @media (max-width: 1024px) {
+      .nav-links {
+        display: none; position: absolute; top: 80px; left: 0; right: 0;
+        background: #ffffff; flex-direction: column; padding: 20px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      }
+      .nav-links.show, .nav-links.open { display: flex; }
+      .nav-hamburger { display: block; }
+      .dropdown-menu { position: static; display: none; background: rgba(0,0,0,0.03); border: none; box-shadow: none; padding: 4px 0 4px 15px; margin-top: 5px; min-width: unset; }
+      .dropdown.active .dropdown-menu { display: block; }
+    }
+
+    /* ===== STANDARD FOOTER CSS ===== */
+    footer {
+      background: hsl(0 0% 5%);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 64px 2rem 32px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .footer-inner { max-width: 1400px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
+    .footer-brand-desc { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; margin: 16px 0 24px; max-width: 280px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .social-btn {
+      width: 36px; height: 36px; border-radius: 4px;
+      background: hsl(0 0% 14%); border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.7); transition: all 0.3s ease; text-decoration: none;
+    }
+    .social-btn:hover { background: #ffffff; color: #000000; border-color: #ffffff; }
+    .footer-col-title { font-family: 'Cinzel', serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #ffffff; margin-bottom: 20px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links li { font-size: 13px; color: rgba(255,255,255,0.7); }
+    .footer-links a { font-size: 13px; color: rgba(255,255,255,0.7); transition: color 0.2s; text-decoration: none; }
+    .footer-links a:hover { color: #ffffff; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 32px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,0.5); }
+    .footer-copy span { color: #ffffff; }
+    @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 16px; text-align: center; } }
+
   </style>
 </head>
 <body>
-  <nav id="navbar">
+    <nav id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
+        <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
         <div class="logo-text-wrap">
           <span class="logo-text">MIRRORIT</span>
           <span class="logo-tagline">You Are Enough</span>
@@ -310,12 +412,12 @@
         <li><a href="index.html#services">Services</a></li>
         <li><a href="index.html#process">How We Work</a></li>
         <li><a href="index.html#testimonials">Reviews</a></li>
-        <li><a href="blog.html">Blog</a></li>
+        <li><a href="blog.html" class="">Blog</a></li>
         <li><a href="index.html#contact" class="nav-cta">Get a Quote</a></li>
       </ul>
-      <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
         <span></span><span></span><span></span>
-      </div>
+      </button>
     </div>
   </nav>
 
@@ -370,63 +472,54 @@
 
   </div>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="display:inline-flex; margin-bottom:0; text-decoration:none;">
-          <img src="images/logo.png" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: contain; flex-shrink: 0; display: block;" alt="MIRRORIT logo" />
-          <div class="logo-text-wrap" style="display: flex; flex-direction: column; justify-content: center; margin-left: 12px;">
-            <span class="logo-text" style="color: #ffffff; font-family: 'Cinzel', serif; font-size: 20px; font-weight: 800; letter-spacing: 1px; line-height: 1;">MIRRORIT</span>
-            <span class="logo-tagline" style="color: rgba(255,255,255,0.45); font-family: 'Montserrat', sans-serif; font-size: 8px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 2px;">You Are Enough</span>
-          </div>
-        </a>
-        <p>We make custom mirrors that fit your space perfectly. Hand-cut and fitted locally in Nairobi.</p>
-        <div class="footer-socials">
-          <a href="https://www.instagram.com/mirrorit.ke/" class="social-btn" id="instagram-btn" title="Instagram" target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom: 16px;">
+            <img src="images/logo.png" class="logo-img" alt="MIRRORIT logo" />
+            <div class="logo-text-wrap">
+              <span class="logo-text" style="color: #ffffff;">MIRRORIT</span>
+              <span class="logo-tagline" style="color: #888888;">You Are Enough</span>
+            </div>
           </a>
-          <a href="https://wa.me/254794439669" class="social-btn" id="whatsapp-social-btn" title="WhatsApp" target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zM223.9 414.7c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 334.1l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 2.1-3.2 7.6-14.1 1.4-2.8 2.8-5.6 1.4-8.4-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-          </a>
+          <p class="footer-brand-desc">Specialists in premium custom LED, vanity, and decorative mirrors. We focus exclusively on mirrors, with custom mirror furniture available on request.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Products</div>
+          <ul class="footer-links">
+            <li><a href="wooden-framed.html">Wooden Mirrors</a></li>
+            <li><a href="thin-framed.html">Thin Framed Mirrors</a></li>
+            <li><a href="frameless.html">Frameless Mirrors</a></li>
+            <li><a href="aluminium-framed.html">Aluminium Framed</a></li>
+            <li><a href="smart-mirrors.html">Smart Mirrors</a></li>
+            <li><a href="vanity.html">Vanity Mirrors</a></li>
+            <li><a href="accent.html">Artistic Mirrors</a></li>
+            <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
+            <li><a href="furniture.html">Mirror Furniture</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="index.html#services">Mirror Fabrication</a></li>
+            <li><a href="index.html#services">Professional Fitting</a></li>
+            <li><a href="index.html#services">Furniture Crafting</a></li>
+            <li><a href="index.html#services">Safe Delivery</a></li>
+            <li><a href="blog.html">Design Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+254794439669">+254 794 439 669</a></li>
+            <li><a href="mailto:mirroritco@gmail.com">mirroritco@gmail.com</a></li>
+            <li>Next to Getrudes, Nairobi</li>
+          </ul>
         </div>
       </div>
-      <div>
-        <div class="footer-col-title">Our Mirrors</div>
-        <ul class="footer-links">
-          <li><a href="wooden-framed.html">Wooden Mirrors</a></li>
-          <li><a href="thin-framed.html">Thin Framed Mirrors</a></li>
-          <li><a href="frameless.html">Frameless Mirrors</a></li>
-          <li><a href="aluminium-framed.html">Aluminium Framed</a></li>
-          <li><a href="smart-mirrors.html">Smart Mirrors</a></li>
-          <li><a href="vanity.html">Vanity Mirrors</a></li>
-          <li><a href="accent.html">Artistic Mirrors</a></li>
-          <li><a href="wall-mirrors.html">Wall Mirrors</a></li>
-          <li><a href="furniture.html">Mirror Furniture</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Services</div>
-        <ul class="footer-links">
-          <li><a href="custom-fabrication.html">Mirror Fabrication</a></li>
-          <li><a href="professional-installation.html">Professional Fitting</a></li>
-          <li><a href="design-consultation.html">Furniture Crafting</a></li>
-          <li><a href="delivery-logistics.html">Safe Delivery</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:+254794439669">+254 794 439 669</a></li>
-          <li><a href="mailto:mirroritco@gmail.com">mirroritco@gmail.com</a></li>
-          <li><a href="#">Manyanja Rd, Nairobi</a></li>
-          <li><a href="#">Next to Gertrude's Hospital</a></li>
-          <li><a href="#">Mon to Sat: 8am to 6pm</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 <span>MIRRORIT Ltd</span>. All rights reserved. &nbsp;&middot;&nbsp; Premium Mirror Solutions in Africa</p>
-      <div class="footer-bottom-links">
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; 2026 <span>MIRRORIT</span>. All rights reserved.</div>
       </div>
     </div>
   </footer>
